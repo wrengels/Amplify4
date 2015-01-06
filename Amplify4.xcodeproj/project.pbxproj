@@ -1,0 +1,408 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		24BF94DE1A5CA878008A02E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BF94DD1A5CA878008A02E8 /* AppDelegate.swift */; };
+		24BF94E01A5CA878008A02E8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24BF94DF1A5CA878008A02E8 /* Images.xcassets */; };
+		24BF94E31A5CA878008A02E8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24BF94E11A5CA878008A02E8 /* MainMenu.xib */; };
+		24BF94EF1A5CA878008A02E8 /* Amplify4Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BF94EE1A5CA878008A02E8 /* Amplify4Tests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		24BF94E91A5CA878008A02E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24BF94D01A5CA878008A02E8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 24BF94D71A5CA878008A02E8;
+			remoteInfo = Amplify4;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		24BF94D81A5CA878008A02E8 /* Amplify4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amplify4.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		24BF94DC1A5CA878008A02E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		24BF94DD1A5CA878008A02E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		24BF94DF1A5CA878008A02E8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		24BF94E21A5CA878008A02E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		24BF94E81A5CA878008A02E8 /* Amplify4Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Amplify4Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		24BF94ED1A5CA878008A02E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		24BF94EE1A5CA878008A02E8 /* Amplify4Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Amplify4Tests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		24BF94D51A5CA878008A02E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24BF94E51A5CA878008A02E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		24BF94CF1A5CA878008A02E8 = {
+			isa = PBXGroup;
+			children = (
+				24BF94DA1A5CA878008A02E8 /* Amplify4 */,
+				24BF94EB1A5CA878008A02E8 /* Amplify4Tests */,
+				24BF94D91A5CA878008A02E8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		24BF94D91A5CA878008A02E8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				24BF94D81A5CA878008A02E8 /* Amplify4.app */,
+				24BF94E81A5CA878008A02E8 /* Amplify4Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		24BF94DA1A5CA878008A02E8 /* Amplify4 */ = {
+			isa = PBXGroup;
+			children = (
+				24BF94DD1A5CA878008A02E8 /* AppDelegate.swift */,
+				24BF94DF1A5CA878008A02E8 /* Images.xcassets */,
+				24BF94E11A5CA878008A02E8 /* MainMenu.xib */,
+				24BF94DB1A5CA878008A02E8 /* Supporting Files */,
+			);
+			path = Amplify4;
+			sourceTree = "<group>";
+		};
+		24BF94DB1A5CA878008A02E8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				24BF94DC1A5CA878008A02E8 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		24BF94EB1A5CA878008A02E8 /* Amplify4Tests */ = {
+			isa = PBXGroup;
+			children = (
+				24BF94EE1A5CA878008A02E8 /* Amplify4Tests.swift */,
+				24BF94EC1A5CA878008A02E8 /* Supporting Files */,
+			);
+			path = Amplify4Tests;
+			sourceTree = "<group>";
+		};
+		24BF94EC1A5CA878008A02E8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				24BF94ED1A5CA878008A02E8 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		24BF94D71A5CA878008A02E8 /* Amplify4 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 24BF94F21A5CA878008A02E8 /* Build configuration list for PBXNativeTarget "Amplify4" */;
+			buildPhases = (
+				24BF94D41A5CA878008A02E8 /* Sources */,
+				24BF94D51A5CA878008A02E8 /* Frameworks */,
+				24BF94D61A5CA878008A02E8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Amplify4;
+			productName = Amplify4;
+			productReference = 24BF94D81A5CA878008A02E8 /* Amplify4.app */;
+			productType = "com.apple.product-type.application";
+		};
+		24BF94E71A5CA878008A02E8 /* Amplify4Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 24BF94F51A5CA878008A02E8 /* Build configuration list for PBXNativeTarget "Amplify4Tests" */;
+			buildPhases = (
+				24BF94E41A5CA878008A02E8 /* Sources */,
+				24BF94E51A5CA878008A02E8 /* Frameworks */,
+				24BF94E61A5CA878008A02E8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				24BF94EA1A5CA878008A02E8 /* PBXTargetDependency */,
+			);
+			name = Amplify4Tests;
+			productName = Amplify4Tests;
+			productReference = 24BF94E81A5CA878008A02E8 /* Amplify4Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		24BF94D01A5CA878008A02E8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Bill Engels";
+				TargetAttributes = {
+					24BF94D71A5CA878008A02E8 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					24BF94E71A5CA878008A02E8 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 24BF94D71A5CA878008A02E8;
+					};
+				};
+			};
+			buildConfigurationList = 24BF94D31A5CA878008A02E8 /* Build configuration list for PBXProject "Amplify4" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 24BF94CF1A5CA878008A02E8;
+			productRefGroup = 24BF94D91A5CA878008A02E8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				24BF94D71A5CA878008A02E8 /* Amplify4 */,
+				24BF94E71A5CA878008A02E8 /* Amplify4Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		24BF94D61A5CA878008A02E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24BF94E01A5CA878008A02E8 /* Images.xcassets in Resources */,
+				24BF94E31A5CA878008A02E8 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24BF94E61A5CA878008A02E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		24BF94D41A5CA878008A02E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24BF94DE1A5CA878008A02E8 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24BF94E41A5CA878008A02E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24BF94EF1A5CA878008A02E8 /* Amplify4Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		24BF94EA1A5CA878008A02E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 24BF94D71A5CA878008A02E8 /* Amplify4 */;
+			targetProxy = 24BF94E91A5CA878008A02E8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		24BF94E11A5CA878008A02E8 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				24BF94E21A5CA878008A02E8 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		24BF94F01A5CA878008A02E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		24BF94F11A5CA878008A02E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		24BF94F31A5CA878008A02E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Amplify4/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		24BF94F41A5CA878008A02E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Amplify4/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		24BF94F61A5CA878008A02E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Amplify4Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Amplify4.app/Contents/MacOS/Amplify4";
+			};
+			name = Debug;
+		};
+		24BF94F71A5CA878008A02E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Amplify4Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Amplify4.app/Contents/MacOS/Amplify4";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		24BF94D31A5CA878008A02E8 /* Build configuration list for PBXProject "Amplify4" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24BF94F01A5CA878008A02E8 /* Debug */,
+				24BF94F11A5CA878008A02E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24BF94F21A5CA878008A02E8 /* Build configuration list for PBXNativeTarget "Amplify4" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24BF94F31A5CA878008A02E8 /* Debug */,
+				24BF94F41A5CA878008A02E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		24BF94F51A5CA878008A02E8 /* Build configuration list for PBXNativeTarget "Amplify4Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24BF94F61A5CA878008A02E8 /* Debug */,
+				24BF94F71A5CA878008A02E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 24BF94D01A5CA878008A02E8 /* Project object */;
+}
