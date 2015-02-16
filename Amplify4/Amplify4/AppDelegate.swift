@@ -31,13 +31,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
         targetScrollView.contentView.postsBoundsChangedNotifications = true
-//        let bundle = NSBundle.mainBundle()
-//        let settingsPath = bundle.pathForResource("settings", ofType: "plist")!
-//        settings = NSMutableDictionary(contentsOfFile: settingsPath)!
-//        let defaults = NSUserDefaults.standardUserDefaults()
-//        defaults.registerDefaults(settings)
-//        let defaultsController = NSUserDefaultsController.sharedUserDefaultsController()
-//        defaultsController.initialValues = settings
     }
     
      func application(sender: NSApplication, openFiles filenames: [AnyObject]) {
