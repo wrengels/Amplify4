@@ -1,2 +1,2 @@
 # Amplify4
-Swift version of Amplify PCR simulator
+This is the Swift version of the Amplify program for simulating PCR experiments.
