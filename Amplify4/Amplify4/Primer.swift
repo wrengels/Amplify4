@@ -90,7 +90,7 @@ class Primer : NSObject {
         var seqd = [Int]()
         var seqc = [Int]()
         let n = min(settings.integerForKey(globals.effectivePrimer), seqChar.count)
-            // n is the number of bases in the primer (or the max effectdive)
+            // n is the number of bases in the primer (or the max effectdive primer)
         for c in seq.uppercaseString {
             var v = 0
             while c != dbases[v] {v += 1}
