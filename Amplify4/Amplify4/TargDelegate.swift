@@ -45,6 +45,8 @@ class TargDelegate: NSObject {
 
         let pr = targetDelegate.primers[0]
         pr.calcZ()
+        let pdimer = Dimer(primer: pr, and: pr)
+        println(pdimer.report())
     
         return
         

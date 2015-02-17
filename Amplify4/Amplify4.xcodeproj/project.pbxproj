@@ -23,6 +23,7 @@
 		24A9D98E1A880EED00E3E032 /* AMprefsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A9D98C1A880EED00E3E032 /* AMprefsController.xib */; };
 		24A9D9901A88132700E3E032 /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24A9D98F1A88132700E3E032 /* settings.plist */; };
 		24CECD921A914A9900819B9E /* PCR.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24CECD911A914A9900819B9E /* PCR.xib */; };
+		24D1E5C91A92E5C600601F58 /* Dimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1E5C81A92E5C600601F58 /* Dimer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		24A9D98C1A880EED00E3E032 /* AMprefsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMprefsController.xib; sourceTree = "<group>"; };
 		24A9D98F1A88132700E3E032 /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settings.plist; sourceTree = "<group>"; };
 		24CECD911A914A9900819B9E /* PCR.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PCR.xib; sourceTree = "<group>"; };
+		24D1E5C81A92E5C600601F58 /* Dimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dimer.swift; sourceTree = "<group>"; };
 		24E0E78F1A80347F00A93AFE /* Amplify4.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Amplify4.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,10 +105,11 @@
 				2483DAAB1A688BB100789E69 /* AppDelegate.swift */,
 				245987841A70294F0002D9F8 /* AMsubstrateDelegate.swift */,
 				246C33F21A75BD5900D5B058 /* TargDelegate.swift */,
+				242001BF1A6DFE6F004D35B8 /* Primer.swift */,
+				24D1E5C81A92E5C600601F58 /* Dimer.swift */,
 				248AEF6C1A893E5000F9E8EA /* Prefs */,
 				2483DAAD1A688BB100789E69 /* Document.swift */,
 				24CECD911A914A9900819B9E /* PCR.xib */,
-				242001BF1A6DFE6F004D35B8 /* Primer.swift */,
 				2483DAB41A688BB100789E69 /* MainMenu.xib */,
 				2483DAAF1A688BB100789E69 /* Document.xib */,
 				2483DAB21A688BB100789E69 /* Images.xcassets */,
@@ -263,6 +266,7 @@
 				245987851A70294F0002D9F8 /* AMsubstrateDelegate.swift in Sources */,
 				24774E621A8BECB400F95BD9 /* Int1DArrayController.swift in Sources */,
 				24774E601A8BE53300F95BD9 /* IntArrayController.swift in Sources */,
+				24D1E5C91A92E5C600601F58 /* Dimer.swift in Sources */,
 				245DF74D1A8AA2AB00F4C622 /* AMGlobals.swift in Sources */,
 				246C33F31A75BD5900D5B058 /* TargDelegate.swift in Sources */,
 				2483DAAE1A688BB100789E69 /* Document.swift in Sources */,
