@@ -812,7 +812,7 @@ CA
                                             </connections>
                                         </buttonCell>
                                     </button>
-                                    <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="fK0-CP-3tg">
+                                    <popUpButton misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fK0-CP-3tg">
                                         <rect key="frame" x="132" y="642" width="50" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="Zhm-I3-Ww5"/>
@@ -820,7 +820,7 @@ CA
                                         </constraints>
                                         <popUpButtonCell key="cell" type="inline" title="Font" bezelStyle="inline" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" id="a7T-Vi-5IU">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="systemBold"/>
+                                            <font key="font" metaFont="menuBar"/>
                                             <menu key="menu" id="f59-64-uMu">
                                                 <items>
                                                     <menuItem title="Font" hidden="YES" id="slj-j6-jcI"/>
@@ -839,7 +839,7 @@ CA
                                             <action selector="setTargFont:" target="jx6-jC-eEd" id="bu5-aA-HQZ"/>
                                         </connections>
                                     </popUpButton>
-                                    <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="lva-4G-HWw">
+                                    <popUpButton misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lva-4G-HWw">
                                         <rect key="frame" x="181" y="642" width="48" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="48" id="aCj-kv-ysk"/>
@@ -847,7 +847,7 @@ CA
                                         </constraints>
                                         <popUpButtonCell key="cell" type="inline" title="Size" bezelStyle="inline" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" id="WfI-PB-rEi">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="systemBold"/>
+                                            <font key="font" metaFont="menuBar"/>
                                             <menu key="menu" id="P1W-62-VOQ">
                                                 <items>
                                                     <menuItem title="Size" hidden="YES" id="4Wh-GJ-doM"/>
@@ -867,11 +867,11 @@ CA
                                             <action selector="setTargSize:" target="jx6-jC-eEd" id="MzS-TW-8NV"/>
                                         </connections>
                                     </popUpButton>
-                                    <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="AM8-Hz-Z1Z">
+                                    <popUpButton misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AM8-Hz-Z1Z">
                                         <rect key="frame" x="72" y="642" width="61" height="21"/>
                                         <popUpButtonCell key="cell" type="inline" title="Target" bezelStyle="inline" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" selectedItem="Lf8-co-Cuq" id="gf9-Mu-P5p">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="systemBold"/>
+                                            <font key="font" metaFont="menuBar"/>
                                             <menu key="menu" id="dVN-ZA-U4E">
                                                 <items>
                                                     <menuItem title="Target" hidden="YES" id="1dm-nO-dRm"/>
@@ -917,7 +917,7 @@ CA
                                         </buttonCell>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="frameCenterRotation">
-                                                <integer key="value" value="15"/>
+                                                <integer key="value" value="7"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -1037,14 +1037,34 @@ CA
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableHeaderView>
                                     </scrollView>
-                                    <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="Njo-5X-cfa">
-                                        <rect key="frame" x="141" y="645" width="73" height="21"/>
+                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iW3-Z6-HTk">
+                                        <rect key="frame" x="5" y="641" width="22" height="25"/>
+                                        <buttonCell key="cell" type="square" title="+" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="njc-ND-54t">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="menu"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="newPrimer:" target="jx6-jC-eEd" id="MH0-3X-P69"/>
+                                        </connections>
+                                    </button>
+                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pDk-FR-bFd">
+                                        <rect key="frame" x="26" y="641" width="22" height="25"/>
+                                        <buttonCell key="cell" type="square" title="-" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FBl-NQ-k9c">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="menu"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="deletePrimers:" target="jx6-jC-eEd" id="Im9-Xb-kcL"/>
+                                        </connections>
+                                    </button>
+                                    <popUpButton ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Njo-5X-cfa">
+                                        <rect key="frame" x="83" y="645" width="73" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="73" id="AVz-t2-gg4"/>
                                         </constraints>
-                                        <popUpButtonCell key="cell" type="inline" title="Selected" bezelStyle="inline" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" selectedItem="m4j-ow-THX" id="ySD-pI-Drt">
+                                        <popUpButtonCell key="cell" type="inline" title="Selected" bezelStyle="inline" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" selectedItem="ye3-Pp-Kue" id="ySD-pI-Drt">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="systemBold"/>
+                                            <font key="font" metaFont="menuBar"/>
                                             <menu key="menu" id="GeW-zS-MhU">
                                                 <items>
                                                     <menuItem title="Selected" hidden="YES" id="m4j-ow-THX"/>
@@ -1081,14 +1101,14 @@ CA
                                             </menu>
                                         </popUpButtonCell>
                                     </popUpButton>
-                                    <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="1qk-7s-qgz">
-                                        <rect key="frame" x="90" y="645" width="32" height="21"/>
+                                    <popUpButton ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1qk-7s-qgz">
+                                        <rect key="frame" x="52" y="645" width="32" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="32" id="tZu-Zk-fk0"/>
                                         </constraints>
                                         <popUpButtonCell key="cell" type="inline" title="All" bezelStyle="inline" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" selectedItem="KVu-kz-Big" id="XuV-DN-5Tk">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="systemBold"/>
+                                            <font key="font" metaFont="menuBar"/>
                                             <menu key="menu" id="PH9-Js-boF">
                                                 <items>
                                                     <menuItem title="All" hidden="YES" id="KVu-kz-Big"/>
@@ -1112,49 +1132,15 @@ CA
                                             </menu>
                                         </popUpButtonCell>
                                     </popUpButton>
-                                    <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="SGq-qB-n3B">
-                                        <rect key="frame" x="5" y="645" width="66" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="66" id="yGB-2G-B92"/>
-                                        </constraints>
-                                        <popUpButtonCell key="cell" type="inline" title="Primers" bezelStyle="inline" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" id="TiZ-uV-VXA">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="systemBold"/>
-                                            <menu key="menu" id="Quh-6F-iSZ">
-                                                <items>
-                                                    <menuItem title="Primers" hidden="YES" id="4Ys-Ez-a0F"/>
-                                                    <menuItem title="Save Primers" id="zSN-0v-lDw">
-                                                        <connections>
-                                                            <binding destination="jx6-jC-eEd" name="enabled" keyPath="primersChanged" id="ohL-rl-CFb"/>
-                                                        </connections>
-                                                    </menuItem>
-                                                    <menuItem title="Save Primers As …" id="VfO-uM-jUt">
-                                                        <connections>
-                                                            <action selector="savePrimersAs:" target="jx6-jC-eEd" id="g0D-bF-wCw"/>
-                                                        </connections>
-                                                    </menuItem>
-                                                    <menuItem isSeparatorItem="YES" id="GkY-az-b9g"/>
-                                                    <menuItem title="New Primer" id="9H9-Mw-iKJ">
-                                                        <connections>
-                                                            <action selector="newPrimer:" target="jx6-jC-eEd" id="6qm-Lj-i2X"/>
-                                                        </connections>
-                                                    </menuItem>
-                                                </items>
-                                            </menu>
-                                        </popUpButtonCell>
-                                    </popUpButton>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="ScP-zv-Ef5" firstAttribute="top" secondItem="Zwt-no-rYN" secondAttribute="top" constant="40" id="43e-3t-bY5"/>
-                                    <constraint firstItem="1qk-7s-qgz" firstAttribute="leading" secondItem="SGq-qB-n3B" secondAttribute="trailing" constant="19" id="80H-Tu-gcw"/>
                                     <constraint firstAttribute="trailing" secondItem="ScP-zv-Ef5" secondAttribute="trailing" constant="6" id="IVS-j9-yOm"/>
                                     <constraint firstItem="ScP-zv-Ef5" firstAttribute="leading" secondItem="Zwt-no-rYN" secondAttribute="leading" constant="5" id="JT3-Jx-37D"/>
                                     <constraint firstAttribute="bottom" secondItem="ScP-zv-Ef5" secondAttribute="bottom" constant="5" id="RPb-CN-As2"/>
                                     <constraint firstItem="1qk-7s-qgz" firstAttribute="baseline" secondItem="Njo-5X-cfa" secondAttribute="baseline" id="YJJ-Kq-Xwj"/>
-                                    <constraint firstItem="Njo-5X-cfa" firstAttribute="leading" secondItem="1qk-7s-qgz" secondAttribute="trailing" constant="19" id="feV-gW-19C"/>
-                                    <constraint firstItem="SGq-qB-n3B" firstAttribute="leading" secondItem="Zwt-no-rYN" secondAttribute="leading" constant="5" id="m6J-US-Xcn"/>
+                                    <constraint firstItem="Njo-5X-cfa" firstAttribute="leading" secondItem="1qk-7s-qgz" secondAttribute="trailing" constant="-1" id="feV-gW-19C"/>
                                     <constraint firstItem="ScP-zv-Ef5" firstAttribute="top" secondItem="1qk-7s-qgz" secondAttribute="bottom" constant="11" id="rfo-wd-Miq"/>
-                                    <constraint firstItem="SGq-qB-n3B" firstAttribute="baseline" secondItem="1qk-7s-qgz" secondAttribute="baseline" id="vkR-41-j0d"/>
                                 </constraints>
                             </customView>
                         </subviews>

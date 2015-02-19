@@ -182,9 +182,10 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
             targetDelegate.targetNeedsCleaning = true
             targetChanged = false
             targetDelegate.cleanupTarget()
-            
+            targetFile = url
             let theDocController : AnyObject = NSDocumentController.sharedDocumentController()
             theDocController.noteNewRecentDocumentURL(url)
+            substrateWindow.title = targetFile.path!.lastPathComponent
         }
         return didit
     }
@@ -283,7 +284,8 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     func saveDocumentAs(sender: AnyObject) -> AnyObject {
         let fid = (substrateWindow.firstResponder as NSView).identifier
         switch fid {
-            case "primer Table View":
+        case "primer Table View":
+            if primers.count < 1 {return self}
             self.savePrimersAs(sender)
         case "target Text View" :
             self.saveTargetStringAs(sender)
@@ -297,11 +299,15 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
         let fid = (substrateWindow.firstResponder as NSView).identifier
         switch fid {
         case "primer Table View":
-            self.savePrimersAs(sender)
+            if let primerPath = primerFile.path {
+                self.savePrimers()
+            }
         case "target Text View" :
-            self.saveTargetStringAs(sender)
+            if let targetPath = targetFile.path {
+                self.saveTargetString(sender)
+            }
         default:
-            let a = "Hello"
+            let a = "There is nothing to save"
         }
     return self
 
@@ -337,6 +343,14 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
             primerString.writeToURL(theURL, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
             primersChanged = false
             primerFile = theURL
+        }
+    }
+    
+    func savePrimers() {
+        if let urlext = primerFile.pathExtension {
+            let primerString = allPrimerString(tab: urlext != "csv")
+            primerString.writeToURL(primerFile, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+            primersChanged = false
         }
     }
     

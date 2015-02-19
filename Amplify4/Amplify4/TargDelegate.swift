@@ -39,10 +39,22 @@ class TargDelegate: NSObject {
         settings = NSUserDefaults.standardUserDefaults();  // Just in case this needs to be done after nib awake
     }
 
-    
+    func saveDocumentAs(sender: AnyObject) -> AnyObject {
+        let fid = (substrateWindow.firstResponder as NSView).identifier
+        switch fid {
+        case "primer Table View":
+            targetDelegate.savePrimersAs(sender)
+        case "target Text View" :
+            targetDelegate.saveTargetStringAs(sender)
+        default:
+            let a = "Hello"
+        }
+        return self
+    }
+
     
     @IBAction func doThing(sender: AnyObject) {
-
+        
         let pr = targetDelegate.primers[0]
         pr.calcZ()
         let pdimer = Dimer(primer: pr, and: pr)

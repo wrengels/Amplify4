@@ -31,6 +31,7 @@ class AMGlobals: NSObject {
     let dimScores = "dimScores"
     let IUBString = "GATCMRWSYKVHDBN"
     let compIUBString = "CTAGKYWSRMBDHVN"
+    let recentDocs = "recent Docs"
     
     let factory = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("settings", ofType: "plist")!)!
 }
