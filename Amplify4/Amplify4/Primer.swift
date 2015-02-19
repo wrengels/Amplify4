@@ -23,6 +23,11 @@ class Primer : NSObject {
             return "\(seq)\t\(name)\t\(note)"
         }
     }
+    var csvline : String {
+        get {
+            return "\(seq),\(name),\(note)"
+        }
+    }
     var zD = [[Int]]()
     var zG = [[Int]]()
     var ideal  = [Int]()
@@ -33,6 +38,14 @@ class Primer : NSObject {
     
     init(theLine: String) {
         var  parts = (theLine as String).componentsSeparatedByString("\t")
+        while parts.count < 3 {parts.append("")} // make sure there are at least 3
+        seq = parts[0]
+        name = parts[1]
+        note = parts[2]
+    }
+    
+    init(theCSVLine : String) {
+        var  parts = (theCSVLine as String).componentsSeparatedByString(",")
         while parts.count < 3 {parts.append("")} // make sure there are at least 3
         seq = parts[0]
         name = parts[1]

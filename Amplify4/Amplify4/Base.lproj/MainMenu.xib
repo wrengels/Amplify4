@@ -24,6 +24,7 @@
                 <outlet property="appdel" destination="Voe-Tx-rLC" id="HZd-92-XhW"/>
                 <outlet property="formattedOrPlain" destination="hXJ-c0-5nF" id="0J0-ff-frm"/>
                 <outlet property="primerTableView" destination="8GV-fp-tNe" id="0UQ-dx-kGM"/>
+                <outlet property="substrateWindow" destination="bmA-jS-XtK" id="vG7-yM-IuX"/>
                 <outlet property="targetDelegate" destination="Whm-mM-EMR" id="kbB-ol-44r"/>
                 <outlet property="targetScrollView" destination="dQb-au-cpo" id="tcv-5e-m5F"/>
                 <outlet property="targetView" destination="TPw-rv-EdO" id="9im-vK-W7B"/>
@@ -200,6 +201,9 @@
                                 </connections>
                             </menuItem>
                             <menuItem title="Delete" id="pa3-QI-u2k">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="delete:" target="-1" id="0Mk-Ml-PaM"/>
@@ -702,19 +706,19 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="Substrate" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="bmA-jS-XtK">
+        <window identifier="substrateWindow" title="Substrate" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="bmA-jS-XtK">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="175" y="717" width="1246" height="675"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
-            <view key="contentView" id="Vnb-Si-sFa">
+            <view key="contentView" identifier="windowsView" id="Vnb-Si-sFa">
                 <rect key="frame" x="0.0" y="0.0" width="1246" height="675"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <splitView dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U5m-f7-rVz">
+                    <splitView identifier="splitView" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U5m-f7-rVz">
                         <rect key="frame" x="0.0" y="0.0" width="1246" height="674"/>
                         <subviews>
-                            <customView id="x3S-l4-R7d">
+                            <customView identifier="leftSideView" id="x3S-l4-R7d">
                                 <rect key="frame" x="0.0" y="0.0" width="814" height="674"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
@@ -765,7 +769,7 @@
                                             <rect key="frame" x="1" y="1" width="223" height="133"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="TPw-rv-EdO">
+                                                <textView identifier="target Text View" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="TPw-rv-EdO">
                                                     <rect key="frame" x="0.0" y="0.0" width="223" height="628"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -943,17 +947,17 @@
                                     <constraint firstItem="AM8-Hz-Z1Z" firstAttribute="leading" secondItem="4aS-z7-ghz" secondAttribute="trailing" constant="10" symbolic="YES" id="wVr-L1-5no"/>
                                 </constraints>
                             </customView>
-                            <customView id="Zwt-no-rYN">
+                            <customView identifier="rightSideview" id="Zwt-no-rYN">
                                 <rect key="frame" x="824" y="0.0" width="422" height="674"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <scrollView placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="infinite" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ScP-zv-Ef5" userLabel="Primer Table View">
+                                    <scrollView identifier="primerScrollView" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="infinite" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ScP-zv-Ef5" userLabel="Primer Table View">
                                         <rect key="frame" x="5" y="5" width="411" height="629"/>
-                                        <clipView key="contentView" misplaced="YES" id="tsJ-hL-erV">
+                                        <clipView key="contentView" identifier="primerClipView" misplaced="YES" id="tsJ-hL-erV">
                                             <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveColumns="NO" headerView="swS-NH-NZO" id="8GV-fp-tNe">
+                                                <tableView identifier="primer Table View" verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveColumns="NO" headerView="swS-NH-NZO" id="8GV-fp-tNe">
                                                     <rect key="frame" x="0.0" y="0.0" width="409" height="19"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>

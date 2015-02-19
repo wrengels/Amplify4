@@ -26,9 +26,75 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     @IBOutlet var targetView: NSTextView!
     @IBOutlet weak var targetDelegate: TargDelegate!
     @IBOutlet weak var appdel: AppDelegate!
+    @IBOutlet weak var substrateWindow: NSWindow!
     
     override init() {
         super.init()
+    }
+    
+    func copy(sender : AnyObject) -> AnyObject {
+        let first = substrateWindow.firstResponder as NSView
+        var a = 0
+        let fid = first.identifier
+        if fid == "primer Table View" {
+            let selection = primerTableView.selectedRowIndexes
+            if selection.count < 1 {return self}
+            var clip = NSPasteboard.generalPasteboard()
+            clip.declareTypes([NSPasteboardTypeString], owner: nil);
+            var srow = selection.firstIndex
+            var s = primers[srow].line
+            srow = selection.indexGreaterThanIndex(srow)
+            while srow != NSNotFound {
+                s += "\r" + primers[srow].line
+                srow = selection.indexGreaterThanIndex(srow)
+            }
+            let didit = clip.setString(s, forType: NSPasteboardTypeString)
+        }
+        return self
+    }
+    
+    func delete(sender : AnyObject) -> AnyObject {
+        let fid = (substrateWindow.firstResponder as NSView).identifier
+        if fid == "primer Table View" {
+            self.deletePrimers(sender);
+        }
+        return self
+    }
+    
+    func cut(sender : AnyObject) -> AnyObject {
+        let fid = (substrateWindow.firstResponder as NSView).identifier
+        if fid == "primer Table View" {
+            self.copy(sender)
+            self.deleteSelectedPrimers()
+            primerTableView.reloadData()
+            primerTableView.deselectAll(self)
+        }
+        return self
+    }
+    
+    func paste(sender : AnyObject) -> AnyObject {
+        let fid = (substrateWindow.firstResponder as NSView).identifier
+
+        if fid == "primer Table View" {
+            var clip = NSPasteboard.generalPasteboard()
+ //           clip.addTypes([NSPasteboardTypeString], owner: nil)
+            let newline = NSCharacterSet(charactersInString: "\n\r")
+            let selection = primerTableView.selectedRowIndexes
+            var srow = -1
+            if selection.count > 0 {
+                srow = selection.lastIndex
+            }
+            if let lines = clip.stringForType(NSPasteboardTypeString)?.componentsSeparatedByCharactersInSet(newline) {
+                for line in lines {
+                    primers.insert(Primer(theLine: line), atIndex: ++srow)
+                }
+            }
+            primerTableView.reloadData()  // must reload before selecting or scrolling
+            primerTableView.selectRowIndexes(NSIndexSet(index: srow), byExtendingSelection: false)
+            primerTableView.scrollRowToVisible(srow)
+            primersChanged = true
+        }
+        return self
     }
     
     // code for enumerator from:
@@ -88,18 +154,22 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
         // Determine whether a file is more likely to be a primer or target file.
         // If the extension is "primers" then it's a primer file
         // If it's formatted text (.rtf or .rtfd) then it's target
-        // Otherwise, consider it target if there are more than 100 characters per tab
+        // Otherwise, consider it target if there are fewer than 1 tabs per line
         var primerQ = true
+        let tabsPerLineInPrimerFile = 1.0
         let ext = url.pathExtension!
         switch ext {
-        case "primers" : primerQ = true
+        case "primers", "pri", "csv", "CSV" : primerQ = true
         case "rtf", "rtfd" : primerQ = false
         default : // Ambiguous
             let utext = NSString(contentsOfURL: url, encoding: NSUTF8StringEncoding, error: nil)!
             let tabcount = Double(utext.componentsSeparatedByString("\t").count)
+            let lineChars = NSCharacterSet(charactersInString: "\n\r")
+            let linecount = Double(utext.componentsSeparatedByCharactersInSet(lineChars).count)
             let charcount = Double(utext.length)
-            let tabrunsize : Double = charcount / tabcount;
-            if tabrunsize > 100 {primerQ = false}
+            let tabsperline : Double = tabcount / linecount
+            let tabrunsize : Double = charcount / tabcount
+            if tabsperline < tabsPerLineInPrimerFile {primerQ = false}
         }
         return primerQ
     }
@@ -112,12 +182,16 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
             targetDelegate.targetNeedsCleaning = true
             targetChanged = false
             targetDelegate.cleanupTarget()
+            
+            let theDocController : AnyObject = NSDocumentController.sharedDocumentController()
+            theDocController.noteNewRecentDocumentURL(url)
         }
         return didit
     }
    
     func getPrimersFromURL(url : NSURL) {
         primerFile = url
+        let urlext = url.pathExtension! as String
         let inputString = NSString(contentsOfURL: primerFile, encoding: NSUTF8StringEncoding, error: nil)
         if (inputString == nil) {return}
         let newline = NSCharacterSet(charactersInString: "\n\r")
@@ -125,10 +199,17 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
         var parts = [String]()
         primers = []
         for line in lines {
-            primers.append(Primer(theLine: line as String))
+            switch urlext {
+            case "csv", "CSV" :
+                primers.append(Primer(theCSVLine: line as String))
+            default :
+                primers.append(Primer(theLine: line as String))
+            }
         }
         primersChanged = false
         primerTableView.reloadData()
+        let theDocController : AnyObject = NSDocumentController.sharedDocumentController()
+        theDocController.noteNewRecentDocumentURL(url)
     }
     
     func openURLArray(urls : NSArray) {
@@ -153,7 +234,8 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     @IBAction func openTargetString(sender: AnyObject) {
         var openPanel = NSOpenPanel()
         openPanel.message = "Open file for target sequence or primers (or both)"
-        openPanel.allowedFileTypes = ["rtf", "txt", "", "rtfd", "primers", "pri"]
+        openPanel.allowedFileTypes = ["rtf", "txt", "", "rtfd", "primers", "pri", "csv", "CSV", "SEQ"]
+        openPanel.allowsOtherFileTypes = true
         openPanel.allowsMultipleSelection = true
         openPanel.accessoryView = whatToOpen
         whatToOpen.selectCellAtRow(0, column: 0)
@@ -198,11 +280,46 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
         }
     }
     
+    func saveDocumentAs(sender: AnyObject) -> AnyObject {
+        let fid = (substrateWindow.firstResponder as NSView).identifier
+        switch fid {
+            case "primer Table View":
+            self.savePrimersAs(sender)
+        case "target Text View" :
+            self.saveTargetStringAs(sender)
+        default:
+            let a = "Hello"
+        }
+        return self
+    }
     
-    func allPrimerString() -> String {
+    func saveDocument(sender: AnyObject) -> AnyObject {
+        let fid = (substrateWindow.firstResponder as NSView).identifier
+        switch fid {
+        case "primer Table View":
+            self.savePrimersAs(sender)
+        case "target Text View" :
+            self.saveTargetStringAs(sender)
+        default:
+            let a = "Hello"
+        }
+    return self
+
+    }
+
+    func allPrimerString(tab : Bool = true) -> String {
         var s = ""
-        for k in 0...(primers.count - 1) {
-            s += primers[k].line + "\n"
+        if primers.count < 1 {return s}
+        if tab {
+            s = primers[0].line
+            for k in 1..<primers.count {
+                s += "\n" + primers[k].line
+            }
+        }else {
+            s = primers[0].csvline
+            for k in 1..<primers.count {
+                s +=  "\n" + primers[k].csvline
+            }
         }
         return s
     }
@@ -210,13 +327,17 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     @IBAction func savePrimersAs(sender: AnyObject) {
         var savePanel = NSSavePanel()
         savePanel.title = "Save primer list in new file"
-        savePanel.allowedFileTypes = ["primers", "txt",""]
+        savePanel.allowedFileTypes = ["primers", "pri", "txt","", "csv"]
         savePanel.message = "Save all primers in file"
         if savePanel.runModal() == NSCancelButton {return}
         if savePanel.URL == nil {return}
-        allPrimerString().writeToURL(savePanel.URL!, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
-        primersChanged = false
-        primerFile = savePanel.URL! as NSURL
+        if let theURL = savePanel.URL {
+            let urlext = theURL.pathExtension
+            let primerString = allPrimerString(tab: urlext != "csv")
+            primerString.writeToURL(theURL, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+            primersChanged = false
+            primerFile = theURL
+        }
     }
     
     func numberOfRowsInTableView(aTableView: NSTableView) -> Int {
@@ -279,6 +400,7 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
         } else if tableColumn?.identifier == "Notes" {
             primers[row].note = object as String
         }
+        primersChanged = true
     }
     
     @IBAction func toggleSelected(sender: AnyObject) {
@@ -314,8 +436,21 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     @IBAction func newPrimer(sender: AnyObject) {
         primers.append(Primer())
         primerTableView.reloadData()
+        primersChanged = true
     }
 
+    func deleteSelectedPrimers() {
+        // without asking are you sure
+        let selection = primerTableView.selectedRowIndexes
+        if selection.count < 1 {return}
+        var srow = selection.lastIndex
+        while srow != NSNotFound {
+            primers.removeAtIndex(srow)
+            srow = selection.indexLessThanIndex(srow)
+        }
+        primersChanged = true
+    }
+    
     @IBAction func deletePrimers(sender: AnyObject) {
         let ruSure = NSAlert()
         ruSure.addButtonWithTitle("Okay")
@@ -329,12 +464,9 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
             }
             let code = ruSure.runModal()
             if code == NSAlertFirstButtonReturn {
-                var srow = selection.lastIndex
-                while srow != NSNotFound {
-                    primers.removeAtIndex(srow)
-                    srow = selection.indexLessThanIndex(srow)
-                }
+                self.deleteSelectedPrimers();
                 primerTableView.reloadData()
+                primerTableView.deselectAll(self)
             }
         }
     }
@@ -388,7 +520,7 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
             srow = selection.indexGreaterThanIndex(srow)
         }
         primerTableView.reloadData()
+        primersChanged = true
     }
-    
     
 }

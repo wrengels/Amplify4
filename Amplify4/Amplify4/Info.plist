@@ -32,13 +32,17 @@
 			<key>CFBundleTypeName</key>
 			<string>PlainText</string>
 			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
+			<string>Viewer</string>
+			<key>NSDocumentClass</key>
+			<string>$(PRODUCT_MODULE_NAME).Document</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeName</key>
 			<string>DocumentType</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>NSDocumentClass</key>
+			<string>$(PRODUCT_MODULE_NAME).Document</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
@@ -49,6 +53,8 @@
 			<string>RTF</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>NSDocumentClass</key>
+			<string>$(PRODUCT_MODULE_NAME).Document</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
@@ -59,6 +65,8 @@
 			<string>RTFD</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>NSDocumentClass</key>
+			<string>$(PRODUCT_MODULE_NAME).Document</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
@@ -69,6 +77,20 @@
 			<string>primers</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>NSDocumentClass</key>
+			<string>$(PRODUCT_MODULE_NAME).Document</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>csf</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>csv</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>NSDocumentClass</key>
+			<string>$(PRODUCT_MODULE_NAME).Document</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
