@@ -29,7 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let maxdocs = docController.maximumRecentDocumentCount
         let doclist = docController.recentDocumentURLs
         let docnum = doclist.count
-        if let oldDocList = NSUserDefaults.standardUserDefaults().arrayForKey("recent Docs") {
+        if let oldDocList = NSUserDefaults.standardUserDefaults().arrayForKey(globals.recentDocs) {
             for doc in (oldDocList as [String])  {
                 if let url = NSURL(fileURLWithPath: doc) {
                     docController.noteNewRecentDocumentURL(url)
@@ -58,11 +58,39 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
 
     let prefsWindow = AMprefsController(windowNibName: "AMprefsController")
+    let helpWindowController = AmplifyHelpController(windowNibName: "AmplifyHelp")
 
     @IBAction func doPrefs(sender: AnyObject) {
         prefsWindow.initialSettings = prefsWindow.currentSettings()
         prefsWindow.showWindow(self)
        let didit =  prefsWindow.windowLoaded
+    }
+    
+    @IBAction func doHelp(sender: AnyObject) {
+       helpWindowController.showWindow(self)
+        let didit = helpWindowController.windowLoaded
+        let helpWindow = helpWindowController.helpWindow
+        helpWindow.display()
+        helpWindow.makeKeyAndOrderFront(self)
+        return
+      }
+    
+    @IBAction func findMeInHelp(sender: AnyObject) {
+        helpWindowController.showWindow(self)
+        let didit = helpWindowController.windowLoaded
+        let helpWindow = helpWindowController.helpWindow
+        helpWindow.display()
+        helpWindow.makeKeyAndOrderFront(self)
+        if let name = sender.identifier? {
+            let nsname = name as NSString
+            let helpTextView = helpWindowController.helpTextView
+            let helpString = helpTextView.string! as NSString
+            let nameRange : NSRange = helpString.rangeOfString(name)
+            helpTextView.setSelectedRange(nameRange)
+            helpTextView.scrollRangeToVisible(nameRange)
+            
+        }
+
     }
     
     

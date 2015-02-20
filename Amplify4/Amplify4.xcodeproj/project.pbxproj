@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		241CF2B91A97ABCD0063AF5A /* Amplify Help.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 241CF2B81A97ABCD0063AF5A /* Amplify Help.rtfd */; };
 		242001C01A6DFE6F004D35B8 /* Primer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242001BF1A6DFE6F004D35B8 /* Primer.swift */; };
 		245987851A70294F0002D9F8 /* AMsubstrateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245987841A70294F0002D9F8 /* AMsubstrateDelegate.swift */; };
 		245DF74D1A8AA2AB00F4C622 /* AMGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245DF74C1A8AA2AB00F4C622 /* AMGlobals.swift */; };
@@ -24,6 +25,8 @@
 		24A9D9901A88132700E3E032 /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24A9D98F1A88132700E3E032 /* settings.plist */; };
 		24CECD921A914A9900819B9E /* PCR.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24CECD911A914A9900819B9E /* PCR.xib */; };
 		24D1E5C91A92E5C600601F58 /* Dimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1E5C81A92E5C600601F58 /* Dimer.swift */; };
+		24EE0CD31A96AA57002D555F /* AmplifyHelp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24EE0CD21A96AA57002D555F /* AmplifyHelp.xib */; };
+		24EE0CD51A96AB0D002D555F /* AmplifyHelpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE0CD41A96AB0D002D555F /* AmplifyHelpController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		241CF2B81A97ABCD0063AF5A /* Amplify Help.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; path = "Amplify Help.rtfd"; sourceTree = "<group>"; };
 		242001BF1A6DFE6F004D35B8 /* Primer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Primer.swift; sourceTree = "<group>"; };
 		245987841A70294F0002D9F8 /* AMsubstrateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AMsubstrateDelegate.swift; sourceTree = "<group>"; };
 		245DF74C1A8AA2AB00F4C622 /* AMGlobals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AMGlobals.swift; sourceTree = "<group>"; };
@@ -59,6 +63,8 @@
 		24CECD911A914A9900819B9E /* PCR.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PCR.xib; sourceTree = "<group>"; };
 		24D1E5C81A92E5C600601F58 /* Dimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dimer.swift; sourceTree = "<group>"; };
 		24E0E78F1A80347F00A93AFE /* Amplify4.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Amplify4.entitlements; sourceTree = "<group>"; };
+		24EE0CD21A96AA57002D555F /* AmplifyHelp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AmplifyHelp.xib; sourceTree = "<group>"; };
+		24EE0CD41A96AB0D002D555F /* AmplifyHelpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmplifyHelpController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +116,8 @@
 				248AEF6C1A893E5000F9E8EA /* Prefs */,
 				2483DAAD1A688BB100789E69 /* Document.swift */,
 				24CECD911A914A9900819B9E /* PCR.xib */,
+				24EE0CD41A96AB0D002D555F /* AmplifyHelpController.swift */,
+				24EE0CD21A96AA57002D555F /* AmplifyHelp.xib */,
 				2483DAB41A688BB100789E69 /* MainMenu.xib */,
 				2483DAAF1A688BB100789E69 /* Document.xib */,
 				2483DAB21A688BB100789E69 /* Images.xcassets */,
@@ -121,6 +129,7 @@
 		2483DAA91A688BB100789E69 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				241CF2B81A97ABCD0063AF5A /* Amplify Help.rtfd */,
 				24A9D98F1A88132700E3E032 /* settings.plist */,
 				2483DAAA1A688BB100789E69 /* Info.plist */,
 			);
@@ -242,10 +251,12 @@
 			files = (
 				24A9D9901A88132700E3E032 /* settings.plist in Resources */,
 				2483DAB11A688BB100789E69 /* Document.xib in Resources */,
+				241CF2B91A97ABCD0063AF5A /* Amplify Help.rtfd in Resources */,
 				2483DAB31A688BB100789E69 /* Images.xcassets in Resources */,
 				24CECD921A914A9900819B9E /* PCR.xib in Resources */,
 				2483DAB61A688BB100789E69 /* MainMenu.xib in Resources */,
 				24A9D98E1A880EED00E3E032 /* AMprefsController.xib in Resources */,
+				24EE0CD31A96AA57002D555F /* AmplifyHelp.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +278,7 @@
 				24774E621A8BECB400F95BD9 /* Int1DArrayController.swift in Sources */,
 				24774E601A8BE53300F95BD9 /* IntArrayController.swift in Sources */,
 				24D1E5C91A92E5C600601F58 /* Dimer.swift in Sources */,
+				24EE0CD51A96AB0D002D555F /* AmplifyHelpController.swift in Sources */,
 				245DF74D1A8AA2AB00F4C622 /* AMGlobals.swift in Sources */,
 				246C33F31A75BD5900D5B058 /* TargDelegate.swift in Sources */,
 				2483DAAE1A688BB100789E69 /* Document.swift in Sources */,

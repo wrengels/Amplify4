@@ -698,7 +698,7 @@ CA
                         <items>
                             <menuItem title="Amplify4 Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                 <connections>
-                                    <action selector="showHelp:" target="-1" id="y7X-2Q-9no"/>
+                                    <action selector="doHelp:" target="Voe-Tx-rLC" id="DQe-qt-VpG"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -924,6 +924,16 @@ CA
                                             <action selector="doThing:" target="Whm-mM-EMR" id="5Ao-Uf-YJd"/>
                                         </connections>
                                     </button>
+                                    <button identifier="🔹  When you click on an amplicon" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gLd-wt-hmC">
+                                        <rect key="frame" x="427" y="641" width="25" height="25"/>
+                                        <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hV1-Hn-b5o">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="findMeInHelp:" target="Voe-Tx-rLC" id="TXI-yO-uRU"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="dQb-au-cpo" firstAttribute="top" secondItem="x3S-l4-R7d" secondAttribute="top" constant="40" id="BMU-dN-Xnr"/>
@@ -1041,7 +1051,7 @@ CA
                                         <rect key="frame" x="5" y="641" width="22" height="25"/>
                                         <buttonCell key="cell" type="square" title="+" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="njc-ND-54t">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="menu"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="newPrimer:" target="jx6-jC-eEd" id="MH0-3X-P69"/>
@@ -1051,7 +1061,7 @@ CA
                                         <rect key="frame" x="26" y="641" width="22" height="25"/>
                                         <buttonCell key="cell" type="square" title="-" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FBl-NQ-k9c">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="menu"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="deletePrimers:" target="jx6-jC-eEd" id="Im9-Xb-kcL"/>
