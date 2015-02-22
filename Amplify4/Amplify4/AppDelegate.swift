@@ -83,14 +83,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         helpWindow.makeKeyAndOrderFront(self)
         if let name = sender.identifier? {
             let nsname = name as NSString
-            let helpTextView = helpWindowController.helpTextView
-            let helpString = helpTextView.string! as NSString
-            let nameRange : NSRange = helpString.rangeOfString(name)
-            helpTextView.setSelectedRange(nameRange)
-            helpTextView.scrollRangeToVisible(nameRange)
-            
+            helpWindowController.scrollToString(nsname)
         }
-
     }
     
     

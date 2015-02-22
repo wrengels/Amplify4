@@ -6,23 +6,27 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AmplifyHelpController" customModule="Amplify4" customModuleProvider="target">
             <connections>
+                <outlet property="helpClip" destination="2K8-eS-qvN" id="kHS-G4-sSO"/>
+                <outlet property="helpScroll" destination="viz-H0-MeY" id="w9v-Xf-AJX"/>
                 <outlet property="helpTextView" destination="bqc-lH-ASR" id="MYT-3H-Gsw"/>
                 <outlet property="helpWindow" destination="QvC-M9-y7g" id="IAM-b5-iRW"/>
+                <outlet property="topicsMenu" destination="SDe-uD-RdU" id="cbU-en-ypX"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSWindow"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
+        <window title="Amplify Help" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="815" y="663" width="794" height="754"/>
+            <rect key="contentRect" x="938" y="828" width="550" height="550"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <value key="minSize" type="size" width="535" height="150"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="794" height="754"/>
+                <rect key="frame" x="0.0" y="0.0" width="550" height="550"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Xr-Kj-wkz">
-                        <rect key="frame" x="-1" y="7" width="796" height="645"/>
+                        <rect key="frame" x="-1" y="7" width="552" height="454"/>
                         <clipView key="contentView" id="2K8-eS-qvN">
                             <rect key="frame" x="1" y="1" width="223" height="133"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -31,10 +35,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="223" height="643"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="779" height="643"/>
+                                    <size key="minSize" width="535" height="452"/>
                                     <size key="maxSize" width="796" height="10000000"/>
                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="minSize" width="779" height="643"/>
+                                    <size key="minSize" width="535" height="452"/>
                                     <size key="maxSize" width="796" height="10000000"/>
                                 </textView>
                             </subviews>
@@ -49,48 +53,38 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ipj-8E-eMI">
-                        <rect key="frame" x="-1" y="655" width="103" height="32"/>
-                        <buttonCell key="cell" type="push" title="Save Help" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EV3-iK-q21">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
+                    <popUpButton identifier="topicsMenu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SDe-uD-RdU">
+                        <rect key="frame" x="164" y="464" width="223" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="218" id="saO-Kz-Rto"/>
+                        </constraints>
+                        <popUpButtonCell key="cell" type="push" title="Topics" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Yy6-mA-sdC" id="BwN-C1-jqx">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="sBi-fV-gF0">
+                                <items>
+                                    <menuItem title="Topics" state="on" id="Yy6-mA-sdC"/>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
                         <connections>
-                            <action selector="saveHelp:" target="-2" id="9gH-Q2-OlO"/>
+                            <action selector="goToTopic:" target="-2" id="OJF-2Y-BBc"/>
                         </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bXK-kO-51n">
-                        <rect key="frame" x="181" y="655" width="97" height="32"/>
-                        <buttonCell key="cell" type="push" title="Find This" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CZW-IA-2At">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="findThis:" target="-2" id="Skl-DR-Rqd"/>
-                        </connections>
-                    </button>
-                    <button identifier="🔹  When you click on an amplicon" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SnX-gR-Yck">
-                        <rect key="frame" x="128" y="661" width="25" height="25"/>
-                        <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vAF-CE-B5g">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="findMe:" target="-2" id="91x-kO-02A"/>
-                        </connections>
-                    </button>
+                    </popUpButton>
                 </subviews>
                 <constraints>
                     <constraint firstItem="4Xr-Kj-wkz" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="-1" id="3ou-jb-sp0"/>
                     <constraint firstAttribute="trailing" secondItem="4Xr-Kj-wkz" secondAttribute="trailing" constant="-1" id="48D-hp-A37"/>
                     <constraint firstAttribute="bottom" secondItem="4Xr-Kj-wkz" secondAttribute="bottom" constant="7" id="C5h-oU-1xf"/>
-                    <constraint firstItem="4Xr-Kj-wkz" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="102" id="dI5-R5-2Iv"/>
+                    <constraint firstItem="4Xr-Kj-wkz" firstAttribute="top" secondItem="SDe-uD-RdU" secondAttribute="bottom" constant="6" id="GHg-Lh-fDq"/>
+                    <constraint firstItem="4Xr-Kj-wkz" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="89" id="dI5-R5-2Iv"/>
+                    <constraint firstItem="SDe-uD-RdU" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="166" id="sbQ-nK-Ed4"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="6Ym-pd-lOk"/>
             </connections>
-            <point key="canvasLocation" x="751" y="417"/>
+            <point key="canvasLocation" x="622" y="315"/>
         </window>
     </objects>
 </document>
