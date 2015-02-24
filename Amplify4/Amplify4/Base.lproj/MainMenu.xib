@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
@@ -39,7 +40,7 @@
                 <outlet property="baseScroll" destination="6xV-yk-QDX" id="EbG-9d-Q9f"/>
                 <outlet property="baseView" destination="QGF-N5-px5" id="cW6-Zh-p6T"/>
                 <outlet property="endBase" destination="vos-jd-cG3" id="t0w-gk-c6e"/>
-                <outlet property="selectedBaseLabel" destination="mka-8J-WLD" id="AR5-uH-989"/>
+                <outlet property="selectedBaseLabel" destination="C6b-aV-d0I" id="uuk-Jj-dTb"/>
                 <outlet property="startBase" destination="ozL-Pi-7d9" id="JsY-3B-Ljv"/>
                 <outlet property="substrateWindow" destination="bmA-jS-XtK" id="MoC-22-qX5"/>
                 <outlet property="targetClip" destination="CVk-gx-kOf" id="U0K-ah-jmi"/>
@@ -126,6 +127,12 @@
                                         </menuItem>
                                     </items>
                                 </menu>
+                            </menuItem>
+                            <menuItem title="Open Built-in Samples" id="9j6-ef-9ci">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="openBuiltinSamples:" target="Voe-Tx-rLC" id="Wcq-0F-Ft8"/>
+                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                             <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
@@ -667,6 +674,15 @@ CA
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="PCR" id="dJK-LO-ihh">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="PCR" id="iCb-hT-kMA">
+                        <items>
+                            <menuItem title="Amplify…" keyEquivalent="1" id="F6Q-Ji-Jge"/>
+                            <menuItem title="Amplify with Defaults" keyEquivalent="2" id="CEL-Co-nQa"/>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Window" id="aUF-d1-5bR">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
@@ -709,17 +725,17 @@ CA
         <window identifier="substrateWindow" title="Substrate" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="bmA-jS-XtK">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="175" y="717" width="1246" height="675"/>
+            <rect key="contentRect" x="175" y="717" width="1049" height="675"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" identifier="windowsView" id="Vnb-Si-sFa">
-                <rect key="frame" x="0.0" y="0.0" width="1246" height="675"/>
+                <rect key="frame" x="0.0" y="0.0" width="1049" height="675"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <splitView identifier="splitView" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U5m-f7-rVz">
-                        <rect key="frame" x="0.0" y="0.0" width="1246" height="674"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1049" height="674"/>
                         <subviews>
-                            <customView identifier="leftSideView" id="x3S-l4-R7d">
-                                <rect key="frame" x="0.0" y="0.0" width="814" height="674"/>
+                            <customView identifier="leftSideView" id="x3S-l4-R7d" userLabel="Left Split View">
+                                <rect key="frame" x="0.0" y="0.0" width="684" height="674"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6xV-yk-QDX" userLabel="Base Count View">
@@ -764,7 +780,7 @@ CA
                                         </scroller>
                                     </scrollView>
                                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQb-au-cpo" userLabel="Sequence View">
-                                        <rect key="frame" x="64" y="5" width="750" height="629"/>
+                                        <rect key="frame" x="64" y="5" width="620" height="629"/>
                                         <clipView key="contentView" id="CVk-gx-kOf">
                                             <rect key="frame" x="1" y="1" width="223" height="133"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -773,7 +789,7 @@ CA
                                                     <rect key="frame" x="0.0" y="0.0" width="223" height="628"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <size key="minSize" width="733" height="627"/>
+                                                    <size key="minSize" width="603" height="627"/>
                                                     <size key="maxSize" width="773" height="10000000"/>
                                                     <attributedString key="textStorage">
                                                         <fragment content="Target Sequence Goes Here">
@@ -784,7 +800,7 @@ CA
                                                         </fragment>
                                                     </attributedString>
                                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                    <size key="minSize" width="733" height="627"/>
+                                                    <size key="minSize" width="603" height="627"/>
                                                     <size key="maxSize" width="773" height="10000000"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="Whm-mM-EMR" id="qqP-ab-Ky0"/>
@@ -812,8 +828,8 @@ CA
                                             </connections>
                                         </buttonCell>
                                     </button>
-                                    <popUpButton misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fK0-CP-3tg">
-                                        <rect key="frame" x="132" y="642" width="50" height="21"/>
+                                    <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="fK0-CP-3tg">
+                                        <rect key="frame" x="132" y="642" width="50" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="Zhm-I3-Ww5"/>
                                             <constraint firstAttribute="width" constant="50" id="jU4-c7-RMy"/>
@@ -839,8 +855,8 @@ CA
                                             <action selector="setTargFont:" target="jx6-jC-eEd" id="bu5-aA-HQZ"/>
                                         </connections>
                                     </popUpButton>
-                                    <popUpButton misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lva-4G-HWw">
-                                        <rect key="frame" x="181" y="642" width="48" height="21"/>
+                                    <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="lva-4G-HWw">
+                                        <rect key="frame" x="181" y="642" width="48" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="48" id="aCj-kv-ysk"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="48" id="siV-r3-g5K"/>
@@ -867,9 +883,9 @@ CA
                                             <action selector="setTargSize:" target="jx6-jC-eEd" id="MzS-TW-8NV"/>
                                         </connections>
                                     </popUpButton>
-                                    <popUpButton misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AM8-Hz-Z1Z">
-                                        <rect key="frame" x="72" y="642" width="61" height="21"/>
-                                        <popUpButtonCell key="cell" type="inline" title="Target" bezelStyle="inline" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" selectedItem="Lf8-co-Cuq" id="gf9-Mu-P5p">
+                                    <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="AM8-Hz-Z1Z">
+                                        <rect key="frame" x="72" y="642" width="61" height="22"/>
+                                        <popUpButtonCell key="cell" type="inline" title="Target" bezelStyle="inline" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" id="gf9-Mu-P5p">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menuBar"/>
                                             <menu key="menu" id="dVN-ZA-U4E">
@@ -901,16 +917,19 @@ CA
                                             </menu>
                                         </popUpButtonCell>
                                     </popUpButton>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mka-8J-WLD">
-                                        <rect key="frame" x="429" y="644" width="361" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="kmX-yb-wy2">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C6b-aV-d0I">
+                                        <rect key="frame" x="327" y="642" width="326" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="322" id="xeP-EP-kyL"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="870-ex-7bB">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MQY-aE-McQ">
-                                        <rect key="frame" x="311" y="637" width="96" height="32"/>
+                                    <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MQY-aE-McQ">
+                                        <rect key="frame" x="231" y="637" width="96" height="32"/>
                                         <buttonCell key="cell" type="push" title="Do Thing" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ejT-AS-h6O">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -924,27 +943,20 @@ CA
                                             <action selector="doThing:" target="Whm-mM-EMR" id="5Ao-Uf-YJd"/>
                                         </connections>
                                     </button>
-                                    <button identifier="🔹  When you click on an amplicon" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gLd-wt-hmC">
-                                        <rect key="frame" x="427" y="641" width="25" height="25"/>
-                                        <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hV1-Hn-b5o">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="findMeInHelp:" target="Voe-Tx-rLC" id="TXI-yO-uRU"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="dQb-au-cpo" firstAttribute="top" secondItem="x3S-l4-R7d" secondAttribute="top" constant="40" id="BMU-dN-Xnr"/>
                                     <constraint firstItem="AM8-Hz-Z1Z" firstAttribute="centerY" secondItem="fK0-CP-3tg" secondAttribute="centerY" id="D30-Xn-amF"/>
                                     <constraint firstItem="dQb-au-cpo" firstAttribute="top" secondItem="fK0-CP-3tg" secondAttribute="bottom" constant="8" id="Dzq-Ml-mp6"/>
+                                    <constraint firstItem="C6b-aV-d0I" firstAttribute="leading" secondItem="MQY-aE-McQ" secondAttribute="trailing" constant="8" symbolic="YES" id="E85-cS-sHx"/>
                                     <constraint firstItem="6xV-yk-QDX" firstAttribute="bottom" secondItem="dQb-au-cpo" secondAttribute="bottom" id="Gg6-is-Z2Y"/>
                                     <constraint firstItem="lva-4G-HWw" firstAttribute="baseline" secondItem="fK0-CP-3tg" secondAttribute="baseline" id="LZP-ax-ksZ"/>
                                     <constraint firstItem="4aS-z7-ghz" firstAttribute="top" secondItem="x3S-l4-R7d" secondAttribute="top" constant="3" id="LcW-HQ-iFE"/>
                                     <constraint firstItem="fK0-CP-3tg" firstAttribute="leading" secondItem="x3S-l4-R7d" secondAttribute="leading" constant="132" id="NIF-qe-Kzs"/>
                                     <constraint firstItem="6xV-yk-QDX" firstAttribute="top" secondItem="4aS-z7-ghz" secondAttribute="bottom" constant="4" id="Pqa-wN-paJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="C6b-aV-d0I" secondAttribute="trailing" constant="33" id="Yqj-s0-e4E"/>
                                     <constraint firstItem="lva-4G-HWw" firstAttribute="leading" secondItem="x3S-l4-R7d" secondAttribute="leading" constant="181" id="beo-BJ-Aia"/>
+                                    <constraint firstItem="dQb-au-cpo" firstAttribute="top" secondItem="C6b-aV-d0I" secondAttribute="bottom" constant="8" symbolic="YES" id="ef4-00-Kl7"/>
                                     <constraint firstItem="AM8-Hz-Z1Z" firstAttribute="trailing" secondItem="fK0-CP-3tg" secondAttribute="leading" constant="1" id="g34-l0-Jf3"/>
                                     <constraint firstItem="4aS-z7-ghz" firstAttribute="leading" secondItem="6xV-yk-QDX" secondAttribute="leading" id="g8p-J0-mHQ"/>
                                     <constraint firstItem="6xV-yk-QDX" firstAttribute="leading" secondItem="x3S-l4-R7d" secondAttribute="leading" constant="7" id="gDa-es-EBv"/>
@@ -952,23 +964,25 @@ CA
                                     <constraint firstAttribute="bottom" secondItem="dQb-au-cpo" secondAttribute="bottom" constant="5" id="gw7-Pb-P7z"/>
                                     <constraint firstItem="4aS-z7-ghz" firstAttribute="trailing" secondItem="6xV-yk-QDX" secondAttribute="trailing" id="iFo-KA-2fp"/>
                                     <constraint firstAttribute="trailing" secondItem="dQb-au-cpo" secondAttribute="trailing" id="kzP-tM-D9t"/>
+                                    <constraint firstItem="C6b-aV-d0I" firstAttribute="top" secondItem="lva-4G-HWw" secondAttribute="top" id="ng7-Px-Xhv"/>
                                     <constraint firstItem="dQb-au-cpo" firstAttribute="leading" secondItem="x3S-l4-R7d" secondAttribute="leading" constant="64" id="vvE-WE-ZWR"/>
+                                    <constraint firstItem="C6b-aV-d0I" firstAttribute="top" secondItem="fK0-CP-3tg" secondAttribute="top" id="w2i-Co-2Xr"/>
                                     <constraint firstItem="dQb-au-cpo" firstAttribute="leading" secondItem="6xV-yk-QDX" secondAttribute="trailing" constant="2" id="wQT-6F-yqd"/>
                                     <constraint firstItem="AM8-Hz-Z1Z" firstAttribute="leading" secondItem="4aS-z7-ghz" secondAttribute="trailing" constant="10" symbolic="YES" id="wVr-L1-5no"/>
                                 </constraints>
                             </customView>
-                            <customView identifier="rightSideview" id="Zwt-no-rYN">
-                                <rect key="frame" x="824" y="0.0" width="422" height="674"/>
+                            <customView identifier="rightSideview" id="Zwt-no-rYN" userLabel="Right Split View">
+                                <rect key="frame" x="694" y="0.0" width="355" height="674"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <scrollView identifier="primerScrollView" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="infinite" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ScP-zv-Ef5" userLabel="Primer Table View">
-                                        <rect key="frame" x="5" y="5" width="411" height="629"/>
+                                        <rect key="frame" x="5" y="5" width="344" height="629"/>
                                         <clipView key="contentView" identifier="primerClipView" misplaced="YES" id="tsJ-hL-erV">
                                             <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView identifier="primer Table View" verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveColumns="NO" headerView="swS-NH-NZO" id="8GV-fp-tNe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="409" height="19"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="342" height="19"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -986,7 +1000,7 @@ CA
                                                             </buttonCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                         </tableColumn>
-                                                        <tableColumn identifier="Sequence" width="206" minWidth="40" maxWidth="1000" headerToolTip="Primer sequence (5' to 3')" id="yit-fm-NcA">
+                                                        <tableColumn identifier="Sequence" width="179" minWidth="40" maxWidth="1000" headerToolTip="Primer sequence (5' to 3')" id="yit-fm-NcA">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Sequence">
                                                                 <font key="font" metaFont="smallSystemBold"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -999,7 +1013,7 @@ CA
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                         </tableColumn>
-                                                        <tableColumn identifier="Name" width="103" minWidth="10" maxWidth="3.4028234663852886e+38" id="bqD-Zg-CpJ">
+                                                        <tableColumn identifier="Name" width="81" minWidth="10" maxWidth="3.4028234663852886e+38" id="bqD-Zg-CpJ">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Name">
                                                                 <font key="font" metaFont="smallSystemBold"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1012,7 +1026,7 @@ CA
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                         </tableColumn>
-                                                        <tableColumn identifier="Notes" width="73" minWidth="10" maxWidth="3.4028234663852886e+38" id="z5z-GX-cAR">
+                                                        <tableColumn identifier="Notes" width="55" minWidth="10" maxWidth="3.4028234663852886e+38" id="z5z-GX-cAR">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Notes">
                                                                 <font key="font" metaFont="smallSystemBold"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1047,8 +1061,8 @@ CA
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableHeaderView>
                                     </scrollView>
-                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iW3-Z6-HTk">
-                                        <rect key="frame" x="5" y="641" width="22" height="25"/>
+                                    <button toolTip="Add a new (blank) primer to the bottom of the list" translatesAutoresizingMaskIntoConstraints="NO" id="iW3-Z6-HTk">
+                                        <rect key="frame" x="5" y="639" width="25" height="25"/>
                                         <buttonCell key="cell" type="square" title="+" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="njc-ND-54t">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -1057,8 +1071,8 @@ CA
                                             <action selector="newPrimer:" target="jx6-jC-eEd" id="MH0-3X-P69"/>
                                         </connections>
                                     </button>
-                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pDk-FR-bFd">
-                                        <rect key="frame" x="26" y="641" width="22" height="25"/>
+                                    <button toolTip="Delete selected primers from list" translatesAutoresizingMaskIntoConstraints="NO" id="pDk-FR-bFd">
+                                        <rect key="frame" x="29" y="639" width="25" height="25"/>
                                         <buttonCell key="cell" type="square" title="-" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FBl-NQ-k9c">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -1067,8 +1081,8 @@ CA
                                             <action selector="deletePrimers:" target="jx6-jC-eEd" id="Im9-Xb-kcL"/>
                                         </connections>
                                     </button>
-                                    <popUpButton ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Njo-5X-cfa">
-                                        <rect key="frame" x="83" y="645" width="73" height="21"/>
+                                    <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="Njo-5X-cfa">
+                                        <rect key="frame" x="98" y="642" width="73" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="73" id="AVz-t2-gg4"/>
                                         </constraints>
@@ -1111,8 +1125,8 @@ CA
                                             </menu>
                                         </popUpButtonCell>
                                     </popUpButton>
-                                    <popUpButton ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1qk-7s-qgz">
-                                        <rect key="frame" x="52" y="645" width="32" height="21"/>
+                                    <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="1qk-7s-qgz">
+                                        <rect key="frame" x="64" y="642" width="32" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="32" id="tZu-Zk-fk0"/>
                                         </constraints>
@@ -1145,12 +1159,19 @@ CA
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="ScP-zv-Ef5" firstAttribute="top" secondItem="Zwt-no-rYN" secondAttribute="top" constant="40" id="43e-3t-bY5"/>
+                                    <constraint firstItem="pDk-FR-bFd" firstAttribute="leading" secondItem="ScP-zv-Ef5" secondAttribute="leading" constant="24" id="B68-bW-f70"/>
+                                    <constraint firstItem="iW3-Z6-HTk" firstAttribute="leading" secondItem="pDk-FR-bFd" secondAttribute="trailing" constant="-49" id="Ei2-tY-Y2Q"/>
                                     <constraint firstAttribute="trailing" secondItem="ScP-zv-Ef5" secondAttribute="trailing" constant="6" id="IVS-j9-yOm"/>
                                     <constraint firstItem="ScP-zv-Ef5" firstAttribute="leading" secondItem="Zwt-no-rYN" secondAttribute="leading" constant="5" id="JT3-Jx-37D"/>
+                                    <constraint firstItem="iW3-Z6-HTk" firstAttribute="baseline" secondItem="pDk-FR-bFd" secondAttribute="baseline" id="Lud-7h-7r3"/>
+                                    <constraint firstItem="1qk-7s-qgz" firstAttribute="leading" secondItem="pDk-FR-bFd" secondAttribute="trailing" constant="10" id="NvB-2j-Rb4"/>
                                     <constraint firstAttribute="bottom" secondItem="ScP-zv-Ef5" secondAttribute="bottom" constant="5" id="RPb-CN-As2"/>
                                     <constraint firstItem="1qk-7s-qgz" firstAttribute="baseline" secondItem="Njo-5X-cfa" secondAttribute="baseline" id="YJJ-Kq-Xwj"/>
-                                    <constraint firstItem="Njo-5X-cfa" firstAttribute="leading" secondItem="1qk-7s-qgz" secondAttribute="trailing" constant="-1" id="feV-gW-19C"/>
-                                    <constraint firstItem="ScP-zv-Ef5" firstAttribute="top" secondItem="1qk-7s-qgz" secondAttribute="bottom" constant="11" id="rfo-wd-Miq"/>
+                                    <constraint firstItem="Njo-5X-cfa" firstAttribute="leading" secondItem="1qk-7s-qgz" secondAttribute="trailing" constant="2" id="feV-gW-19C"/>
+                                    <constraint firstItem="iW3-Z6-HTk" firstAttribute="baseline" secondItem="1qk-7s-qgz" secondAttribute="baseline" constant="1" id="fwN-3s-ffn"/>
+                                    <constraint firstItem="iW3-Z6-HTk" firstAttribute="leading" secondItem="Zwt-no-rYN" secondAttribute="leading" constant="5" id="n87-u2-L9N"/>
+                                    <constraint firstItem="1qk-7s-qgz" firstAttribute="leading" secondItem="iW3-Z6-HTk" secondAttribute="trailing" constant="34" id="qyi-GM-inZ"/>
+                                    <constraint firstItem="ScP-zv-Ef5" firstAttribute="top" secondItem="1qk-7s-qgz" secondAttribute="bottom" constant="8" id="rfo-wd-Miq"/>
                                 </constraints>
                             </customView>
                         </subviews>
@@ -1170,7 +1191,7 @@ CA
             <connections>
                 <outlet property="delegate" destination="jx6-jC-eEd" id="RpO-fM-PO3"/>
             </connections>
-            <point key="canvasLocation" x="606" y="569.5"/>
+            <point key="canvasLocation" x="655.5" y="576.5"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="ARt-0s-xHm"/>
         <customView identifier="BaseRangeView" id="iyD-JS-ymW">

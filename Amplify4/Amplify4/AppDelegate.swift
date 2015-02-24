@@ -41,6 +41,34 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
         targetScrollView.contentView.postsBoundsChangedNotifications = true
+        let settings = NSUserDefaults.standardUserDefaults()
+        
+        var targetURL = NSURL()
+        var primerURL = NSURL()
+        if (substrateDelegate.primerFile.path == nil) && settings.boolForKey(globals.useRecentPrimers) {
+            // No primers were opened at startup and user wants to use recent file
+            if let primerPath = settings.stringForKey(globals.recentPrimerPath) {
+                if let primerURL = NSURL(fileURLWithPath: primerPath) {
+                    if primerURL.checkResourceIsReachableAndReturnError(nil) {
+                        // There is a recent file path and it does point to an actual file
+                        substrateDelegate.openURLArray([primerURL])
+                    }
+                }
+            }
+            
+        }
+        if (substrateDelegate.targetFile.path == nil) && settings.boolForKey(globals.useRecentTarget) {
+            // No target was opened at startup and user wants to use recent file
+            if let targetPath = settings.stringForKey(globals.recentTargetPath) {
+                if let targetURL = NSURL(fileURLWithPath: targetPath) {
+                    if targetURL.checkResourceIsReachableAndReturnError(nil) {
+                        // There is a recent file path and it does point to an actual file
+                        substrateDelegate.openURLArray([targetURL])
+                    }
+                }
+            }
+            
+        }
     }
     
      func application(sender: NSApplication, openFiles filenames: [AnyObject]) {
@@ -56,6 +84,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    @IBAction func openBuiltinSamples(sender: AnyObject) {
+        if let primerSamplePath = NSBundle.mainBundle().pathForResource(globals.samplePrimers, ofType: "primers") {
+            if let targetSamplePath = NSBundle.mainBundle().pathForResource(globals.sampleTarget, ofType: "rtf") {
+                let primerURL = NSURL(fileURLWithPath: primerSamplePath)!
+                let targetURL = NSURL(fileURLWithPath: targetSamplePath)!
+                substrateDelegate.openURLArray([primerURL, targetURL])
+                // Now blank out the current file URLs so that we don't try to save into the application bundle
+                substrateDelegate.primerFile = NSURL()
+                substrateDelegate.targetFile = NSURL()
+            }
+        }
+        
+    }
 
     let prefsWindow = AMprefsController(windowNibName: "AMprefsController")
     let helpWindowController = AmplifyHelpController(windowNibName: "AmplifyHelp")

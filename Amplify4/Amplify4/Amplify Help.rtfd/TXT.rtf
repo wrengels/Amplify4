@@ -1,78 +1,115 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1344\cocoasubrtf720
-{\fonttbl\f0\fnil\fcharset0 LucidaGrande;\f1\fswiss\fcharset0 ArialMT;\f2\fnil\fcharset0 Menlo-Regular;
-\f3\fnil\fcharset0 Monaco;\f4\fnil\fcharset0 MSReferenceSansSerif;\f5\fswiss\fcharset0 Helvetica;
+{\fonttbl\f0\fnil\fcharset0 LucidaGrande;\f1\fswiss\fcharset0 ArialMT;\f2\fnil\fcharset0 Consolas;
+\f3\fnil\fcharset0 Monaco;\f4\fswiss\fcharset0 Helvetica;\f5\fnil\fcharset0 Menlo-Regular;
 }
-{\colortbl;\red255\green255\blue255;\red46\green111\blue253;\red0\green0\blue255;\red255\green0\blue0;
-}
-\paperw28800\paperh15840\margl1440\margr1440\vieww19620\viewh21380\viewkind0
+{\colortbl;\red255\green255\blue255;\red46\green111\blue253;\red26\green26\blue26;\red234\green234\blue234;
+\red230\green230\blue230;\red0\green0\blue255;\red255\green0\blue0;}
+\paperw28800\paperh15840\margl1440\margr1440\vieww41220\viewh24820\viewkind0
 \deftab720
-\pard\tx6480\pardeftab720\ri0\qc
+\pard\tx6480\pardeftab720\ri-15954\qc
 
 \f0\b\fs72 \cf2 Amplify 4\
+\pard\tx6480\pardeftab720\fi27\ri-19445\qc
+
+\f1\b0\fs28 \cf0 \
+\pard\pardeftab720
+
+\f2\fs4 \cf3 \cb3 \expnd0\expndtw0\kerning0
 \
-\pard\tx6480\pardeftab720\ri0
+\pard\tx6480\pardeftab720\fi27\ri-19445\qc
 
-\fs44 \cf0 \uc0\u9670 
-\f1  Match Settings\
+\f1\b\fs28 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\tx0\pardeftab720\li11164\fi-11165\ri-19445\qc
+\cf0 Bill Engels, University of Wisconsin, Genetics Dept., Madison, WI 53706\
+Version 4.0, March 2015\
+\pard\tx6480\pardeftab720\fi27\ri-19445\qc
+\cf0 \
+\pard\pardeftab720
+
+\f2\b0\fs4 \cf3 \cb4 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720
+\cf3 \cb3 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\sl312\slmult1
+
+\f1\fs28 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\tx6480\pardeftab720\fi27\ri-19445\qc
+\cf0 \
 \pard\tx6480\pardeftab720\li576\ri-19445
 
-\b0\fs28 \cf0 \
-\pard\pardeftab720\li576\ri0
-\cf0 Matches are evaluated according to two parameters called "primability" and "stability." They both measure how well the primer matches the target site, but the former emphasizes matches at the 3' end, and the latter places more weight on runs of consecutive matches. You can adjust how these parameters are calculated by changing the settings. Here is what the values {\field{\*\fldinst{HYPERLINK "http://www.macworld.com"}}{\fldrslt mean}}:\
-\pard\tx6480\pardeftab720\li576\ri-19445
-
-\b\fs36 \cf3 \
-\pard\tx6480\pardeftab720\li576\ri-19445
-
-\f2\b0\fs28 \cf0 0123456789012345678901234567890123456789012345678901234567890123456789\
-\pard\tx6480\pardeftab720\li576\ri-19445
-
-\f1\b\fs36 \cf3 \
-\pard\tx6480\pardeftab720\li270\ri-19445
-
-\f3\b0\fs28 \cf2 \'95
-\f1\b\fs36  Degenerate Code Scores\
-\pard\tx6480\pardeftab720\li576\ri-19445
-\cf3 \
-\pard\pardeftab720\li576\ri0
-
-\b0\fs28 \cf0 The parameters are computed by summing the contributions from each base position. The contributions are the "degenerate code scores" (with the primer base being shown on the vertical axis and the target base on the horizontal) multiplied by a weighting factor.\
-\pard\tx6480\pardeftab720\li576\ri-19445
-
-\b\fs36 \cf3 \
-\pard\tx6480\pardeftab720\li270\ri-19445
-
-\f3\b0\fs28 \cf2 \'95
-\f1\b\fs36  Run Weights\
-\pard\tx6480\pardeftab720\li576\ri-19445
-\cf3 \
-\pard\tx6480\pardeftab720\li576\ri-19445
-
-\b0\fs28 \cf0 The first value is applied to single matches surrounded by mismatches; the second to runs of two matches, and so on. Note that the numbers increase with the length of run. These quantities are used to compute the "stability" of a match. Normally, you will want longer runs of matches to count more toward the stability.\
-\pard\tx6480\pardeftab720\li576\ri-19445
-
-\b\fs36 \cf3 \
-\pard\tx6480\pardeftab720\li270\ri-19445
-
-\f3\b0\fs28 \cf2 \'95
-\f1\b\fs36  Where do the default numbers come from?\
-\pard\tx6480\pardeftab720\li576\ri-19445
-\cf3 \
-\pard\tx6480\pardeftab720\li576\ri-19445
-
-\b0\fs28 \cf0 I just made them up. Well ... not quite. They actually come from a great deal of trial and error in which I kept tinkering with the values until they successfully predicted the great majority of PCR experiments run in my lab. If you find values that work better for you, be sure to hit the "Save As Defaults" button so that 
+\i \cf0 Amplify
+\i0  is a Mac program for simulating DNA amplification by the polymerase chain reaction. You supply the DNA sequences of one or more primers plus a length of target DNA sequence, and 
 \i Amplify
-\i0  will use your values in the future.\
+\i0  will generate a map of the expected outcome. It will also provide other helpful information such as the the sequence of likely amplified fragments, warnings about potential primer dimers, etc.\
 \
+
+\i Amplify
+\i0  is useful for planning experiments and for teaching students about PCR.\
 \
 \pard\tx6480\pardeftab720\ri0
 
-\f0\b\fs44 \cf0 \uc0\u9670 
-\f4\b0\fs40  
-\f1\b\fs44 Target Sequence\
+\f0\fs44 \cf0 \cb5 \uc0\u9670 
+\f1  Overview: How to use 
+\i Amplify\
+\pard\tx6480\pardeftab720\li576\ri-19445
+
+\i0\fs28 \cf0 \cb1 \
+\pard\tx6480\pardeftab720\li270\ri-19445
+
+\f3 \cf2 \'95
+\f1\b\fs36  Step 1: Open text files with the target and primer sequences\
 \pard\tx6480\pardeftab720\li576\ri-19445
 
 \b0\fs28 \cf0 \
+You need to tell 
+\i Amplify
+\i0  the DNA sequences of the target area plus those of one or more primers. Primers are short fragments of synthesized DNA, typically around 20 bp. The target is usually a stretch of sequence from the genome of an organism whose DNA you want to amplify. \
+\
+Go to the 
+\b File
+\i  
+\i0\b0 menu and select 
+\b Open
+\b0   to open your text files containing the target and/or the primer sequences. These can simple text files with the extension \'93.txt\'94 or more specific files like \'93.rtf\'94, \'93.csv\'94, \'93.primers\'94, \'93.pri\'94 and others. See below for more details about file formats.\
+\
+When you select a text file to open, 
+\i Amplify
+\i0  will know whether it contains the target sequence or a list of primers. (How does it know? It can usually tell by the file extension. If not, it checks to see whether the file \'93looks\'94 like a list of primers which typically has multiple lines with one or more tab characters per line.) When you open the target sequence, 
+\i Amplify
+\i0  will display it on the left side of the screen. The list of primers will go on the right.\
+\
+\pard\tx6480\pardeftab720\li270\ri-19445
+
+\f3 \cf2 \'95
+\f1\b\fs36  Step 2: Select one or more primers from the list\
+\pard\tx6480\pardeftab720\li576\ri-19445
+
+\b0\fs28 \cf0 \
+To the left of each primer sequence you will see a checkbox. You must check at least one to run a PCR, but you can check as many as you like. \
+\
+\pard\tx6480\pardeftab720\li270\ri-19445
+
+\f3 \cf2 \'95
+\f1\b\fs36  Step 3: Run the PCR simulation\
+\pard\tx6480\pardeftab720\li576\ri-19445
+
+\b0\fs28 \cf0 \
+When you choose 
+\b Amplify
+\b0  from the 
+\b PCR
+\b0  menu, 
+\i Amplify
+\i0  will draw a map of the expected outcome. You can now click on items in this drawing to get more information about each.\
+\
+\pard\tx6480\pardeftab720\ri0
+
+\f0\fs44 \cf0 \cb5 \uc0\u9670 
+\f1  Target Sequence\
+\pard\tx6480\pardeftab720\li576\ri-19445
+
+\fs28 \cf0 \cb1 \
 This window holds the target sequence for amplification. You can add a sequence to by copying and pasting, or else by opening a text file.\
 \
 \pard\tx6480\pardeftab720\li270\ri-19445
@@ -80,7 +117,7 @@ This window holds the target sequence for amplification. You can add a sequence 
 \f3 \cf2 \'95
 \f1\b\fs36  Sequence headers\
 \pard\tx6480\pardeftab720\li576\ri-19445
-\cf3 \
+\cf6 \
 \pard\tx6480\pardeftab720\li576\ri-19445
 
 \b0\fs28 \cf0 Some sequence files come with a preamble or header before the actual sequence begins. 
@@ -92,7 +129,7 @@ This window holds the target sequence for amplification. You can add a sequence 
 \f3 \cf2 \'95
 \f1\b\fs36  Styled text\
 \pard\tx6480\pardeftab720\li576\ri-19445
-\cf3 \
+\cf6 \
 \pard\tx6480\pardeftab720\li576\ri-19445
 
 \i\b0\fs28 \cf0 Amplify
@@ -103,7 +140,7 @@ This window holds the target sequence for amplification. You can add a sequence 
 \f3 \cf2 \'95
 \f1\b\fs36  Allowable characters\
 \pard\tx6480\pardeftab720\li576\ri-19445
-\cf3 \
+\cf6 \
 \pard\tx6480\pardeftab720\li576\ri-19445
 
 \b0\fs28 \cf0 The actual sequence part of the text (i.e., the text following any sequence header) must consist of the letters A, T, C, G or N (or a, t, c, g or n). Any other characters will be removed. Note that other IUB codes are allowed in the primer specifications but not in the target sequence.\
@@ -113,7 +150,7 @@ This window holds the target sequence for amplification. You can add a sequence 
 \f3 \cf2 \'95
 \f1\b\fs36  Pattern Finding\
 \pard\tx6480\pardeftab720\li576\ri-19445
-\cf3 \
+\cf6 \
 \pard\tx6480\pardeftab720\li576\ri-19445
 
 \i\b0\fs28 \cf0 Amplify
@@ -124,7 +161,7 @@ This window holds the target sequence for amplification. You can add a sequence 
 \f3 \cf2 \'95
 \f1\b\fs36  Sequence formatting\
 \pard\tx6480\pardeftab720\li576\ri-19445
-\cf3 \
+\cf6 \
 \pard\tx6480\pardeftab720\li576\ri-19445
 
 \b0\fs28 \cf0 When you hit the "Format Sequence" button, 
@@ -136,60 +173,44 @@ This window holds the target sequence for amplification. You can add a sequence 
 \f3 \cf2 \'95
 \f1\b\fs36  Inversion\
 \pard\tx6480\pardeftab720\li576\ri-19445
-\cf3 \
+\cf6 \
 \pard\tx6480\pardeftab720\li576\ri-19445
 
 \b0\fs28 \cf0 You can invert any selected portion of the target sequence by hitting the "Invert" button or by selecting "Invert Selection" under the Edit menu. Note that 
 \i Amplify
 \i0  remembers the text style (color, etc.) of each character during the inversion.\
 \
-\
-\
 \pard\tx6480\pardeftab720\ri0
 
-\f0\b\fs44 \cf0 \uc0\u9670 
-\f4\b0\fs40  
-\f1\b\fs44 Preferences\
+\f0\fs44 \cf0 \cb5 \uc0\u9670 
+\f1  Primer List\
 \pard\tx6480\pardeftab720\li576\ri-19445
 
-\b0\fs28 \cf0 \
-Any changes you make to the Preferences are active after you hit the Okay button. If you hit "Save As Defaults" those changes will also be available next time you run 
-\i Amplify
-\i0 . If you want to restore the original settings, hit the "Factory Settings" button.\
-\
-Note that the size and position of the windows will also be preserved when you hit the "Save As Defaults" button provided you have this option checked.\
-\
-\pard\tx6480\pardeftab720\ri0
-
-\f0\b\fs44 \cf0 \uc0\u9670 
-\f4\b0\fs40  
-\f1\b\fs44 Primer List\
-\pard\tx6480\pardeftab720\li576\ri-19445
-
-\b0\fs28 \cf0 \
+\fs28 \cf0 \cb1 \
 You will need a list of your available primers from which to select one or more to use in a particular amplification. To select a primer for use, click on the checkbox in the leftmost column.  All checked primers will be used when you perform an amplification by selecting "
 \i Amplify
 \i0 " under the PCR menu.\
 \pard\tx6480\pardeftab720\li576\ri-19445
 
-\b\fs36 \cf3  \
+\b\fs36 \cf6  \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural\qc
 
-\f5\b0\fs24 \cf0 {{\NeXTGraphic Pasted Graphic.tiff \width5760 \height4540
-}¬}\
+\f4\b0\fs24 \cf0 {{\NeXTGraphic Pasted Graphic.tiff \width5760 \height4540
+}¬}\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural\qc
+\cf0 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural
 
-\f1\b\fs36 \cf3 \
+\f1\b\fs36 \cf6 \
 \pard\tx6480\pardeftab720\li270\ri-19445
 
 \f3\b0\fs28 \cf2 \'95
 \f1\b\fs36  Constructing a primer list\
 \pard\tx6480\pardeftab720\li576\ri-19445
-\cf3 \
+\cf6 \
 \pard\tx6480\pardeftab720\li576\ri-19445
 
 \i\b0\fs28 \cf0 Amplify
-\i0 \cf4  3\cf0  can use primer lists made with earlier versions provided you used the Tab character to separate fields. You can also build or modify your list within 
+\i0 \cf7  3\cf0  can use primer lists made with earlier versions provided you used the Tab character to separate fields. You can also build or modify your list within 
 \i Amplify
 \i0  by typing or pasting in the information. You can add a new row to the bottom of the list by clicking in last cell and hitting the Tab key. Be sure to save the list after you make your changes.\
 \
@@ -199,7 +220,7 @@ To reverse the sequence, select the sequence you want to invert and pick "Invert
 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\li576\ri0
 
-\f5\fs24 \cf0 \
+\f4\fs24 \cf0 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\li576\ri0
 
 \f1\fs28 \cf0 \
@@ -229,34 +250,104 @@ You can sort your primer list according to any column by clicking on the header 
 
 \b0\fs28 \cf0 \
 Select a primer by clicking on its sequence, name or notes, then click on "Primer Info" to see various pieces of information about that primer's sequence. If it has a potential to self-dimerize, the hypothetical alignment will also be shown. \
+\pard\tx6480\pardeftab720\li576\ri-19445
+
+\f0\b\fs72 \cf2 \
+\pard\tx6480\pardeftab720\ri0
+
+\b0\fs44 \cf0 \cb5 \uc0\u9670 
+\f1  Match Settings\
+\pard\tx6480\pardeftab720\li576\ri-19445
+
+\fs28 \cf0 \cb1 \
+\pard\pardeftab720\li576\ri0
+\cf0 Matches are evaluated according to two parameters called "primability" and "stability." They both measure how well the primer matches the target site, but the former emphasizes matches at the 3' end, and the latter places more weight on runs of consecutive matches. You can adjust how these parameters are calculated by changing the settings. Here is what the values {\field{\*\fldinst{HYPERLINK "http://www.macworld.com"}}{\fldrslt mean}}:\
+\pard\tx6480\pardeftab720\li576\ri-19445
+
+\b\fs36 \cf6 \
+\pard\tx6480\pardeftab720\li576\ri-19445
+
+\f5\b0\fs28 \cf0 0123456789012345678901234567890123456789012345678901234567890123456789\
+\pard\tx6480\pardeftab720\li576\ri-19445
+
+\f1\b\fs36 \cf6 \
+\pard\tx6480\pardeftab720\li270\ri-19445
+
+\f3\b0\fs28 \cf2 \'95
+\f1\b\fs36  Degenerate Code Scores\
+\pard\tx6480\pardeftab720\li576\ri-19445
+\cf6 \
+\pard\pardeftab720\li576\ri0
+
+\b0\fs28 \cf0 The parameters are computed by summing the contributions from each base position. The contributions are the "degenerate code scores" (with the primer base being shown on the vertical axis and the target base on the horizontal) multiplied by a weighting factor.\
+\pard\tx6480\pardeftab720\li576\ri-19445
+
+\b\fs36 \cf6 \
+\pard\tx6480\pardeftab720\li270\ri-19445
+
+\f3\b0\fs28 \cf2 \'95
+\f1\b\fs36  Run Weights\
+\pard\tx6480\pardeftab720\li576\ri-19445
+\cf6 \
+\pard\tx6480\pardeftab720\li576\ri-19445
+
+\b0\fs28 \cf0 The first value is applied to single matches surrounded by mismatches; the second to runs of two matches, and so on. Note that the numbers increase with the length of run. These quantities are used to compute the "stability" of a match. Normally, you will want longer runs of matches to count more toward the stability.\
+\pard\tx6480\pardeftab720\li576\ri-19445
+
+\b\fs36 \cf6 \
+\pard\tx6480\pardeftab720\li270\ri-19445
+
+\f3\b0\fs28 \cf2 \'95
+\f1\b\fs36  Where do the default numbers come from?\
+\pard\tx6480\pardeftab720\li576\ri-19445
+\cf6 \
+\pard\tx6480\pardeftab720\li576\ri-19445
+
+\b0\fs28 \cf0 I just made them up. Well ... not quite. They actually come from a great deal of trial and error in which I kept tinkering with the values until they successfully predicted the great majority of PCR experiments run in my lab. If you find values that work better for you, be sure to hit the "Save As Defaults" button so that 
+\i Amplify
+\i0  will use your values in the future.\
+\
+\
+\
 \
 \pard\tx6480\pardeftab720\ri0
 
-\f0\b\fs44 \cf0 \uc0\u9670 
-\f4\b0\fs40  
-\f1\b\fs44 Define Target Sequence\
+\f0\fs44 \cf0 \cb5 \uc0\u9670 
+\f1  Preferences\
 \pard\tx6480\pardeftab720\li576\ri-19445
 
-\b0\fs28 \cf0 \
+\fs28 \cf0 \cb1 \
+Any changes you make to the Preferences are active after you hit the Okay button. If you hit "Save As Defaults" those changes will also be available next time you run 
+\i Amplify
+\i0 . If you want to restore the original settings, hit the "Factory Settings" button.\
+\
+Note that the size and position of the windows will also be preserved when you hit the "Save As Defaults" button provided you have this option checked.\
+\
+\
+\pard\tx6480\pardeftab720\ri0
+
+\f0\fs44 \cf0 \cb5 \uc0\u9670 
+\f1  Define Target Sequence\
+\pard\tx6480\pardeftab720\li576\ri-19445
+
+\fs28 \cf0 \cb1 \
 You can tell Amplify to use your entire target sequence (the default) or any subset. If you already have the desired subset selected in the target sequence window, just check the "Use Selection" box to have the corresponding numbers put into the boxes for you.\
 \
-\pard\tx6480\pardeftab720\li576\ri-19445
 
-\i \cf0 Amplify
+\i Amplify
 \i0  will treat your target sequence as either linear or circular according to your choice. If you choose circular, then some additional fragments might show up on your amplification map.  These additional ones will appear as interrupted lines and have arrowheads at the left and right ends to indicate that they can be thought of as continuing around a circle.\
 \pard\tx6480\pardeftab720\ri0
 
-\f0\b\fs44 \cf0 \uc0\u9670 
-\f4\b0\fs40  
-\f1\b\fs44 Primer Dimers\
+\f0\fs44 \cf0 \cb5 \uc0\u9670 
+\f1  Primer Dimers\
 \pard\tx6480\pardeftab720\li576\ri-19445
 
-\b0\fs28 \cf0 \
+\fs28 \cf0 \cb1 \
 Some primers have the potential to pair up in such a way that they can use each other as templates for DNA synthesis. For example, two primers might line up this way:\
 \
 \pard\tx6480\pardeftab720\li576\ri-19445
 
-\f2 \cf0 5' GTCGGCTACTCCTTGCGTCG 3'  \
+\f5 \cf0 5' GTCGGCTACTCCTTGCGTCG 3'  \
                   |||||\
                3' GCAGCCCTGGTGGAATACAA 5'  
 \f1 \
@@ -268,24 +359,23 @@ This process prevents the primers from functioning properly in your reaction. Wo
 \i \cf0 Amplify
 \i0  can show you pairs that it considers having some potential for dimer formation. Then you can decide for yourself whether the combination is dangerous to your reaction.\
 \
-You can adjust the parameters and stringency used to determine which dimers are flagged by changing the settings in\cf4  
+You can adjust the parameters and stringency used to determine which dimers are flagged by changing the settings in\cf7  
 \i \cf0 Amplify
 \i0 's Preferences dialog.\
 \
 \pard\tx6480\pardeftab720\ri0
 
-\f0\b\fs44 \cf0 \uc0\u9670 
-\f4\b0\fs40  
-\f1\b\fs44 PCR Settings\
+\f0\fs44 \cf0 \cb5 \uc0\u9670 
+\f1  PCR Settings\
 \pard\tx6480\pardeftab720\li576\ri-19445
 
-\b0\fs28 \cf0 \
+\fs28 \cf0 \cb1 \
 \pard\tx6480\pardeftab720\li270\ri-19445
 
 \f3 \cf2 \'95
 \f1\b\fs36  Maximum Effective Primer Length\
 \pard\tx6480\pardeftab720\li576\ri-19445
-\cf3 \
+\cf6 \
 \pard\tx6480\pardeftab720\li576\ri-19445
 
 \b0\fs28 \cf0 You can still use primers longer than this, but the excess sequence at the 5' end will be ignored.\
@@ -314,25 +404,22 @@ You can always decide whether you want your target sequence to be treated as lin
 \
 \pard\tx6480\pardeftab720\ri0
 
-\f0\b\fs44 \cf0 \uc0\u9670 
-\f4\b0\fs40  
-\f1\b\fs44 Tm Calculations\
+\f0\fs44 \cf0 \cb5 \uc0\u9670 
+\f1  Tm Calculations\
 \pard\tx6480\pardeftab720\li576\ri-19445
 
-\b0\fs28 \cf0 \
+\fs28 \cf0 \cb1 \
 Melting temperatures for primers are calculated by the "nearest neighbor" method. This method, as well as the entropy and enthalpy values, come from the "Primer" program of the Eric Lander lab, and are used here with permission from the authors.\
 \
 \pard\tx6480\pardeftab720\ri0
 
-\f0\b\fs44 \cf0 \uc0\u9670 
-\f4\b0\fs40  
-\f1\b\fs44 Primer\cf4  \cf0 Dimer calculation parameters\
+\f0\fs44 \cf0 \cb5 \uc0\u9670 
+\f1  Primer Dimer calculation parameters\
 \pard\tx6480\pardeftab720\li576\ri-19445
 
-\b0\fs28 \cf0 \
-\pard\tx6480\pardeftab720\li576\ri-19445
+\fs28 \cf0 \cb1 \
 
-\i \cf0 Amplify
+\i Amplify
 \i0  flags potential primer-dimer combinations if (1) the region of overlap is at least as large as the number specified, and (2) the "quality" of the match within the overlap is greater than a cutoff value set by the Stringency slider on this panel.\
 \
 The "quality" is the sum of the numbers for in the shown matrix for each base pair. You can set the numbers to be whatever you like. The defaults were computed as A + wG \'96 M, where A is the probability of an A-T pair, G is the probability of a G-C pair, and M is the probability of a mismatch. The weighting factor, w, gives extra weight to G-C pairs. I used w = 1.5 in arriving at the default values.\
@@ -340,12 +427,11 @@ The "quality" is the sum of the numbers for in the shown matrix for each base pa
 These criteria seem to work well in practice in identifying potential dimer-forming pairs, but they are not based on any theory. Feel free to try other values, and please let me know if you find a set that works better than the defaults.\
 \pard\tx6480\pardeftab720\ri0
 
-\f0\b\fs44 \cf0 \uc0\u9670 
-\f4\b0\fs40  
-\f1\b\fs44 General\cf4  \cf0 Preferences\
+\f0\fs44 \cf0 \cb5 \uc0\u9670 
+\f1  General Preferences\
 \pard\tx6480\pardeftab720\li576\ri-19445
 
-\fs36 \cf3 \
+\b\fs36 \cf6 \cb1 \
 \pard\tx6480\pardeftab720\li270\ri-19445
 
 \f3\b0\fs28 \cf2 \'95
@@ -386,7 +472,7 @@ If you find yourself working with the same target sequence each time you use
 \f3 \cf2 \'95
 \f1\b\fs36  Allow live scrolling of target sequence\
 \pard\tx6480\pardeftab720\li576\ri-19445
-\cf3 \
+\cf6 \
 \pard\tx6480\pardeftab720\li576\ri-19445
 
 \b0\fs28 \cf0 Checking this box causes the target sequence to scroll actively as you move the scroll bar. If you computer is old and slow it might be better to deactivate this feature.\
@@ -396,7 +482,7 @@ If you find yourself working with the same target sequence each time you use
 \f3 \cf2 \'95
 \f1\b\fs36  Preferred monospaced font\
 \pard\tx6480\pardeftab720\li576\ri-19445
-\cf3 \
+\cf6 \
 \pard\tx6480\pardeftab720\li576\ri-19445
 
 \b0\fs28 \cf0 The Target Sequence window, the Primer List window, and the Results window require a monospaced font. You can enter the name of your favorite monospaced font here.\
@@ -411,12 +497,11 @@ If you find yourself working with the same target sequence each time you use
 You can indicate a string of characters, such as "End Header" or ".." to mark the end of the header information in your target sequence files. When the target sequence is formatted, the header will be marked with the color shown here.\
 \pard\tx6480\pardeftab720\ri0
 
-\f0\b\fs44 \cf0 \uc0\u9670 
-\f4\b0\fs40  
-\f1\b\fs44 Amplification Map\
+\f0\fs44 \cf0 \cb5 \uc0\u9670 
+\f1  Amplification Map\
 \pard\tx6480\pardeftab720\li576\ri-19445
 
-\b0\fs28 \cf0 \
+\fs28 \cf0 \cb1 \
 This map shows you what 
 \i Amplify
 \i0  thinks is a likely outcome of your PCR. Sites along the target sequence where primers match are shown as rightward or leftward arrowheads above or below the line representing the target sequence. Amplified fragments ("amplicons") are shown below the matches.\
@@ -426,7 +511,7 @@ This map shows you what
 \f3 \cf2 \'95
 \f1\b\fs36  "Quality" of matches and amplicons\
 \pard\tx6480\pardeftab720\li576\ri-19445
-\cf3 \
+\cf6 \
 \pard\tx6480\pardeftab720\li576\ri-19445
 
 \b0\fs28 \cf0 The size and boldness of the arrowheads and lines indicate how strongly those items are likely to appear in your amplification. In the case of the matches, the "quality" is only a function of the Primability and Stability calculated for that match. For the amplicons, it is determined by the quality of the corresponding primer matches as well as the length of the amplicon. Longer fragments 
@@ -459,7 +544,7 @@ For matches,
 \
 \pard\tx6480\pardeftab720\li576\ri-19445
 
-\f2 \cf0 TGTCGGAAATTATGCGAACAGGAATTCTGGATAAACCCAAAAGGCTCCCATT\
+\f5 \cf0 TGTCGGAAATTATGCGAACAGGAATTCTGGATAAACCCAAAAGGCTCCCATT\
                     ||||||||:  ||||||||\
                  3' CCTTAAGAYKCATTTGGGT 5'\
                     |                 |\
@@ -473,7 +558,7 @@ All sequence are drawn 5' to 3' unless otherwise indicated. Rightward matches ar
 \
 \pard\tx6480\pardeftab720\li576\ri-19445
 
-\f2 \cf0                  2108                 2127\
+\f5 \cf0                  2108                 2127\
                     |                  |\
                  5' ACCTTATMTTATTTCATCAT 3'\
                      | || |:|||||| |||||\
@@ -524,13 +609,13 @@ You can print a copy of the map to most printers. \
  \
 \pard\tx6480\pardeftab720\ri0
 
-\f0\b\fs44 \cf0 \uc0\u9670 
-\f4\b0\fs40  
-\f1\i\b\fs44 Amplify
+\f0\fs44 \cf0 \cb5 \uc0\u9670 
+\f1  
+\i Amplify
 \i0  Help\
 \pard\tx6480\pardeftab720\li576\ri-19445
 
-\b0\fs28 \cf0 \
+\fs28 \cf0 \cb1 \
 Click on the question-mark icons you find in various places to get help. A window will open up with information about whatever functions are nearby to the question mark icon you clicked. \
 \
 The official web site of 

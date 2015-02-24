@@ -32,6 +32,12 @@ class AMGlobals: NSObject {
     let IUBString = "GATCMRWSYKVHDBN"
     let compIUBString = "CTAGKYWSRMBDHVN"
     let recentDocs = "recent Docs"
+    let recentPrimerPath = "recentPrimerPath"
+    let recentTargetPath = "recentTargetPath"
+    let samplePrimers = "Amplify Sample Primers"
+    let sampleTarget = "Amplify Sample Target"
+    let useRecentPrimers = "useRecentPrimers"
+    let useRecentTarget = "useRecentTarget"
     
     let factory = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("settings", ofType: "plist")!)!
 }

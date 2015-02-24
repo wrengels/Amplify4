@@ -183,6 +183,7 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
             targetChanged = false
             targetDelegate.cleanupTarget()
             targetFile = url
+            settings.setObject(targetFile.path, forKey: globals.recentTargetPath)
             let theDocController : AnyObject = NSDocumentController.sharedDocumentController()
             theDocController.noteNewRecentDocumentURL(url)
             substrateWindow.title = targetFile.path!.lastPathComponent
@@ -211,6 +212,7 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
         primerTableView.reloadData()
         let theDocController : AnyObject = NSDocumentController.sharedDocumentController()
         theDocController.noteNewRecentDocumentURL(url)
+        settings.setObject(primerFile.path, forKey: globals.recentPrimerPath)
     }
     
     func openURLArray(urls : NSArray) {
@@ -375,7 +377,7 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     }
     
     @IBAction func checkAll(sender: AnyObject) {
-        var a = 0
+        if primers.count < 1 {return}
         for i in 0...primers.count - 1 {
             primers[i].check = 1
         }
@@ -383,7 +385,7 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     }
     
     @IBAction func uncheckAll(sender: AnyObject) {
-        var a = 0
+        if primers.count < 1 {return}
         for i in 0...primers.count - 1 {
             primers[i].check = 0
         }
@@ -391,7 +393,7 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     }
     
     @IBAction func toggleAll(sender: AnyObject) {
-        var a = 0
+        if primers.count < 1 {return}
         for i in 0...primers.count - 1 {
             primers[i].check = 1 - primers[i].check
         }
@@ -418,6 +420,7 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     }
     
     @IBAction func toggleSelected(sender: AnyObject) {
+        if primers.count < 1 {return}
         let selection = primerTableView.selectedRowIndexes
         var srow = selection.firstIndex
         while srow != NSNotFound {
@@ -428,6 +431,7 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     }
     
     @IBAction func uncheckSelected(sender: AnyObject) {
+        if primers.count < 1 {return}
         let selection = primerTableView.selectedRowIndexes
         var srow = selection.firstIndex
         while srow != NSNotFound {
@@ -438,6 +442,7 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     }
     
     @IBAction func checkSelected(sender: AnyObject) {
+        if primers.count < 1 {return}
         let selection = primerTableView.selectedRowIndexes
         var srow = selection.firstIndex
         while srow != NSNotFound {
@@ -450,11 +455,15 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     @IBAction func newPrimer(sender: AnyObject) {
         primers.append(Primer())
         primerTableView.reloadData()
+        primerTableView.scrollToEndOfDocument(self)
+        let newIndex = NSIndexSet(index: primers.count - 1)
+        primerTableView.selectRowIndexes(newIndex, byExtendingSelection: false)
         primersChanged = true
     }
 
     func deleteSelectedPrimers() {
         // without asking are you sure
+        if primers.count < 1 {return}
         let selection = primerTableView.selectedRowIndexes
         if selection.count < 1 {return}
         var srow = selection.lastIndex
@@ -466,6 +475,7 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     }
     
     @IBAction func deletePrimers(sender: AnyObject) {
+        if primers.count < 1 {return}
         let ruSure = NSAlert()
         ruSure.addButtonWithTitle("Okay")
         ruSure.addButtonWithTitle("Cancel")
@@ -522,6 +532,7 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     }
 
     @IBAction func flipPrimers(sender: AnyObject) {
+        if primers.count < 1 {return}
         let selection = primerTableView.selectedRowIndexes
         if selection.count < 1 {return}
         var srow = selection.firstIndex

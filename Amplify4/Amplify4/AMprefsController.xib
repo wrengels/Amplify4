@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
@@ -43,7 +44,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField identifier="endHeader" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g4e-xb-IkO" userLabel="endHeader">
-                                            <rect key="frame" x="318" y="314" width="232" height="22"/>
+                                            <rect key="frame" x="306" y="214" width="232" height="22"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="SZe-xM-dMg">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -53,8 +54,8 @@
                                                 <binding destination="bOP-QH-IHI" name="value" keyPath="values.endHeader" id="8kh-q8-Jjq"/>
                                             </connections>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EWT-nv-j6B">
-                                            <rect key="frame" x="130" y="319" width="182" height="17"/>
+                                        <textField toolTip="All characters following this string in the target sequence file will be treated as DNA bases" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EWT-nv-j6B">
+                                            <rect key="frame" x="118" y="219" width="182" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Sequence Header Boundary:" id="zOQ-ky-dxs">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -62,7 +63,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LXu-2e-0zm" userLabel="fontName">
-                                            <rect key="frame" x="318" y="270" width="232" height="22"/>
+                                            <rect key="frame" x="306" y="170" width="232" height="22"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="7wO-SX-PHn">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -72,8 +73,8 @@
                                                 <binding destination="bOP-QH-IHI" name="value" keyPath="values.targetFont" id="jfT-A1-k6V"/>
                                             </connections>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kPF-Ui-vYS">
-                                            <rect key="frame" x="130" y="275" width="182" height="17"/>
+                                        <textField toolTip="Newly opened target sequence will display with this font" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kPF-Ui-vYS">
+                                            <rect key="frame" x="118" y="175" width="182" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Target Sequence Font" id="GHH-Hb-ot3">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -81,7 +82,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F88-Jn-2Fg" userLabel="fontSize">
-                                            <rect key="frame" x="598" y="270" width="66" height="22"/>
+                                            <rect key="frame" x="586" y="170" width="66" height="22"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="cdR-f2-Adj">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -91,8 +92,8 @@
                                                 <binding destination="bOP-QH-IHI" name="value" keyPath="values.targetSize" id="zVX-QM-qow"/>
                                             </connections>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i2x-Hb-ejo">
-                                            <rect key="frame" x="562" y="275" width="30" height="17"/>
+                                        <textField toolTip="Newly opened target sequence will use this font size" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i2x-Hb-ejo">
+                                            <rect key="frame" x="550" y="175" width="30" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Size" id="Nk5-aW-e7L">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -100,7 +101,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Qy-gB-UTT" userLabel="default Form">
-                                            <rect key="frame" x="318" y="226" width="156" height="18"/>
+                                            <rect key="frame" x="306" y="126" width="156" height="18"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             <size key="cellSize" width="70" height="18"/>
                                             <size key="intercellSpacing" width="4" height="2"/>
@@ -130,8 +131,8 @@
                                                 </binding>
                                             </connections>
                                         </matrix>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o3r-OF-114" userLabel="form label">
-                                            <rect key="frame" x="130" y="227" width="182" height="17"/>
+                                        <textField toolTip="Target sequence can be treated as circular or linear" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o3r-OF-114" userLabel="form label">
+                                            <rect key="frame" x="118" y="127" width="182" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Default Target Form" id="dHT-F5-6jJ">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -139,7 +140,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <box autoresizesSubviews="NO" fixedFrame="YES" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="ASq-2d-RpV">
-                                            <rect key="frame" x="105" y="189" width="611" height="191"/>
+                                            <rect key="frame" x="93" y="89" width="611" height="191"/>
                                             <view key="contentView">
                                                 <rect key="frame" x="1" y="1" width="609" height="175"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -157,6 +158,38 @@
                                                 <action selector="findMeInHelp:" target="6Q9-fb-sjZ" id="RKo-mi-gG0"/>
                                             </connections>
                                         </button>
+                                        <box autoresizesSubviews="NO" fixedFrame="YES" title="When Amplify starts up, automatically open the most recently used:" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="pCb-I5-3Sy">
+                                            <rect key="frame" x="93" y="297" width="611" height="82"/>
+                                            <view key="contentView">
+                                                <rect key="frame" x="1" y="1" width="609" height="63"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fkX-il-wgV">
+                                                        <rect key="frame" x="214" y="37" width="86" height="18"/>
+                                                        <buttonCell key="cell" type="check" title="Target File" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="yov-it-vkg">
+                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <binding destination="bOP-QH-IHI" name="value" keyPath="values.useRecentTarget" id="9fj-zf-dHa"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bCN-i4-5ld">
+                                                        <rect key="frame" x="214" y="13" width="88" height="18"/>
+                                                        <buttonCell key="cell" type="check" title="Primer File" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="sbn-O3-SOt">
+                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <binding destination="bOP-QH-IHI" name="value" keyPath="values.useRecentPrimers" id="TzW-GA-2l9"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </view>
+                                            <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                            <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <font key="titleFont" metaFont="system"/>
+                                        </box>
                                     </subviews>
                                 </view>
                             </tabViewItem>
@@ -339,7 +372,7 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </tableHeaderView>
                                         </scrollView>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJ2-Tc-jZu">
+                                        <textField toolTip="Values used in testing primer matches" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJ2-Tc-jZu">
                                             <rect key="frame" x="63" y="495" width="248" height="17"/>
                                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Base Pair Scores" id="3oc-JC-PlU">
                                                 <font key="font" metaFont="systemBold"/>
@@ -347,7 +380,7 @@
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Aph-vJ-C42">
+                                        <textField toolTip="Values used in testing primer matches" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Aph-vJ-C42">
                                             <rect key="frame" x="336" y="495" width="114" height="17"/>
                                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Match Weights" id="E4W-GP-6S5">
                                                 <font key="font" metaFont="systemBold"/>
@@ -416,7 +449,7 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </tableHeaderView>
                                         </scrollView>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CZw-dT-Ei6">
+                                        <textField toolTip="Values used in testing primer matches" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CZw-dT-Ei6">
                                             <rect key="frame" x="479" y="495" width="114" height="17"/>
                                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Run Weights" id="eGb-FM-ujS">
                                                 <font key="font" metaFont="systemBold"/>
@@ -424,7 +457,7 @@
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TNd-wU-DgE">
+                                        <textField toolTip="Determines whether a primer match is shown in map" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TNd-wU-DgE">
                                             <rect key="frame" x="647" y="436" width="130" height="17"/>
                                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Primability Cutoff " id="HOq-It-iFc">
                                                 <font key="font" metaFont="systemBold"/>
@@ -455,7 +488,7 @@
                                                 <binding destination="bOP-QH-IHI" name="value" keyPath="values.primabilityCutoff" id="pig-JA-CCb"/>
                                             </connections>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wxB-Ke-OuW">
+                                        <textField toolTip="Determines whether a primer match is shown in map" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wxB-Ke-OuW">
                                             <rect key="frame" x="647" y="330" width="130" height="17"/>
                                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Stability Cutoff " id="41h-Bi-uAi">
                                                 <font key="font" metaFont="systemBold"/>
@@ -488,6 +521,7 @@
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EeO-lo-NET">
                                             <rect key="frame" x="95" y="78" width="178" height="24"/>
+                                            <string key="toolTip">Bases 5' of these do not contribute to quality of match. This value does NOT limit the length of primer that will be included in the amplicon. Primers can be much longer than this and still be included.</string>
                                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Maximum Effective Primer" id="8PN-cI-DHG">
                                                 <font key="font" metaFont="systemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -517,7 +551,7 @@
                                                 <binding destination="bOP-QH-IHI" name="value" keyPath="values.effectivePrimer" id="nbL-mD-7Na"/>
                                             </connections>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dL1-6e-2ry">
+                                        <textField toolTip="These codes may be used in primers. Target sequence may use N but no other ambiguous code" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dL1-6e-2ry">
                                             <rect key="frame" x="677" y="53" width="58" height="162"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="aEr-SM-yFD">
                                                 <font key="font" metaFont="miniSystem"/>
@@ -1171,7 +1205,7 @@ N = any</string>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </tableHeaderView>
                                         </scrollView>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nQB-VW-Kbt">
+                                        <textField toolTip="Values summed through overlapping bases determine quality of primer dimer" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nQB-VW-Kbt">
                                             <rect key="frame" x="96" y="352" width="546" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Base Pair Weights For Primer Dimer Formation" id="5zQ-JN-Gxl">
                                                 <font key="font" metaFont="systemBold"/>
@@ -1179,7 +1213,7 @@ N = any</string>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eRM-nJ-cfz">
+                                        <textField toolTip="These codes may be used in primers. Target sequence may use N but no other ambiguous code" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eRM-nJ-cfz">
                                             <rect key="frame" x="709" y="93" width="58" height="162"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="VpP-Jn-eBb">
                                                 <font key="font" metaFont="miniSystem"/>
@@ -1200,7 +1234,7 @@ N = any</string>
                                                 <color key="backgroundColor" white="0.91279940120000003" alpha="1" colorSpace="calibratedWhite"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ptI-Vx-EBw">
+                                        <textField toolTip="Potential primer dimer ignored if fewer bases overlap" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ptI-Vx-EBw">
                                             <rect key="frame" x="203" y="446" width="174" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Minimum Overlap" id="coK-xO-Z2I">
                                                 <font key="font" metaFont="systemBold"/>
@@ -1228,7 +1262,7 @@ N = any</string>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Pa-hi-qr0">
+                                        <textField toolTip="Primer dimer not shown if quality less than this value" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Pa-hi-qr0">
                                             <rect key="frame" x="371" y="446" width="134" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Minimum Quality" id="f9J-Fv-yFJ">
                                                 <font key="font" metaFont="systemBold"/>
@@ -1272,7 +1306,7 @@ N = any</string>
                             </tabViewItem>
                         </tabViewItems>
                     </tabView>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xDV-WA-0n3">
+                    <button toolTip="Accept all setting changes. (All four panels)" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xDV-WA-0n3">
                         <rect key="frame" x="14" y="6" width="72" height="32"/>
                         <buttonCell key="cell" type="push" title="Okay" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yb2-sv-6hL">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1285,7 +1319,7 @@ DQ
                             <action selector="okay:" target="-2" id="tLp-rT-o2L"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RXR-Vd-tSE">
+                    <button toolTip="Keep all settings as they were before Amplify Settings window was opened" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RXR-Vd-tSE">
                         <rect key="frame" x="86" y="6" width="83" height="32"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zlV-zQ-ZBB">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1298,7 +1332,7 @@ Gw
                             <action selector="cancel:" target="-2" id="tDc-ui-Aab"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VuF-0C-vNg">
+                    <button toolTip="All settings (in all preference panels) will be restored to original settings. Changes take effect only if you click Okay" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VuF-0C-vNg">
                         <rect key="frame" x="616" y="6" width="193" height="32"/>
                         <buttonCell key="cell" type="push" title="Restore Factory Settings" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WvW-IW-ps4">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1308,7 +1342,7 @@ Gw
                             <action selector="restoreFactorySettings:" target="-2" id="TNy-dW-Xjq"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aLR-ay-AwU">
+                    <button toolTip="Load previously-saved settings from a plist file. Changes only take effect in you click Okay" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aLR-ay-AwU">
                         <rect key="frame" x="218" y="6" width="169" height="32"/>
                         <buttonCell key="cell" type="push" title="Load Settings File …" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tqp-sI-Y9p">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1318,7 +1352,7 @@ Gw
                             <action selector="loadSettingsFile:" target="-2" id="iCW-pV-nGW"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HyI-zl-u4e">
+                    <button toolTip="You can save a plist file with the settings in all four panels" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HyI-zl-u4e">
                         <rect key="frame" x="387" y="6" width="168" height="32"/>
                         <buttonCell key="cell" type="push" title="Save Settings File …" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3qD-Tb-Zdk">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

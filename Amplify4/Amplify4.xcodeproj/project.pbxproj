@@ -20,6 +20,8 @@
 		2483DAB31A688BB100789E69 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2483DAB21A688BB100789E69 /* Images.xcassets */; };
 		2483DAB61A688BB100789E69 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2483DAB41A688BB100789E69 /* MainMenu.xib */; };
 		2483DAC21A688BB100789E69 /* Amplify4Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2483DAC11A688BB100789E69 /* Amplify4Tests.swift */; };
+		24A19D271A9BD5B5006486E0 /* Amplify Sample Primers.primers in Resources */ = {isa = PBXBuildFile; fileRef = 24A19D251A9BD5B5006486E0 /* Amplify Sample Primers.primers */; };
+		24A19D281A9BD5B5006486E0 /* Amplify Sample Target.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 24A19D261A9BD5B5006486E0 /* Amplify Sample Target.rtf */; };
 		24A9D98D1A880EED00E3E032 /* AMprefsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A9D98B1A880EED00E3E032 /* AMprefsController.swift */; };
 		24A9D98E1A880EED00E3E032 /* AMprefsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A9D98C1A880EED00E3E032 /* AMprefsController.xib */; };
 		24A9D9901A88132700E3E032 /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24A9D98F1A88132700E3E032 /* settings.plist */; };
@@ -57,6 +59,8 @@
 		2483DABB1A688BB100789E69 /* Amplify4Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Amplify4Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2483DAC01A688BB100789E69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2483DAC11A688BB100789E69 /* Amplify4Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Amplify4Tests.swift; sourceTree = "<group>"; };
+		24A19D251A9BD5B5006486E0 /* Amplify Sample Primers.primers */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Amplify Sample Primers.primers"; sourceTree = "<group>"; };
+		24A19D261A9BD5B5006486E0 /* Amplify Sample Target.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "Amplify Sample Target.rtf"; sourceTree = "<group>"; };
 		24A9D98B1A880EED00E3E032 /* AMprefsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AMprefsController.swift; sourceTree = "<group>"; };
 		24A9D98C1A880EED00E3E032 /* AMprefsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMprefsController.xib; sourceTree = "<group>"; };
 		24A9D98F1A88132700E3E032 /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settings.plist; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 		2483DAA91A688BB100789E69 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				24A19D251A9BD5B5006486E0 /* Amplify Sample Primers.primers */,
+				24A19D261A9BD5B5006486E0 /* Amplify Sample Target.rtf */,
 				241CF2B81A97ABCD0063AF5A /* Amplify Help.rtfd */,
 				24A9D98F1A88132700E3E032 /* settings.plist */,
 				2483DAAA1A688BB100789E69 /* Info.plist */,
@@ -253,9 +259,11 @@
 				2483DAB11A688BB100789E69 /* Document.xib in Resources */,
 				241CF2B91A97ABCD0063AF5A /* Amplify Help.rtfd in Resources */,
 				2483DAB31A688BB100789E69 /* Images.xcassets in Resources */,
+				24A19D271A9BD5B5006486E0 /* Amplify Sample Primers.primers in Resources */,
 				24CECD921A914A9900819B9E /* PCR.xib in Resources */,
 				2483DAB61A688BB100789E69 /* MainMenu.xib in Resources */,
 				24A9D98E1A880EED00E3E032 /* AMprefsController.xib in Resources */,
+				24A19D281A9BD5B5006486E0 /* Amplify Sample Target.rtf in Resources */,
 				24EE0CD31A96AA57002D555F /* AmplifyHelp.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,6 +338,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -410,6 +419,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Amplify4/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -421,6 +431,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Amplify4/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

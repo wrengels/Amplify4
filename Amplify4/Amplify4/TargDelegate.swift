@@ -59,9 +59,7 @@ class TargDelegate: NSObject {
         pr.calcZ()
         let pdimer = Dimer(primer: pr, and: pr)
         println(pdimer.report())
-    
-        return
-        
+            
         var tsettings = NSMutableDictionary();
         tsettings.setValue(
             [100,150,175,182,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186],
