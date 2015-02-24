@@ -38,6 +38,8 @@ class AMGlobals: NSObject {
     let sampleTarget = "Amplify Sample Target"
     let useRecentPrimers = "useRecentPrimers"
     let useRecentTarget = "useRecentTarget"
+    let targetViewID = "target Text View"
+    let primerViewID = "primer Table View"
     
     let factory = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("settings", ofType: "plist")!)!
 }

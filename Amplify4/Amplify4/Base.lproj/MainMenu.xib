@@ -25,6 +25,7 @@
                 <outlet property="appdel" destination="Voe-Tx-rLC" id="HZd-92-XhW"/>
                 <outlet property="formattedOrPlain" destination="hXJ-c0-5nF" id="0J0-ff-frm"/>
                 <outlet property="primerTableView" destination="8GV-fp-tNe" id="0UQ-dx-kGM"/>
+                <outlet property="saveItem" destination="pxx-59-PXV" id="GQC-Xr-aRJ"/>
                 <outlet property="substrateWindow" destination="bmA-jS-XtK" id="vG7-yM-IuX"/>
                 <outlet property="targetDelegate" destination="Whm-mM-EMR" id="kbB-ol-44r"/>
                 <outlet property="targetScrollView" destination="dQb-au-cpo" id="tcv-5e-m5F"/>

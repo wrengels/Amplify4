@@ -72,6 +72,27 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
         return self
     }
     
+        @IBOutlet weak var saveItem: NSMenuItem!
+
+override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+   
+    let fid = substrateWindow.firstResponder
+    if fid == primerTableView {
+        if menuItem == saveItem {
+            saveItem.title = "Save Primers"
+            if primerFile.path == nil {return false}
+            return primersChanged
+        }
+    } else if fid == targetView {
+        if menuItem == saveItem {
+            saveItem.title = "Save Target"
+            if targetFile.path == nil {return false}
+            return targetChanged
+        }
+    }
+        return true // super.validateMenuItem(menuItem)
+}
+    
     func paste(sender : AnyObject) -> AnyObject {
         let fid = (substrateWindow.firstResponder as NSView).identifier
 
@@ -183,7 +204,7 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
             targetChanged = false
             targetDelegate.cleanupTarget()
             targetFile = url
-            settings.setObject(targetFile.path, forKey: globals.recentTargetPath)
+//            settings.setObject(targetFile.path, forKey: globals.recentTargetPath)
             let theDocController : AnyObject = NSDocumentController.sharedDocumentController()
             theDocController.noteNewRecentDocumentURL(url)
             substrateWindow.title = targetFile.path!.lastPathComponent
@@ -212,7 +233,7 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
         primerTableView.reloadData()
         let theDocController : AnyObject = NSDocumentController.sharedDocumentController()
         theDocController.noteNewRecentDocumentURL(url)
-        settings.setObject(primerFile.path, forKey: globals.recentPrimerPath)
+//        settings.setObject(primerFile.path, forKey: globals.recentPrimerPath)
     }
     
     func openURLArray(urls : NSArray) {
@@ -351,8 +372,10 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     func savePrimers() {
         if let urlext = primerFile.pathExtension {
             let primerString = allPrimerString(tab: urlext != "csv")
-            primerString.writeToURL(primerFile, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
-            primersChanged = false
+            let didit = primerString.writeToURL(primerFile, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+            if didit {
+                primersChanged = false
+            }
         }
     }
     

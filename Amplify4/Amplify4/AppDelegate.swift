@@ -136,9 +136,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         for doc in doclist {
             docpaths.append(doc.path!)
         }
-        NSUserDefaults.standardUserDefaults().setObject(docpaths, forKey: globals.recentDocs)
+        NSUserDefaults.standardUserDefaults().setObject(docpaths, forKey: globals.recentDocs)        
+        if let ppath = substrateDelegate.primerFile.path {
+            NSUserDefaults.standardUserDefaults().setObject(ppath, forKey: globals.recentPrimerPath)
+        } else {
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(globals.recentPrimerPath)
+        }
+        if let tpath = substrateDelegate.targetFile.path {
+            NSUserDefaults.standardUserDefaults().setObject(tpath, forKey: globals.recentTargetPath)
+        } else {
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(globals.recentTargetPath)
+        }
         NSUserDefaults.standardUserDefaults().synchronize()
-        
         return
     }
     
