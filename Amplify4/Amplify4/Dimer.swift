@@ -13,6 +13,7 @@ struct Dimer {
     let olap, n1, n2 : Int
     let p1pos : Int
     let quality : Double
+    let serious : Bool
     
     var p1n = [Int]()
     var p2n = [Int]()
@@ -20,6 +21,7 @@ struct Dimer {
     init (primer primer1 : Primer, and primer2 : Primer) {
         n1 = countElements(primer1.seq)
         n2 = countElements(primer2.seq)
+        self.serious = false
         p1pos = -1
         // Make sure primer 2 is the larger one
         if countElements(primer1.seq) < countElements(primer2.seq) {
@@ -71,6 +73,7 @@ struct Dimer {
         self.p1pos = tempp1pos
         self.olap = min(n1, n2 - tempp1pos)
         self.quality = Double(bestQuality)
+        self.serious = (quality > settings.doubleForKey(globals.dimerStringency)) && (olap >= settings.integerForKey(globals.dimerOverlap))
     }
     
     func report() -> String {
@@ -96,4 +99,47 @@ struct Dimer {
         return s
     }
     
+    func freport() -> NSAttributedString {
+       
+        let dimerScores = NSUserDefaults.standardUserDefaults().arrayForKey(globals.dimScores) as [[Int]]
+        var report = NSMutableAttributedString()
+        
+        func addReport(s : String, attr: NSDictionary) {
+            report.appendAttributedString(NSAttributedString(string: s, attributes: attr))
+        }
+        
+        addReport("\r", fmat.hline1)
+        addReport("Potential primer-dimer for primers: \(p2.name) and \(p1.name)\r", fmat.h3)
+        addReport("\rOverlap = \(olap),   Quality = \(quality)\r", fmat.normal)
+        
+        let space = Character(" ")
+        addReport("\r\(p2.name)\t", fmat.blue)
+        addReport("5′ ", fmat.blueseq)
+        addReport(p2.seq, fmat.seq)
+        addReport(" 3′\r", fmat.blueseq)
+        addReport("\t", fmat.blue)
+
+        var s = String(count: p1pos + 3, repeatedValue: space)
+        for position2 in p1pos..<(p1pos + olap) {
+            let index1 = p1n[n1 - 1 - (position2 - p1pos)]
+            let index2 = p2n[position2]
+            let score = dimerScores[index1][index2]
+            if score < 0 {
+                s += " "
+            } else if score < 10 {
+                s += ":"
+            } else {
+                s += "|"
+            }
+        }
+        s +=  "\r"
+        addReport(s, fmat.greyseq)
+        addReport("\(p1.name)\t", fmat.blue)
+        addReport(String(count: p1pos, repeatedValue: space) + "3′ " , fmat.blueseq)
+        addReport(String(reverse(p1.seq)), fmat.seq)
+        addReport(" 5′\r\r", fmat.blueseq)
+        
+        return report
+    }
+
 }

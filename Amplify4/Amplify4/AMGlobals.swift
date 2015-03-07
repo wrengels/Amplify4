@@ -40,7 +40,7 @@ class AMGlobals: NSObject {
     let useRecentTarget = "useRecentTarget"
     let targetViewID = "target Text View"
     let primerViewID = "primer Table View"
-    
+        
     let factory = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("settings", ofType: "plist")!)!
 }
 
@@ -57,3 +57,25 @@ func make2D(a : [Int], ncols : Int) -> [[Int]] {
     }
     return a2
 }
+
+// Convience funcs for appending to a mutable attributed string
+func extendString(#starter : NSMutableAttributedString, #suffix : NSString, #attr : NSDictionary) {
+    starter.appendAttributedString(NSAttributedString(string: suffix, attributes: attr))
+}
+func extendString(#starter : NSMutableAttributedString, #suffix1 : NSString, #attr1 : NSDictionary, #suffix2 : NSString, #attr2 : NSDictionary) {
+    starter.appendAttributedString(NSAttributedString(string: suffix1, attributes: attr1))
+    starter.appendAttributedString(NSAttributedString(string: suffix2, attributes: attr2))
+}
+
+func timeStamp() -> NSString {
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = "d MMM, yyyy', at' h:m a"
+    return dateFormatter.stringFromDate(NSDate())
+}
+
+func forFloat(#val : Double, #decimals : Int ) -> String {
+    let f = "%.\(decimals)f"
+    return String(format: f, val)
+}
+
+

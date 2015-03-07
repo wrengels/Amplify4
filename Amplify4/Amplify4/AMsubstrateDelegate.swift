@@ -27,16 +27,27 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     @IBOutlet weak var targetDelegate: TargDelegate!
     @IBOutlet weak var appdel: AppDelegate!
     @IBOutlet weak var substrateWindow: NSWindow!
+    @IBOutlet var primerInfoView: NSTextView!
     
     override init() {
         super.init()
     }
     
+    func tableViewSelectionDidChange(aNotification: NSNotification) {
+        let selection = primerTableView.selectedRowIndexes.firstIndex
+        self.showInfoForPrimer(selection)
+    }
+    
+    func showInfoForPrimer(k : Int) {
+        if (k < 0) || (k >= primers.count) {return}
+        let sto = primerInfoView.textStorage!
+        sto.setAttributedString(primers[k].info())
+    }
+    
     func copy(sender : AnyObject) -> AnyObject {
-        let first = substrateWindow.firstResponder as NSView
+        let first = substrateWindow.firstResponder
         var a = 0
-        let fid = first.identifier
-        if fid == "primer Table View" {
+        if first  == primerTableView {
             let selection = primerTableView.selectedRowIndexes
             if selection.count < 1 {return self}
             var clip = NSPasteboard.generalPasteboard()
@@ -53,6 +64,23 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
         return self
     }
     
+    @IBAction func copyNameFirst(sender: AnyObject) {
+        if substrateWindow.firstResponder == primerTableView {
+            let selection = primerTableView.selectedRowIndexes
+            if selection.count < 1 {return}
+            var clip = NSPasteboard.generalPasteboard()
+            clip.declareTypes([NSPasteboardTypeString], owner: nil);
+            var srow = selection.firstIndex
+            var s = primers[srow].nameFirstLine
+            srow = selection.indexGreaterThanIndex(srow)
+            while srow != NSNotFound {
+                s += "\r" + primers[srow].nameFirstLine
+                srow = selection.indexGreaterThanIndex(srow)
+            }
+            let didit = clip.setString(s, forType: NSPasteboardTypeString)
+        }
+    }
+    
     func delete(sender : AnyObject) -> AnyObject {
         let fid = (substrateWindow.firstResponder as NSView).identifier
         if fid == "primer Table View" {
@@ -62,8 +90,8 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     }
     
     func cut(sender : AnyObject) -> AnyObject {
-        let fid = (substrateWindow.firstResponder as NSView).identifier
-        if fid == "primer Table View" {
+        let fid = substrateWindow.firstResponder
+        if fid == primerTableView {
             self.copy(sender)
             self.deleteSelectedPrimers()
             primerTableView.reloadData()
@@ -72,31 +100,38 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
         return self
     }
     
-        @IBOutlet weak var saveItem: NSMenuItem!
-
+    @IBOutlet weak var saveItem: NSMenuItem!
+    @IBOutlet weak var saveAsItem: NSMenuItem!
+    @IBOutlet weak var copyRearrangedItem: NSMenuItem!
+        @IBOutlet weak var copyItem: NSMenuItem!
+    
 override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
    
     let fid = substrateWindow.firstResponder
     if fid == primerTableView {
         if menuItem == saveItem {
             saveItem.title = "Save Primers"
+            saveAsItem.title = "Save Primers As…"
             if primerFile.path == nil {return false}
             return primersChanged
         }
+        copyRearrangedItem.hidden = false
     } else if fid == targetView {
         if menuItem == saveItem {
             saveItem.title = "Save Target"
+            saveAsItem.title = "Save Target As…"
             if targetFile.path == nil {return false}
             return targetChanged
         }
+        copyRearrangedItem.hidden = true
     }
         return true // super.validateMenuItem(menuItem)
 }
     
     func paste(sender : AnyObject) -> AnyObject {
-        let fid = (substrateWindow.firstResponder as NSView).identifier
+        let fid = substrateWindow.firstResponder
 
-        if fid == "primer Table View" {
+        if fid == primerTableView {
             var clip = NSPasteboard.generalPasteboard()
  //           clip.addTypes([NSPasteboardTypeString], owner: nil)
             let newline = NSCharacterSet(charactersInString: "\n\r")
@@ -305,18 +340,15 @@ override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
     }
     
     func saveDocumentAs(sender: AnyObject) -> AnyObject {
-        let fid = (substrateWindow.firstResponder as NSView).identifier
-        switch fid {
-        case "primer Table View":
+        let fid = substrateWindow.firstResponder
+        if fid == primerTableView {
             if primers.count < 1 {return self}
             self.savePrimersAs(sender)
-        case "target Text View" :
+        } else if fid == targetView {
             self.saveTargetStringAs(sender)
-        default:
-            let a = "Hello"
         }
         return self
-    }
+     }
     
     func saveDocument(sender: AnyObject) -> AnyObject {
         let fid = (substrateWindow.firstResponder as NSView).identifier
@@ -439,6 +471,7 @@ override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
         } else if tableColumn?.identifier == "Notes" {
             primers[row].note = object as String
         }
+        showInfoForPrimer(row)
         primersChanged = true
     }
     
@@ -475,12 +508,19 @@ override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
         primerTableView.reloadData()
     }
     
+    @IBAction func selectNone(sender: AnyObject) {
+        primerTableView.deselectAll(self)
+    }
+    
     @IBAction func newPrimer(sender: AnyObject) {
-        primers.append(Primer())
+        var row = primerTableView.selectedRowIndexes.firstIndex
+        if row > primers.count {row = 0}
+        primers.insert(Primer(), atIndex: row)
         primerTableView.reloadData()
-        primerTableView.scrollToEndOfDocument(self)
-        let newIndex = NSIndexSet(index: primers.count - 1)
+//        primerTableView.scrollToEndOfDocument(self)
+        let newIndex = NSIndexSet(index: row)
         primerTableView.selectRowIndexes(newIndex, byExtendingSelection: false)
+        showInfoForPrimer(row)
         primersChanged = true
     }
 
@@ -561,12 +601,14 @@ override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
         var srow = selection.firstIndex
         var flip = ""
         while srow != NSNotFound {
+            flip = ""
             for c in (primers[srow].seq as String) {
                 flip = iubComp(String(c)) + flip
             }
             primers[srow].seq = flip
             srow = selection.indexGreaterThanIndex(srow)
         }
+        showInfoForPrimer(selection.firstIndex)
         primerTableView.reloadData()
         primersChanged = true
     }

@@ -9,10 +9,15 @@
 import Cocoa
 
 class Primer : NSObject {
-    var seq = ""
-    var name = ""
-    var note = ""
+    var seq : String = ""
+    var name : String = ""
+    var note : String = ""
+    var redundancyFold = 1
+    var redundantBases = 0
     var check = 0
+    var nBases = 0
+    var nAT = 0
+    var nGC = 0
     
     var maxStab : Int = 0
     var maxPrimability : Int = 0
@@ -28,6 +33,13 @@ class Primer : NSObject {
             return "\(seq),\(name),\(note)"
         }
     }
+    
+    var nameFirstLine: String {
+        get {
+            return "\(name),\(seq),\(note)"
+        }
+    }
+
     var zD = [[Int]]()
     var zG = [[Int]]()
     var ideal  = [Int]()
@@ -53,13 +65,64 @@ class Primer : NSObject {
     }
     
     func hasBadBases()->Bool {
+        if countElements(seq) < 1 {return true}
         let okayChars = NSCharacterSet(charactersInString: globals.IUBString)
         let badChars = okayChars.invertedSet
         let firstBad = (seq.uppercaseString as NSString).rangeOfCharacterFromSet(badChars).location
         return (firstBad != NSNotFound)
     }
     
+    
+    func calcRedundancy() {
+        func redundantBase(c : String) -> Int {
+            switch c {
+            case "A": return 1
+            case "C": return 1
+            case "T":  return 1
+            case "G": return 1
+            case "Y": return 2
+            case "R": return 2
+            case "W": return 2
+            case "S": return 2
+            case "K": return 2
+            case "M": return 2
+            case "D": return 3
+            case "V": return 3
+            case "H": return 3
+            case "B": return 3
+            case "N": return 4
+            default : return 0
+            }
+        }
+        let upseq = seq.uppercaseString
+        var rb = 0
+        redundancyFold = 1
+        redundantBases = 0
+        for c in upseq {
+            rb = redundantBase(String(c))
+            redundancyFold *= rb
+            if rb > 1 {redundantBases++}
+        }
+    }
+    
+    func countBases() {
+        let upseq = seq.uppercaseString
+        nBases = countElements(seq)
+        nAT = 0; nGC = 0
+        for c in upseq {
+            switch String(c) {
+            case "A","T","W" :
+                nAT++
+            case "G","C","S" :
+                nGC++
+            default: false
+            }
+        }
+    }
+
+    
     func calcTm() -> Double {
+        if self.hasBadBases() {return 0.0}
         var entr = 108.0
         var enth = 0.0
         let seqChar = [Character](seq.uppercaseString)
@@ -103,7 +166,7 @@ class Primer : NSObject {
         var seqd = [Int]()
         var seqc = [Int]()
         let n = min(settings.integerForKey(globals.effectivePrimer), seqChar.count)
-            // n is the number of bases in the primer (or the max effectdive primer)
+            // n is the number of bases in the primer (or the max effective primer)
         for c in seq.uppercaseString {
             var v = 0
             while c != dbases[v] {v += 1}
@@ -134,5 +197,28 @@ class Primer : NSObject {
         }
         let Tm = calcTm()
         return true
+    }
+    
+    func info() -> NSAttributedString {
+        let dimer = Dimer(primer: self, and: self)
+        self.countBases()
+        let baseContent = String(format: "%.1f", 100.0 * (Double(nAT) + Double(nBases - nAT - nGC)/2.0)/Double(nBases))
+        self.calcRedundancy()
+        var report = NSMutableAttributedString(string: "Primer: \(name)\r", attributes: fmat.h3)
+        extendString(starter: report, suffix: "\(nBases) bp:      ", attr: fmat.normal)
+        extendString(starter: report, suffix1: "\(seq)", attr1: fmat.seq, suffix2: "\r\rTm = \(forFloat(val: self.calcTm(), decimals: 2))°C", attr2: fmat.normal)
+        extendString(starter: report, suffix: "\r\(nAT) AT Pairs,  \(nGC) GC Pairs,    \(baseContent)% AT", attr: fmat.normal)
+        if redundantBases == 0 {
+            extendString(starter: report, suffix: "\rNo redundant bases.", attr: fmat.normal)
+        } else {
+            extendString(starter: report, suffix: "\rRedundant bases = \(redundantBases),  Fold redundancy = \(redundancyFold)", attr: fmat.normal)
+        }
+        if self.hasBadBases() {
+            extendString(starter: report, suffix: "\rThis primer sequence cannot be used for PCR\r", attr: fmat.red)
+        }
+        if dimer.serious {
+            extendString(starter: report, suffix: "\rPotential Primer Dimer with quality = \(dimer.quality) and overlap = \(dimer.olap)\r", attr: fmat.red)
+        }
+        return report
     }
 }

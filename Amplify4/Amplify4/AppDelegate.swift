@@ -42,7 +42,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to initialize your application
         targetScrollView.contentView.postsBoundsChangedNotifications = true
         let settings = NSUserDefaults.standardUserDefaults()
-        
         var targetURL = NSURL()
         var primerURL = NSURL()
         if (substrateDelegate.primerFile.path == nil) && settings.boolForKey(globals.useRecentPrimers) {
@@ -136,7 +135,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         for doc in doclist {
             docpaths.append(doc.path!)
         }
-        NSUserDefaults.standardUserDefaults().setObject(docpaths, forKey: globals.recentDocs)        
+        NSUserDefaults.standardUserDefaults().setObject(docpaths, forKey: globals.recentDocs)
         if let ppath = substrateDelegate.primerFile.path {
             NSUserDefaults.standardUserDefaults().setObject(ppath, forKey: globals.recentPrimerPath)
         } else {
@@ -151,5 +150,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return
     }
     
+    @IBAction func amplify(sender: AnyObject) {
+        let newDoc: Document = NSDocumentController.sharedDocumentController().openUntitledDocumentAndDisplay(true, error: nil)! as Document
+    }
     
+    @IBAction func amplifyCircular(sender: AnyObject) {
+        let theDC: NSDocumentController = NSDocumentController.sharedDocumentController() as NSDocumentController
+        let newDoc: DocumentCircular = theDC.makeUntitledDocumentOfType("CircularDocumentType", error: nil)! as DocumentCircular
+        theDC.addDocument(newDoc)
+        newDoc.makeWindowControllers()
+        newDoc.showWindows()
+
+    }
 }
