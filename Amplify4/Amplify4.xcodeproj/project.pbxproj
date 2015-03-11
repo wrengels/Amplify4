@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2408B5911A9E37BF00689090 /* AMformats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2408B5901A9E37BF00689090 /* AMformats.swift */; };
+		240AA3A91AAFAE86001B5258 /* MatchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240AA3A81AAFAE86001B5258 /* MatchOperation.swift */; };
 		241CF2B91A97ABCD0063AF5A /* Amplify Help.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 241CF2B81A97ABCD0063AF5A /* Amplify Help.rtfd */; };
 		242001C01A6DFE6F004D35B8 /* Primer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242001BF1A6DFE6F004D35B8 /* Primer.swift */; };
 		242B4C411AA8D8BC003C65A3 /* Fragment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B4C401AA8D8BC003C65A3 /* Fragment.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		2408B5901A9E37BF00689090 /* AMformats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AMformats.swift; sourceTree = "<group>"; };
+		240AA3A81AAFAE86001B5258 /* MatchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchOperation.swift; sourceTree = "<group>"; };
 		241CF2B81A97ABCD0063AF5A /* Amplify Help.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; path = "Amplify Help.rtfd"; sourceTree = "<group>"; };
 		242001BF1A6DFE6F004D35B8 /* Primer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Primer.swift; sourceTree = "<group>"; };
 		242B4C401AA8D8BC003C65A3 /* Fragment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fragment.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				242B4C401AA8D8BC003C65A3 /* Fragment.swift */,
 				248AEF6C1A893E5000F9E8EA /* Prefs */,
 				2483DAAD1A688BB100789E69 /* Document.swift */,
+				240AA3A81AAFAE86001B5258 /* MatchOperation.swift */,
 				24BAD94E1AAA5BA5000FE446 /* MapView.swift */,
 				2483DAAF1A688BB100789E69 /* Document.xib */,
 				24EE0CD41A96AB0D002D555F /* AmplifyHelpController.swift */,
@@ -310,6 +313,7 @@
 				2483DAAE1A688BB100789E69 /* Document.swift in Sources */,
 				242001C01A6DFE6F004D35B8 /* Primer.swift in Sources */,
 				24A9D98D1A880EED00E3E032 /* AMprefsController.swift in Sources */,
+				240AA3A91AAFAE86001B5258 /* MatchOperation.swift in Sources */,
 				243294421A9E8A7300D176D3 /* PlotterThing.swift in Sources */,
 				2483DAAC1A688BB100789E69 /* AppDelegate.swift in Sources */,
 				24B03FF21AA4E13A00A132B0 /* Match.swift in Sources */,

@@ -9,6 +9,8 @@
             <connections>
                 <outlet property="ampWindow" destination="xOd-HO-29H" id="dMg-XQ-NPt"/>
                 <outlet property="dimerButton" destination="JnV-lT-PBp" id="mq2-kU-GTK"/>
+                <outlet property="mapBottomConstraint" destination="eY8-La-XWU" id="yR6-bj-gS7"/>
+                <outlet property="mapClipView" destination="DgR-aa-l98" id="Va3-wi-HTL"/>
                 <outlet property="mapScrollView" destination="nYB-lq-G5R" id="XOe-kE-h1R"/>
                 <outlet property="outputTextView" destination="HcI-u8-QYh" id="aDm-M9-qNL"/>
                 <outlet property="window" destination="xOd-HO-29H" id="JIz-fz-R2o"/>
@@ -32,21 +34,21 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1246" height="308"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <scrollView borderType="line" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYB-lq-G5R">
+                                    <scrollView borderType="line" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYB-lq-G5R" userLabel="mapScrollView">
                                         <rect key="frame" x="0.0" y="0.0" width="1246" height="308"/>
-                                        <clipView key="contentView" id="DgR-aa-l98">
+                                        <clipView key="contentView" id="DgR-aa-l98" userLabel="mapClipView">
                                             <rect key="frame" x="1" y="1" width="166" height="79"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rVp-Wa-6sb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="166" height="79"/>
+                                                <view canDrawConcurrently="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rVp-Wa-6sb" userLabel="theMapView" customClass="MapView" customModule="Amplify4" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="-800" width="1232" height="1091"/>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="rVp-Wa-6sb" secondAttribute="trailing" constant="1063" id="DJD-bv-lLk"/>
-                                                <constraint firstItem="rVp-Wa-6sb" firstAttribute="top" secondItem="DgR-aa-l98" secondAttribute="top" constant="212" id="Kmo-iM-mD7"/>
-                                                <constraint firstItem="rVp-Wa-6sb" firstAttribute="leading" secondItem="DgR-aa-l98" secondAttribute="leading" id="aSx-T8-qBS"/>
-                                                <constraint firstAttribute="bottom" secondItem="rVp-Wa-6sb" secondAttribute="bottom" id="hPF-ZK-zbN"/>
+                                                <constraint firstItem="rVp-Wa-6sb" firstAttribute="top" secondItem="DgR-aa-l98" secondAttribute="top" id="9Ae-Vh-tk9"/>
+                                                <constraint firstAttribute="trailing" secondItem="rVp-Wa-6sb" secondAttribute="trailing" constant="-3" id="EAO-Um-HCX"/>
+                                                <constraint firstAttribute="bottom" secondItem="rVp-Wa-6sb" secondAttribute="bottom" constant="-800" id="eY8-La-XWU"/>
+                                                <constraint firstItem="rVp-Wa-6sb" firstAttribute="leading" secondItem="DgR-aa-l98" secondAttribute="leading" id="nLg-va-0Lz"/>
                                             </constraints>
                                             <color key="backgroundColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                         </clipView>
@@ -54,7 +56,7 @@
                                             <rect key="frame" x="1" y="80" width="166" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
-                                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="aef-RE-u0S">
+                                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="0.97875000000000001" horizontal="NO" id="aef-RE-u0S">
                                             <rect key="frame" x="167" y="1" width="15" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
@@ -113,8 +115,8 @@
                             <real value="250"/>
                         </holdingPriorities>
                     </splitView>
-                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JnV-lT-PBp">
-                        <rect key="frame" x="6" y="641" width="145" height="32"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JnV-lT-PBp">
+                        <rect key="frame" x="23" y="641" width="128" height="32"/>
                         <buttonCell key="cell" type="push" title="Primer Dimers" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="04J-a3-z64">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -134,7 +136,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ht-pQ-NQ6">
-                        <rect key="frame" x="239" y="641" width="88" height="32"/>
+                        <rect key="frame" x="-6" y="-7" width="88" height="32"/>
                         <buttonCell key="cell" type="push" title="Undraw" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uux-4B-Mty">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>

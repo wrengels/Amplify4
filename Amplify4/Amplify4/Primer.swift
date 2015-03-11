@@ -18,11 +18,11 @@ class Primer : NSObject {
     var nBases = 0
     var nAT = 0
     var nGC = 0
+    let maxNameLength = 10
     
     var maxStab : Int = 0
     var maxPrimability : Int = 0
     var isDegenerate = false
-    var Req = [Int]()
     var line : String {
         get {
             return "\(seq)\t\(name)\t\(note)"
@@ -43,7 +43,8 @@ class Primer : NSObject {
     var zD = [[Int]]()
     var zG = [[Int]]()
     var ideal  = [Int]()
-    
+    var Req = [Int]()
+
     override init() {
         super.init()
     }
@@ -54,6 +55,10 @@ class Primer : NSObject {
         seq = parts[0]
         name = parts[1]
         note = parts[2]
+        // truncate the name if it's too long
+        if countElements(name) > maxNameLength {
+            name = String((name as NSString).substringWithRange(NSMakeRange(0, maxNameLength)))
+        }
     }
     
     init(theCSVLine : String) {
@@ -62,6 +67,9 @@ class Primer : NSObject {
         seq = parts[0]
         name = parts[1]
         note = parts[2]
+        if countElements(name) > maxNameLength {
+            name = String((name as NSString).substringWithRange(NSMakeRange(0, maxNameLength)))
+        }
     }
     
     func hasBadBases()->Bool {
@@ -156,6 +164,11 @@ class Primer : NSObject {
     }
     
     func calcZ() -> Bool {
+        self.zD = [[Int]]()
+        self.zG = [[Int]]()
+        self.Req = [Int]()
+        self.ideal = [Int]()
+
         if self.hasBadBases() {return false}
         let dbases = [Character](globals.IUBString)
         let cbases = [Character](globals.compIUBString)
@@ -177,6 +190,7 @@ class Primer : NSObject {
         }
         // Now seqd and seqc contain the numerical codes of this primer's bases and complements, respectively
         maxStab = 0
+        maxPrimability = 0
         for primerLocation in 0..<n {
             var zrow = [Int]()
             for targetBase in 0...4 {
@@ -195,7 +209,6 @@ class Primer : NSObject {
         for i in 1..<n {
         Req.append(ideal[i] + Req[i - 1])
         }
-        let Tm = calcTm()
         return true
     }
     

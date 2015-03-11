@@ -13,6 +13,8 @@ class Match: PlotterThing {
     let threePrime : Int  // 3' end in target coordinates
     let primability, stability : Int
     let primer : Primer
+    let bez : NSBezierPath
+    let bezFillColor, bezStrokeColor : NSColor
     
     init(primer: Primer, isD : Bool, threePrime : Int, primability : Int, stability : Int) {
         self.primer = primer
@@ -20,12 +22,45 @@ class Match: PlotterThing {
         self.threePrime = threePrime
         self.primability = primability
         self.stability = stability
+        let hsize : CGFloat = 10
+        let vsize : CGFloat = 14
+        let linewidth : CGFloat = 1
+        let minScale : CGFloat = 0.5
+        let arrowAlpha : CGFloat = 0.7
+        let colorLightness : CGFloat = 0.7
+        bez = NSBezierPath()
+
+        bez.moveToPoint(NSPoint(x:0,y:0))
+        if isD {
+            bezFillColor = NSColor(red: 0, green: 0, blue: colorLightness, alpha:arrowAlpha)
+            bezStrokeColor = NSColor.blackColor()
+        } else {
+            bezFillColor = NSColor(red: colorLightness, green: 0, blue: 0, alpha: arrowAlpha)
+            bezStrokeColor = NSColor.blackColor()
+        }
+        super.init()
+
+        var qualityScale = NSAffineTransform()
+        let scaleFactor = minScale + self.quality() * minScale
+        qualityScale.scaleBy(CGFloat(scaleFactor))
+
+        if isD {
+            bez.lineToPoint(NSPoint(x: -hsize, y: -vsize))
+            bez.lineToPoint(NSPoint(x: -hsize, y: vsize))
+        } else {
+            bez.lineToPoint(NSPoint(x: hsize, y: -vsize))
+            bez.lineToPoint(NSPoint(x: hsize, y: vsize))
+        }
+        bez.closePath()
+        bez.lineWidth = linewidth
+        bez.lineJoinStyle = NSLineJoinStyle.RoundLineJoinStyle
+        bez.transformUsingAffineTransform(qualityScale)
     }
 
-    func quality() ->Double {
+    func quality() ->CGFloat {
         let settings = NSUserDefaults.standardUserDefaults()
         let cutoffSum = settings.integerForKey(globals.primabilityCutoff) + settings.integerForKey(globals.stabilityCutoff)
-        return Double(primability + stability - cutoffSum) / Double(200 - cutoffSum)
+       return CGFloat(primability + stability - cutoffSum) / CGFloat(200 - cutoffSum)
     }
     
     func direction() -> String {
@@ -44,6 +79,7 @@ class Match: PlotterThing {
             return String(count: k, repeatedValue: Character(" "))
         }
         func hbonds(targetString : String, primerString: String) -> String {
+            // Produce a string of | or : or blank to indicate base-pairing
             let pairScores = NSUserDefaults.standardUserDefaults().arrayForKey(globals.pairScores) as [[Int]]
             let topScore = pairScores[0][0]
             let tchars = "GATCN" as NSString
@@ -74,7 +110,6 @@ class Match: PlotterThing {
                     }
                 }
             }
-            
             return bonds
         }
         

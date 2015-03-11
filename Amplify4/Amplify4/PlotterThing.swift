@@ -69,6 +69,33 @@ class VStringThing : PlotterThing {
     }
 }
 
+class VStringRectThing : PlotterThing {
+    let string : String
+    let rect : NSRect
+    let attr : NSDictionary?
+    //    let bounds : NSRect
+    
+    init (string : String, rect : NSRect, attr : NSDictionary) {
+        self.string = string
+        self.rect = rect
+        self.attr = attr
+        let rec = (self.string as NSString).boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: attr)
+        super.init()
+        bounds = rect
+    }
+    
+    override func plot() {
+        var tran = NSAffineTransform()
+//        tran.translateXBy(rect.origin.x, yBy: rect.origin.y)
+        tran.rotateByDegrees(-90)
+        tran.concat()
+        let drect = NSMakeRect(-(rect.origin.y + rect.size.height), rect.origin.x, rect.size.height, rect.size.width)
+        (string as NSString).drawInRect(drect, withAttributes: attr)
+//        (string as NSString).drawAtPoint(NSMakePoint(0, 0), withAttributes: attr)
+        tran.invert()
+        tran.concat()
+    }
+}
 
 class BezThing : PlotterThing {
     let bez : NSBezierPath

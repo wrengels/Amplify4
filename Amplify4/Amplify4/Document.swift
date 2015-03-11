@@ -21,19 +21,31 @@ class Document: NSDocument {
     @IBOutlet var ampWindow: NSWindow!
     @IBOutlet var outputTextView: NSTextView!
     
+    @IBOutlet var mapClipView: NSClipView!
+//    @IBOutlet var theMapView: MapView!
     @IBOutlet var mapScrollView: NSScrollView!
+    @IBOutlet var mapBottomConstraint: NSLayoutConstraint!
     
-    var mapImageView = NSImageView(frame: NSRect(x: 0, y: 0, width: 100, height: 10000))
-    var mapView = MapView()
+ //   var mapImageView = NSImageView(frame: NSRect(x: 0, y: 0, width: 100, height: 10000))
+//    var mapView = MapView()
     let settings = NSUserDefaults.standardUserDefaults()
     let apdel = NSApplication.sharedApplication().delegate! as AppDelegate
     var usedPrimers = [Primer]()
     var matches = [Match]()
+    var dmatches = [Match]()
+    var gmatches = [Match]()
     var dimers = [Dimer]()
     var fragments = [Fragment]()
     var output = NSMutableAttributedString()
     var targInt = [Int]()
     var circularTarget  : Bool = false
+    var theMapView = MapView()
+    var wwidth : CGFloat = 0.0
+    let runWeights = NSUserDefaults.standardUserDefaults().arrayForKey(globals.runWeights)! as [Int]
+    let pairScores = NSUserDefaults.standardUserDefaults().arrayForKey(globals.pairScores)! as [[Int]]
+    let maxLength = NSUserDefaults.standardUserDefaults().integerForKey(globals.effectivePrimer)
+    var opn = 100
+
     
     override init() {
         super.init()
@@ -42,128 +54,27 @@ class Document: NSDocument {
     }
     
     @IBAction func unDrawIt(sender: AnyObject) {
-        let last = mapView.plotters.last! as PlotterThing
-        mapView.setNeedsDisplayInRect(last.bounds)
-        mapView.plotters.removeLast()
-        mapView.display()
+        let last = theMapView.plotters.last! as PlotterThing
+        theMapView.setNeedsDisplayInRect(last.bounds)
+        theMapView.plotters.removeLast()
+        theMapView.display()
         
     }
     @IBAction func drawSomething(sender: AnyObject) {
-        
-        let something = StringThing(string: "This Here is Something", point: NSPoint(x: 30, y: 30))
-        mapView.plotters.append(something)
-        mapView.setNeedsDisplayInRect(something.bounds)
-        mapView.display()
-        
+        self.makePlot()
+        theMapView.needsDisplay = true
+        theMapView.display()
         return
-        
-        let framesize = mapImageView.frame.size
-        let theImage = NSImage(size: framesize)
-        
-        func markpoint (x : Int, y : Int) {
-            let pt = NSPoint(x: x, y: y)
-            ("\(pt)" as NSString).drawAtPoint(pt, withAttributes: fmat.normal)
-        }
-        
-        theImage.lockFocusFlipped(true)
-        let s = "Hello World" as NSString
-        s.drawAtPoint(NSPoint(x: 70, y: 100), withAttributes: fmat.red)
-        s.drawAtPoint(NSPoint(x: 500, y: 200), withAttributes: fmat.bigbold)
-        markpoint(800, 300)
-        var tran = NSAffineTransform()
-        tran.rotateByDegrees(-90)
-        tran.concat()
-        markpoint(-300, 800)
-        s.drawAtPoint(NSPoint(x: -100, y: 70), withAttributes: fmat.blue)
-        s.drawAtPoint(NSPoint(x: -100, y: 100), withAttributes: nil)
-        s.drawAtPoint(NSPoint(x: -100, y: 200), withAttributes: nil)
-        s.drawAtPoint(NSPoint(x: 100, y: -220), withAttributes: nil)
-        s.drawAtPoint(NSPoint(x: 100, y: -500), withAttributes: nil)
-        tran.invert()
-        tran.concat()
-        ("Are we back to normal?" as NSString).drawAtPoint(NSPoint(x: 50, y: 50), withAttributes: fmat.big)
-        markpoint(200, 150)
-        markpoint(500, 170)
-        
-        tran = NSAffineTransform()
-        tran.translateXBy(500, yBy: 170)
-        tran.rotateByDegrees(-90)
-        tran.concat()
-        ("Is this string upright?" as NSString).drawAtPoint(NSMakePoint(0, 0), withAttributes: fmat.bigbold)
-        tran.invert()
-        tran.concat()
-        
-        let vstringThing = VStringThing(string: "Upright String", point: NSPoint(x: 700, y: 400), attr: fmat.bigbold)
-        let stringThing = StringThing(string: "This is a string thing", point: NSPoint(x: 700, y: 400), attr: fmat.blue)
-        let plainThing = StringThing(string: "Plain old", point: NSPoint(x: 700, y: 450))
-        var ara = [PlotterThing]()
-        
-        ara += [stringThing, plainThing, vstringThing]
-        
-        var garrow = NSBezierPath()
-        garrow.moveToPoint(NSMakePoint(0, 0))
-        garrow.lineToPoint(NSMakePoint(10, 10))
-        garrow.lineToPoint(NSMakePoint(10, -10))
-        garrow.closePath()
-        let gthing = BezThing(bez: garrow , point: NSMakePoint(700, 500), fillColor: NSColor.redColor(), strokeColor: NSColor.blackColor(), scale : 1)
-        let gblue = BezThing(bez: garrow, point: NSMakePoint(730, 500), fillColor: NSColor.blueColor(), strokeColor: NSColor.blackColor(), scale : 1)
-        ara += [gthing, gblue]
-        let darrow = NSBezierPath()
-        darrow.moveToPoint(NSMakePoint(0, 0))
-        darrow.lineToPoint(NSMakePoint(-10, 10))
-        darrow.lineToPoint(NSMakePoint(-10, -10))
-        darrow.closePath()
-        let gfat = BezThing(bez: darrow, point: NSMakePoint(780, 500), fillColor: NSColor.whiteColor(), strokeColor: NSColor.blackColor(), scale : 1)
-        ara.append(gfat)
-        darrow.lineJoinStyle = NSLineJoinStyle.RoundLineJoinStyle
-        darrow.miterLimit = 80
-        darrow.lineWidth = 6
-        let gmfat = BezThing(bez: darrow, point: NSMakePoint(810, 500), fillColor: NSColor.whiteColor(), strokeColor: NSColor.blackColor(), scale : 2)
-        
-        darrow.lineWidth = 0.4
-        let gthin = BezThing(bez: darrow, point: NSMakePoint(830, 500), fillColor: NSColor.yellowColor(), strokeColor: NSColor.blackColor(), scale : 2)
-       
-        ara +=  [gthin, gmfat]
-        let arat = ArrayThing(ara: ara)
-        
-        ArrayThing(ara: ara).plot()
-        
-        for thing in ara {
-            let rec = thing.bounds
-            NSBezierPath(rect: rec).stroke()
-            
-        }
-        
-        tran = NSAffineTransform()
-        tran.translateXBy(-250, yBy: 30)
-        tran.concat()
-        ArrayThing(ara: ara).plot()
-        
-        tran = NSAffineTransform()
-        tran.scaleBy(0.5)
-        tran.translateXBy(0, yBy: -100)
-        tran.concat()
-        ArrayThing(ara: ara).plot()
-
-        theImage.unlockFocus()
-    
-        mapImageView.image = theImage
-        
-        // this method makes only bitmapped image. So, is offscreenview needed?
-        let clip = NSPasteboard.generalPasteboard()
-         clip.declareTypes([NSPDFPboardType], owner: nil)
-        let thepdfdata = mapImageView.dataWithPDFInsideRect(mapImageView.bounds)
-        clip.setData(thepdfdata, forType: NSPDFPboardType)
-        
     }
     
     override func windowControllerDidLoadNib(aController: NSWindowController) {
         super.windowControllerDidLoadNib(aController)
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "boundsDidChange:", name:  NSViewFrameDidChangeNotification, object: mapClipView)
+        
         let substrateDelegate = apdel.substrateDelegate
         for primer in substrateDelegate.primers {
             if primer.check > 0 {
-                primer.calcTm()
                 primer.calcZ()
                 usedPrimers.append(primer)
             }
@@ -188,10 +99,14 @@ class Document: NSDocument {
             k++
         }
         
-        // Find Matches
-        self.findDmatches()
-        self.findGmatches()
-        self.findDimers()
+        // Find Matches and Dimers using parallel cores
+        let opQ = NSOperationQueue()
+        opQ.addOperation(DMatchOperation(maker: self))
+        opQ.addOperation(GMatchOperation(maker: self))
+        opQ.addOperation(FindPrimers(maker: self))
+        opQ.waitUntilAllOperationsAreFinished()
+        
+        matches = dmatches + gmatches
         dimerButton.enabled = dimers.count > 0
         dimerButton.title = "Primer Dimers (\(dimers.count))"
         
@@ -212,47 +127,104 @@ class Document: NSDocument {
         extendString(starter: output, suffix1: "found \(matches.count) primer matches and \(fragments.count) potential amplicons.  PCR simulation performed \(timeStamp())\r\r", attr1: fmat.bigcenter, suffix2: "\r", attr2: fmat.hlineblue)
         self.printOutput()
         
-        // Put some dummy plots into plotters
+    // Show the map
+        let clip = mapClipView.bounds
+        let mapFrame = NSRect(origin: clip.origin, size: NSMakeSize(clip.size.width, 2000))
+        theMapView.frame = mapFrame
+        mapScrollView.documentView = theMapView
+        mapBottomConstraint.constant = -3000  // This constraint needs to be reset for some reason for initial drawing
+        self.makePlot()
+        theMapView.needsDisplay = true
+        theMapView.display()
+
+ }
+    
+    func makePlot() {
+        let clip = mapClipView.bounds
+        let mapFrame = NSRect(origin: clip.origin, size: NSMakeSize(clip.size.width, 3000))
+        theMapView.frame = mapFrame
+
         var plotters = [PlotterThing]()
-
-        let vstringThing = VStringThing(string: "Upright String", point: NSPoint(x: 700, y: 400), attr: fmat.bigbold)
-        let stringThing = StringThing(string: "This is a string thing", point: NSPoint(x: 700, y: 400), attr: fmat.blue)
-        let plainThing = StringThing(string: "Plain old", point: NSPoint(x: 700, y: 450))
-        var garrow = NSBezierPath()
-        garrow.moveToPoint(NSMakePoint(0, 0))
-        garrow.lineToPoint(NSMakePoint(10, 10))
-        garrow.lineToPoint(NSMakePoint(10, -10))
-        garrow.closePath()
-        let gthing = BezThing(bez: garrow , point: NSMakePoint(700, 500), fillColor: NSColor.redColor(), strokeColor: NSColor.blackColor(), scale : 1)
-        let gblue = BezThing(bez: garrow, point: NSMakePoint(730, 500), fillColor: NSColor.blueColor(), strokeColor: NSColor.blackColor(), scale : 1)
-        plotters += [gthing, gblue]
-        let darrow = NSBezierPath()
-        darrow.moveToPoint(NSMakePoint(0, 0))
-        darrow.lineToPoint(NSMakePoint(-10, 10))
-        darrow.lineToPoint(NSMakePoint(-10, -10))
-        darrow.closePath()
-        let gfat = BezThing(bez: darrow, point: NSMakePoint(780, 500), fillColor: NSColor.whiteColor(), strokeColor: NSColor.blackColor(), scale : 1)
-        darrow.lineJoinStyle = NSLineJoinStyle.RoundLineJoinStyle
-        darrow.miterLimit = 80
-        darrow.lineWidth = 6
-        let gmfat = BezThing(bez: darrow, point: NSMakePoint(810, 500), fillColor: NSColor.whiteColor(), strokeColor: NSColor.blackColor(), scale : 2)
+        // constants for the plot
+        let targetLength = CGFloat(apdel.substrateDelegate.targetView.textStorage!.length - apdel.targDelegate.firstbase)
+        let startBase = 1
+        let endBase = Int(targetLength + 1.1)
+        wwidth  = theMapView.frame.size.width
+        let h1 : CGFloat = 5.0  // Horizional margin outside base numbers
+        let v1 : CGFloat = 5.0  // vertical margin above base numbers
+        let v2 : CGFloat = 30.0  // vertical space above top of base number tick
+        let v3 : CGFloat = 70.0  // vertical space from top of big tick to target baseline
+        let v4 : CGFloat = 17 // distance above or below target baseline for point of match arrow
+        let v5 : CGFloat = 37 // distance above or below target baseline for match primer name
+        let h3 : CGFloat = 14 // distance to the left or right of arrow point for match primer name
+        let v6 : CGFloat = 50 // height of box containing G primer name
+        let tickup : CGFloat = 5.0  // length of tick upward
+        let tickdown : CGFloat = 5.0  // length of tick downward
+        let tickwidth : CGFloat = 1.0  // linewidth for ticks
+        let targwidth : CGFloat = 2.5  // linewidth for target baseline
+        let bigtickFactor : CGFloat = 1.5  // relative size of ticks every 1000 pb
+        let twidth = wwidth - 2.0 * h1 // graphic distance between first and last base
         
-        darrow.lineWidth = 0.4
-        let gthin = BezThing(bez: darrow, point: NSMakePoint(830, 500), fillColor: NSColor.yellowColor(), strokeColor: NSColor.blackColor(), scale : 2)
+        func basex(base : Int) -> CGFloat {
+            // the X position of a base site
+            return CGFloat(base) * twidth/targetLength + h1
+        }
+        // Write first and last base numbers
+        plotters.append(StringThing(string: String(startBase), point: NSMakePoint(h1, v1), attr: fmat.bigger))
+        let endString = String(endBase) as NSString
+        let endStringRect = endString.boundingRectWithSize(NSSize(width: 1000, height: 1000), options: nil, attributes: fmat.bigger)
+        let endStringWidth = endStringRect.size.width
+        plotters.append(StringThing(string: endString, point: NSPoint(x: wwidth  - endStringWidth, y: v1), attr: fmat.bigger))
         
-        plotters += [gthing, gblue]
-        plotters.append(gfat)
-        plotters += [vstringThing, stringThing, plainThing]
-        plotters +=  [gthin, gmfat]
+        // Make baseline for target
+        var targLine = NSBezierPath()
+        targLine.moveToPoint(NSPoint(x: h1, y: v2 + v3))
+        targLine.lineToPoint(NSPoint(x: wwidth - h1, y: v2 + v3))
+        targLine.lineWidth = targwidth
+        plotters.append(BezThing(bez: targLine, point: NSPoint(x: 0, y: 0), fillColor: nil, strokeColor: NSColor.blackColor(), scale: 1))
         
-        // Set up the view
-        mapView.setFrameOrigin(NSPoint(x: 0, y: 0))
-        mapView.setFrameSize((NSSize(width: mapScrollView.documentVisibleRect.width, height: 2000)))
-        mapView.plotters = plotters
-        mapScrollView.documentView = mapView
+        // Put in tick marks
+        var tickPath = NSBezierPath()
+        tickPath.moveToPoint(NSPoint(x: h1, y: v2))
+        tickPath.lineToPoint(NSPoint(x: h1, y: v2+v3))
+        tickPath.moveToPoint(NSPoint(x: wwidth - h1, y: v2+v3))
+        tickPath.lineToPoint(NSPoint(x: wwidth - h1, y: v2))
+        tickPath.lineWidth = tickwidth
+        for var tickbase : Int = 100; tickbase < endBase; tickbase += 100 {
+            let x = basex(tickbase)
+            if tickbase % 1000 == 0 {
+                tickPath.moveToPoint(NSPoint(x: x, y: v2 + v3 + tickdown * bigtickFactor))
+                tickPath.lineToPoint(NSPoint(x: x, y: v2 + v3 - tickup * bigtickFactor))
+            } else {
+                tickPath.moveToPoint(NSPoint(x: x, y: v2 + v3 + tickdown))
+                tickPath.lineToPoint(NSPoint(x: x, y: v2 + v3 - tickup))
+            }
+        }
+        plotters.append(BezThing(bez: tickPath, point: NSPoint(x: 0, y: 0), fillColor: nil, strokeColor: NSColor.blackColor(), scale: 1))
         
-
-}
+        // Add match arrows and primer names
+        for match in matches {
+            var ypos = v2 + v3
+            if match.isD {
+                ypos -= v4
+                plotters.append(VStringThing(string: match.primer.name, point: NSPoint(x: basex(match.threePrime) - h3, y: (v2 + v3 - v5)), attr: fmat.baseD))
+            } else {
+                ypos += v4
+                let namebox = NSRect(x: basex(match.threePrime), y: v2 + v3 + v5, width: h3, height: v6)
+                plotters.append(VStringRectThing(string: match.primer.name, rect: namebox, attr: fmat.baseG))
+//                plotters.append(BezThing(bez: NSBezierPath(rect: namebox), point: NSPoint(x: 0, y: 0), fillColor: nil, strokeColor: NSColor.blackColor(), scale: 1))
+            }
+            plotters.append(BezThing(bez: match.bez, point: NSPoint(x: basex(match.threePrime), y: ypos), fillColor: match.bezFillColor, strokeColor: match.bezStrokeColor, scale: 1))
+        }
+        
+        
+        theMapView.plotters = plotters
+    }
+    
+    func boundsDidChange (notification: NSNotification) {
+        if mapClipView.bounds.size.width == wwidth {return}
+            self.drawSomething(self)
+    }
     
     func printOutput() {
         outputTextView.textStorage!.appendAttributedString(output)
@@ -290,140 +262,135 @@ class Document: NSDocument {
         self.printOutput()
     }
     
-    func findDmatches() {
-        let runWeights = settings.arrayForKey(globals.runWeights)! as [Int]
-        let pairScores = settings.arrayForKey(globals.pairScores)! as [[Int]]
-        let maxLength = settings.integerForKey(globals.effectivePrimer)
-
-        for primer in usedPrimers {
-            let seq = (primer.seq as NSString).substringFromIndex(max(0, countElements(primer.seq) - maxLength)).uppercaseString
-            let requiredPrimability = primer.Req.last
-            let requiredStability100 = primer.maxStab * settings.integerForKey(globals.stabilityCutoff)
-            var seqInt = [Int](count: countElements(seq), repeatedValue: 0)
-            let IUBString = globals.IUBString as NSString
-            var k = 0
-            for c in seq {
-                var n = IUBString.rangeOfString(String(c)).location
-                if n == NSNotFound {n = 14}
-                seqInt[k++] = n
-            }
-            // Now check for a match at each 3' (tp) site on the target
-            var primability = 0
-            var stability = 0
-            for tp in 0..<targInt.count {
-                var basePos = 0
-                var targPos = tp
-                primability = primer.zD[basePos++][targInt[targPos--]]
-                while (targPos >= 0) && (basePos < seqInt.count) && (primability >= primer.Req[basePos - 1]) {
-                    primability += primer.zD[basePos++][targInt[targPos--]]
-                } // while ...
-                if primability >= requiredPrimability {
-                    // primability looks good. Now check for stability
-                    stability = 0
-                    var thisRun = 0
-                    var runCount = 0
-                    var targPos = tp
-                    for var basePos = seqInt.count - 1; basePos >= 0 && targPos >= 0;  --basePos  {
-                        // examine each base of the match
-                        let pairScore = pairScores[seqInt[basePos]][targInt[targPos]]
-                        if pairScore > 0 {
-                            // extend a run
-                            thisRun += pairScore
-                            runCount++
-                        } else {
-                            // finish a run
-                            stability += thisRun * runWeights[max(0, runCount - 1)]
-                            runCount = 0
-                            thisRun = 0
-                        }
-                        targPos--
-                    }
-                    stability += thisRun * runWeights[max(0, runCount - 1)] // In case it ended on a run
-                    if stability * 100 >= requiredStability100 {
-                        // Found a match!
-                        primability =  primability * 100 / primer.maxPrimability
-                        stability = stability * 100 / primer.maxStab
-                        let match = Match(primer: primer, isD: true, threePrime: tp, primability: primability, stability: stability)
-                        matches.append(match)
-                    }
-                }
-            } // for tp
-        } // for each primer used
-    }
-    
-    func findGmatches() {
-        let runWeights = settings.arrayForKey(globals.runWeights)! as [Int]
-        let pairScores = settings.arrayForKey(globals.pairScores)! as [[Int]]
-        let maxLength = settings.integerForKey(globals.effectivePrimer)
-        
-        for primer in usedPrimers {
-            let seq = (primer.seq as NSString).substringFromIndex(max(0, countElements(primer.seq) - maxLength)).uppercaseString
-            let requiredPrimability = primer.Req.last
-            let requiredStability100 = primer.maxStab * settings.integerForKey(globals.stabilityCutoff)
-            var seqInt = [Int](count: countElements(seq), repeatedValue: 0)
-            let compIUBString = globals.compIUBString as NSString
-            var k = 0
-            for c in seq {
-                var n = compIUBString.rangeOfString(String(c)).location
-                if n == NSNotFound {n = 14}
-                seqInt[k++] = n
-            }
-            // Now check for a match at each 3' (tp) site on the target
-            var primability = 0
-            var stability = 0
-            for tp in 0..<targInt.count {
-                var basePos = 0
-                var targPos = tp
-                primability = primer.zG[basePos++][targInt[targPos++]] // Different from D
-                while (targPos < targInt.count) && (basePos < seqInt.count) && (primability >= primer.Req[basePos - 1]) { // Different from D
-                    primability += primer.zG[basePos++][targInt[targPos++]] // Different from D
-                } // while ...
-                if primability >= requiredPrimability {
-                    // primability looks good. Now check for stability
-                    stability = 0
-                    var thisRun = 0
-                    var runCount = 0
-                    targPos = tp
-                    for basePos = (seqInt.count - 1); basePos >= 0 && targPos < targInt.count;  --basePos  { // Different from D
-                        // examine each base of the match
-                        let pairScore = pairScores[seqInt[basePos]][targInt[targPos]] // Different from D
-                        if pairScore > 0 {
-                            // extend a run
-                            thisRun += pairScore
-                            runCount++
-                        } else {
-                            // finish a run
-                            stability += thisRun * runWeights[max(0, runCount - 1)]
-                            runCount = 0
-                            thisRun = 0
-                        }
-                        targPos++ // Different from D
-                    }
-                    stability += thisRun * runWeights[max(0, runCount - 1)] // In case it ended on a run
-                    if stability * 100 >= requiredStability100 {
-                        // Found a match!
-                        primability =  primability * 100 / primer.maxPrimability
-                        stability = stability * 100 / primer.maxStab
-                        let match = Match(primer: primer, isD: false, threePrime: tp, primability: primability, stability: stability) // Different from D
-                        matches.append(match)
-                    }
-                }
-            } // for tp
-        } // for each primer used
-    }
-    
-    func findDimers() {
-        let nprimers = usedPrimers.count
-        if nprimers < 1 {return}
-        for k1 in 0..<nprimers {
-            for k2 in 0...k1 {
-                let dimer = Dimer(primer: usedPrimers[k1], and: usedPrimers[k2])
-                if dimer.serious {
-                    dimers.append(dimer)
-                }
-            }
-        }
-    }
+    // THESE THREE FUNCTIONS HAVE NOW BEEN MOVED TO NSOPERATIONS
+//    func findDmatches() {
+//
+//        for primer in usedPrimers {
+//            let seq = (primer.seq as NSString).substringFromIndex(max(0, countElements(primer.seq) - maxLength)).uppercaseString
+//            let requiredPrimability = primer.Req.last
+//            let requiredStability100 = primer.maxStab * settings.integerForKey(globals.stabilityCutoff)
+//            var seqInt = [Int](count: countElements(seq), repeatedValue: 0)
+//            let IUBString = globals.IUBString as NSString
+//            var k = 0
+//            for c in seq {
+//                var n = IUBString.rangeOfString(String(c)).location
+//                if n == NSNotFound {n = 14}
+//                seqInt[k++] = n
+//            }
+//            // Now check for a match at each 3' (tp) site on the target
+//            var primability = 0
+//            var stability = 0
+//            for tp in 0..<targInt.count {
+//                var basePos = 0
+//                var targPos = tp
+//                primability = primer.zD[basePos++][targInt[targPos--]]
+//                while (targPos >= 0) && (basePos < seqInt.count) && (primability >= primer.Req[basePos - 1]) {
+//                    primability += primer.zD[basePos++][targInt[targPos--]]
+//                } // while ...
+//                if primability >= requiredPrimability {
+//                    // primability looks good. Now check for stability
+//                    stability = 0
+//                    var thisRun = 0
+//                    var runCount = 0
+//                    var targPos = tp
+//                    for var basePos = seqInt.count - 1; basePos >= 0 && targPos >= 0;  --basePos  {
+//                        // examine each base of the match
+//                        let pairScore = pairScores[seqInt[basePos]][targInt[targPos]]
+//                        if pairScore > 0 {
+//                            // extend a run
+//                            thisRun += pairScore
+//                            runCount++
+//                        } else {
+//                            // finish a run
+//                            stability += thisRun * runWeights[max(0, runCount - 1)]
+//                            runCount = 0
+//                            thisRun = 0
+//                        }
+//                        targPos--
+//                    }
+//                    stability += thisRun * runWeights[max(0, runCount - 1)] // In case it ended on a run
+//                    if stability * 100 >= requiredStability100 {
+//                        // Found a match!
+//                        primability =  primability * 100 / primer.maxPrimability
+//                        stability = stability * 100 / primer.maxStab
+//                        let match = Match(primer: primer, isD: true, threePrime: tp, primability: primability, stability: stability)
+//                        dmatches.append(match)
+//                    }
+//                }
+//            } // for tp
+//        } // for each primer used
+//    }
+//    
+//    func findGmatches() {
+//        
+//        for primer in usedPrimers {
+//            let seq = (primer.seq as NSString).substringFromIndex(max(0, countElements(primer.seq) - maxLength)).uppercaseString
+//            let requiredPrimability = primer.Req.last
+//            let requiredStability100 = primer.maxStab * settings.integerForKey(globals.stabilityCutoff)
+//            var seqInt = [Int](count: countElements(seq), repeatedValue: 0)
+//            let compIUBString = globals.compIUBString as NSString
+//            var k = 0
+//            for c in seq {
+//                var n = compIUBString.rangeOfString(String(c)).location
+//                if n == NSNotFound {n = 14}
+//                seqInt[k++] = n
+//            }
+//            // Now check for a match at each 3' (tp) site on the target
+//            var primability = 0
+//            var stability = 0
+//            for tp in 0..<targInt.count {
+//                var basePos = 0
+//                var targPos = tp
+//                primability = primer.zG[basePos++][targInt[targPos++]] // Different from D
+//                while (targPos < targInt.count) && (basePos < seqInt.count) && (primability >= primer.Req[basePos - 1]) { // Different from D
+//                    primability += primer.zG[basePos++][targInt[targPos++]] // Different from D
+//                } // while ...
+//                if primability >= requiredPrimability {
+//                    // primability looks good. Now check for stability
+//                    stability = 0
+//                    var thisRun = 0
+//                    var runCount = 0
+//                    targPos = tp
+//                    for basePos = (seqInt.count - 1); basePos >= 0 && targPos < targInt.count;  --basePos  { // Different from D
+//                        // examine each base of the match
+//                        let pairScore = pairScores[seqInt[basePos]][targInt[targPos]] // Different from D
+//                        if pairScore > 0 {
+//                            // extend a run
+//                            thisRun += pairScore
+//                            runCount++
+//                        } else {
+//                            // finish a run
+//                            stability += thisRun * runWeights[max(0, runCount - 1)]
+//                            runCount = 0
+//                            thisRun = 0
+//                        }
+//                        targPos++ // Different from D
+//                    }
+//                    stability += thisRun * runWeights[max(0, runCount - 1)] // In case it ended on a run
+//                    if stability * 100 >= requiredStability100 {
+//                        // Found a match!
+//                        primability =  primability * 100 / primer.maxPrimability
+//                        stability = stability * 100 / primer.maxStab
+//                        let match = Match(primer: primer, isD: false, threePrime: tp, primability: primability, stability: stability) // Different from D
+//                        gmatches.append(match)
+//                    }
+//                }
+//            } // for tp
+//        } // for each primer used
+//    }
+//    
+//    func findDimers() {
+//        let nprimers = usedPrimers.count
+//        if nprimers < 1 {return}
+//        for k1 in 0..<nprimers {
+//            for k2 in 0...k1 {
+//                let dimer = Dimer(primer: usedPrimers[k1], and: usedPrimers[k2])
+//                if dimer.serious {
+//                    dimers.append(dimer)
+//                }
+//            }
+//        }
+//    }
 
     @IBAction func writeSomething(sender: AnyObject) {
         self.showAllMatches()
