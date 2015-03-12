@@ -107,6 +107,7 @@ class Document: NSDocument {
         opQ.waitUntilAllOperationsAreFinished()
         
         matches = dmatches + gmatches
+        self.findFrags()
         dimerButton.enabled = dimers.count > 0
         dimerButton.title = "Primer Dimers (\(dimers.count))"
         
@@ -138,11 +139,20 @@ class Document: NSDocument {
         theMapView.display()
 
  }
+    func findFrags () {
+        for dmatch in dmatches {
+            for gmatch in gmatches {
+                if gmatch.threePrime >= dmatch.threePrime {
+                    fragments.append(Fragment(dmatch: dmatch, gmatch: gmatch))
+                }
+            }
+        }
+        fragments = sorted(fragments, {(f1 : Fragment, f2 : Fragment) -> Bool in
+            return f1.quality < f2.quality
+        })
+    }
     
     func makePlot() {
-        let clip = mapClipView.bounds
-        let mapFrame = NSRect(origin: clip.origin, size: NSMakeSize(clip.size.width, 3000))
-        theMapView.frame = mapFrame
 
         var plotters = [PlotterThing]()
         // constants for the plot
@@ -156,14 +166,19 @@ class Document: NSDocument {
         let v3 : CGFloat = 70.0  // vertical space from top of big tick to target baseline
         let v4 : CGFloat = 17 // distance above or below target baseline for point of match arrow
         let v5 : CGFloat = 37 // distance above or below target baseline for match primer name
-        let h3 : CGFloat = 14 // distance to the left or right of arrow point for match primer name
+        let h3 : CGFloat = 16 // distance to the left or right of arrow point for match primer name
         let v6 : CGFloat = 50 // height of box containing G primer name
+        let vfrag : CGFloat = 30 // vertical space for bar and size label
         let tickup : CGFloat = 5.0  // length of tick upward
         let tickdown : CGFloat = 5.0  // length of tick downward
         let tickwidth : CGFloat = 1.0  // linewidth for ticks
         let targwidth : CGFloat = 2.5  // linewidth for target baseline
         let bigtickFactor : CGFloat = 1.5  // relative size of ticks every 1000 pb
         let twidth = wwidth - 2.0 * h1 // graphic distance between first and last base
+        
+        let clip = mapClipView.bounds
+        let mapFrame = NSRect(origin: clip.origin, size: NSMakeSize(clip.size.width, v2 + v3 + v5 + v6 + vfrag * CGFloat(fragments.count)))
+        theMapView.frame = mapFrame
         
         func basex(base : Int) -> CGFloat {
             // the X position of a base site
@@ -217,6 +232,19 @@ class Document: NSDocument {
             plotters.append(BezThing(bez: match.bez, point: NSPoint(x: basex(match.threePrime), y: ypos), fillColor: match.bezFillColor, strokeColor: match.bezStrokeColor, scale: 1))
         }
         
+        // Add fragments
+        var vpoint : CGFloat  = v2 + v3 + v5 + v6
+        let pointsPerBase = twidth/targetLength
+        for frag in fragments {
+            var barRect = frag.barRect
+            barRect.size.width *= pointsPerBase  // rescale length of bar
+            let bez = NSBezierPath(rect: barRect)
+            plotters.append(BezThing(bez: bez, point: NSPoint(x: basex(frag.dmatch.threePrime), y: vpoint), fillColor: NSColor.blackColor(), strokeColor: nil, scale: 1))
+            let rec = (String(frag.totSize) as NSString).boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: fmat.normal)
+            let stringx : CGFloat = basex(frag.dmatch.threePrime) + barRect.size.width/2  - rec.size.width/2  // to center the size string
+            plotters.append(StringThing(string: String(frag.totSize), point: NSPoint(x: stringx, y: vpoint + barRect.size.height), attr: fmat.normal))
+            vpoint += vfrag
+        }
         
         theMapView.plotters = plotters
     }
