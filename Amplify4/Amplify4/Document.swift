@@ -21,6 +21,7 @@ class Document: NSDocument {
     @IBOutlet var ampWindow: NSWindow!
     @IBOutlet var outputTextView: NSTextView!
     
+    @IBOutlet var infoTextView: NSTextView!
     @IBOutlet var mapClipView: NSClipView!
 //    @IBOutlet var theMapView: MapView!
     @IBOutlet var mapScrollView: NSScrollView!
@@ -39,12 +40,13 @@ class Document: NSDocument {
     var output = NSMutableAttributedString()
     var targInt = [Int]()
     var circularTarget  : Bool = false
-    var theMapView = MapView()
     var wwidth : CGFloat = 0.0
     let runWeights = NSUserDefaults.standardUserDefaults().arrayForKey(globals.runWeights)! as [Int]
     let pairScores = NSUserDefaults.standardUserDefaults().arrayForKey(globals.pairScores)! as [[Int]]
     let maxLength = NSUserDefaults.standardUserDefaults().integerForKey(globals.effectivePrimer)
     var opn = 100
+
+    let theMapView = MapView(frame: NSRect(x: 0, y: 0, width: 10, height: 10))
 
     
     override init() {
@@ -132,6 +134,8 @@ class Document: NSDocument {
         let clip = mapClipView.bounds
         let mapFrame = NSRect(origin: clip.origin, size: NSMakeSize(clip.size.width, 2000))
         theMapView.frame = mapFrame
+        theMapView.theDoc = self
+//        theMapView.theDoc = self
         mapScrollView.documentView = theMapView
         mapBottomConstraint.constant = -3000  // This constraint needs to be reset for some reason for initial drawing
         self.makePlot()
@@ -155,6 +159,8 @@ class Document: NSDocument {
     func makePlot() {
 
         var plotters = [PlotterThing]()
+        var trackingAreas = [NSTrackingArea]()
+
         // constants for the plot
         let targetLength = CGFloat(apdel.substrateDelegate.targetView.textStorage!.length - apdel.targDelegate.firstbase)
         let startBase = 1
@@ -229,7 +235,15 @@ class Document: NSDocument {
                 plotters.append(VStringRectThing(string: match.primer.name, rect: namebox, attr: fmat.baseG))
 //                plotters.append(BezThing(bez: NSBezierPath(rect: namebox), point: NSPoint(x: 0, y: 0), fillColor: nil, strokeColor: NSColor.blackColor(), scale: 1))
             }
-            plotters.append(BezThing(bez: match.bez, point: NSPoint(x: basex(match.threePrime), y: ypos), fillColor: match.bezFillColor, strokeColor: match.bezStrokeColor, scale: 1))
+            let plotPoint = NSPoint(x: basex(match.threePrime), y: ypos)
+            let bez = BezThing(bez: match.bez, point: plotPoint, fillColor: match.bezFillColor, strokeColor: match.bezStrokeColor, scale: 1)
+            match.highlightPoint = plotPoint
+            match.setLitBez(match.bez.copy() as NSBezierPath)
+            plotters.append(bez)
+            let trackArea = NSTrackingArea(rect: NSInsetRect(bez.bounds, -3, -3),
+                options: (NSTrackingAreaOptions.MouseEnteredAndExited | NSTrackingAreaOptions.ActiveAlways | NSTrackingAreaOptions.MouseMoved),
+                owner: theMapView, userInfo: [0 : match])
+            trackingAreas.append(trackArea)
         }
         
         // Add fragments
@@ -239,13 +253,38 @@ class Document: NSDocument {
             var barRect = frag.barRect
             barRect.size.width *= pointsPerBase  // rescale length of bar
             let bez = NSBezierPath(rect: barRect)
-            plotters.append(BezThing(bez: bez, point: NSPoint(x: basex(frag.dmatch.threePrime), y: vpoint), fillColor: NSColor.blackColor(), strokeColor: nil, scale: 1))
+            let plotPoint = NSPoint(x: basex(frag.dmatch.threePrime), y: vpoint)
+            frag.highlightPoint = plotPoint
+            frag.setLitRec(barRect)
+            plotters.append(BezThing(bez: bez, point: plotPoint, fillColor: NSColor.blackColor(), strokeColor: nil, scale: 1))
             let rec = (String(frag.totSize) as NSString).boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: fmat.normal)
             let stringx : CGFloat = basex(frag.dmatch.threePrime) + barRect.size.width/2  - rec.size.width/2  // to center the size string
             plotters.append(StringThing(string: String(frag.totSize), point: NSPoint(x: stringx, y: vpoint + barRect.size.height), attr: fmat.normal))
+            let trackArea = NSTrackingArea(rect: NSInsetRect(NSRect(origin: plotPoint, size: bez.bounds.size), -2, -12),
+                options: (NSTrackingAreaOptions.MouseEnteredAndExited | NSTrackingAreaOptions.ActiveAlways | NSTrackingAreaOptions.MouseMoved),
+                owner: theMapView, userInfo: [0 : frag])
+            trackingAreas.append(trackArea)
             vpoint += vfrag
         }
         
+//        let trackRect = NSRect(x: 0, y: 0, width: 100, height: 40)
+//        var trackBez = NSBezierPath(rect: trackRect)
+//        trackBez.lineWidth = 1
+//        plotters.append(BezThing(bez: trackBez, point: NSPoint(x: 0, y: 0), fillColor: NSColor.lightGrayColor(), strokeColor: NSColor.blackColor(), scale: 1))
+//        let trackArea : NSTrackingArea = NSTrackingArea(rect: trackRect,
+//            options: (NSTrackingAreaOptions.MouseEnteredAndExited | NSTrackingAreaOptions.ActiveAlways | NSTrackingAreaOptions.MouseMoved),
+//            owner: theMapView, userInfo: [0 : dimerButton]) as NSTrackingArea
+//        
+////        theMapView.removeTrackingArea(trackArea)
+//        var tareas = theMapView.trackingAreas
+//        theMapView.addTrackingArea(trackArea)
+//        tareas = theMapView.trackingAreas
+//        println("Just added one, and there are \(tareas.count) tracking areas")
+        
+        theMapView.clearAllTrackingAreas()
+        for tracker in trackingAreas {
+            theMapView.addTrackingArea(tracker)
+        }
         theMapView.plotters = plotters
     }
     
@@ -257,6 +296,7 @@ class Document: NSDocument {
     func printOutput() {
         outputTextView.textStorage!.appendAttributedString(output)
         output = NSMutableAttributedString()
+        outputTextView.scrollToEndOfDocument(self)
     }
     
     func addOutput(s : String, attr: NSDictionary) {
@@ -289,6 +329,14 @@ class Document: NSDocument {
         }
         self.printOutput()
     }
+    
+    func showAllFragments() {
+        for frag in fragments {
+            output.appendAttributedString(frag.report())
+        }
+        self.printOutput()
+    }
+    
     
     // THESE THREE FUNCTIONS HAVE NOW BEEN MOVED TO NSOPERATIONS
 //    func findDmatches() {
@@ -421,8 +469,7 @@ class Document: NSDocument {
 //    }
 
     @IBAction func writeSomething(sender: AnyObject) {
-        self.showAllMatches()
-        self.showSeriousDimers()
+         self.showSeriousDimers()
     }
     
     

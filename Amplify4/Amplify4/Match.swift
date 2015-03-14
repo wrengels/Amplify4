@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class Match: PlotterThing {
+class Match: MapItem {
     let isD : Bool  // Does match point rightward?
     let threePrime : Int  // 3' end in target coordinates
     let primability, stability : Int
@@ -67,7 +67,17 @@ class Match: PlotterThing {
         if isD {return "⫸"} else {return "⫷"}
     }
     
-    func report() -> NSAttributedString {
+    override func info() -> NSAttributedString {
+        var info = NSMutableAttributedString()
+        extendString(starter: info, suffix: "Match for primer:    ", attr: fmat.normal)
+        var thefmat = fmat.bigboldred
+        if isD {thefmat = fmat.bigboldblue}
+        extendString(starter: info, suffix: "\(primer.name)   \(self.direction())", attr: thefmat)
+        extendString(starter: info, suffix: "    3′ position = base \(threePrime + 1),    Primability = \(primability)%,    Stability = \(stability)%,    Quality = \(self.quality())", attr: fmat.normal)
+        return info
+    }
+    
+    override func report() -> NSAttributedString {
         let side = 20 // Show this number of target bases left and right of primer
         var report = NSMutableAttributedString()
         let settings = NSUserDefaults.standardUserDefaults()

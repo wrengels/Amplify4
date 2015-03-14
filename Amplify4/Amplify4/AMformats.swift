@@ -12,7 +12,8 @@ let fmat = AMformats()
 
 class AMformats: NSObject {
     
-    let normal, big, bigger, bigital, blue, red, bold, bigbold, bigcenter,
+    let normal, big, bigger, bigital, blue, red,
+    bold, bigbold, bigcenter, bigboldblue, bigboldred,
     symb, baseD, baseG,
     seq, redseq, blueseq, greyseq,
     h0, h0ital, h1, h2, h3,
@@ -41,6 +42,8 @@ class AMformats: NSObject {
         bigbold = attributesForThis("bigboldFmat")
         bigcenter = attributesForThis("bigcenterFmat")
         bigger = attributesForThis("biggerFmat")
+        bigboldred = attributesForThis("bigboldredFmat")
+        bigboldblue = attributesForThis("bigboldblueFmat")
         
         symb = attributesForThis("symbFmat")
         baseD = attributesForThis("baseDFmat")
