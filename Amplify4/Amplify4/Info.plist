@@ -125,5 +125,7 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>CFBundleIconFile</key>
+	<string>Ampicon2.png</string>
 </dict>
 </plist>

@@ -176,6 +176,7 @@ class Match: MapItem {
             extendString(starter: report, suffix: "\t\(spaces(side))\(bonds)\r", attr: fmat.greyseq)
             addReport("Context\t", fmat.blue)
             addReport(context + "\r\r" , fmat.seq)
+            apdel.targDelegate.selectBasesFrom(threePrime - seqLen + 2, lastSelected: threePrime + 1)
 
         } else {
             let reverseSeq = (String(reverse(String(seq))) as NSString)
@@ -197,6 +198,7 @@ class Match: MapItem {
             var numline = "\t\(spaces(side - startDigits/2))\(startNumString)"
             numline += spaces(seqLen - startDigits/2 - endDigits/2 - 1) + endNumString
             addReport(numline + "\r\r", fmat.blueseq)
+            apdel.targDelegate.selectBasesFrom(threePrime + 1, lastSelected: threePrime + seqLen)
         }
         return report
     }

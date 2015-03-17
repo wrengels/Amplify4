@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2408B5911A9E37BF00689090 /* AMformats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2408B5901A9E37BF00689090 /* AMformats.swift */; };
 		240AA3A91AAFAE86001B5258 /* MatchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240AA3A81AAFAE86001B5258 /* MatchOperation.swift */; };
+		241C7E931AB759B40068ED13 /* SearchPrimers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241C7E911AB759B40068ED13 /* SearchPrimers.swift */; };
+		241C7E941AB759B40068ED13 /* SearchPrimers.xib in Resources */ = {isa = PBXBuildFile; fileRef = 241C7E921AB759B40068ED13 /* SearchPrimers.xib */; };
 		241CF2B91A97ABCD0063AF5A /* Amplify Help.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 241CF2B81A97ABCD0063AF5A /* Amplify Help.rtfd */; };
 		242001C01A6DFE6F004D35B8 /* Primer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242001BF1A6DFE6F004D35B8 /* Primer.swift */; };
 		242B4C411AA8D8BC003C65A3 /* Fragment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B4C401AA8D8BC003C65A3 /* Fragment.swift */; };
@@ -51,6 +53,8 @@
 /* Begin PBXFileReference section */
 		2408B5901A9E37BF00689090 /* AMformats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AMformats.swift; sourceTree = "<group>"; };
 		240AA3A81AAFAE86001B5258 /* MatchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchOperation.swift; sourceTree = "<group>"; };
+		241C7E911AB759B40068ED13 /* SearchPrimers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPrimers.swift; sourceTree = "<group>"; };
+		241C7E921AB759B40068ED13 /* SearchPrimers.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPrimers.xib; sourceTree = "<group>"; };
 		241CF2B81A97ABCD0063AF5A /* Amplify Help.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; path = "Amplify Help.rtfd"; sourceTree = "<group>"; };
 		242001BF1A6DFE6F004D35B8 /* Primer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Primer.swift; sourceTree = "<group>"; };
 		242B4C401AA8D8BC003C65A3 /* Fragment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fragment.swift; sourceTree = "<group>"; };
@@ -103,6 +107,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2446F0731AB78F5C004465FB /* Search Primers */ = {
+			isa = PBXGroup;
+			children = (
+				241C7E911AB759B40068ED13 /* SearchPrimers.swift */,
+				241C7E921AB759B40068ED13 /* SearchPrimers.xib */,
+			);
+			name = "Search Primers";
+			sourceTree = "<group>";
+		};
+		2446F0741AB78F90004465FB /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				242001BF1A6DFE6F004D35B8 /* Primer.swift */,
+				24D1E5C81A92E5C600601F58 /* Dimer.swift */,
+				24B4CA691AB3A05600CF2831 /* MapItem.swift */,
+				24B03FF11AA4E13A00A132B0 /* Match.swift */,
+				242B4C401AA8D8BC003C65A3 /* Fragment.swift */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
 		2483DA9D1A688BB100789E69 = {
 			isa = PBXGroup;
 			children = (
@@ -131,16 +156,13 @@
 				2483DAAB1A688BB100789E69 /* AppDelegate.swift */,
 				245987841A70294F0002D9F8 /* AMsubstrateDelegate.swift */,
 				246C33F21A75BD5900D5B058 /* TargDelegate.swift */,
-				242001BF1A6DFE6F004D35B8 /* Primer.swift */,
-				24D1E5C81A92E5C600601F58 /* Dimer.swift */,
-				24B4CA691AB3A05600CF2831 /* MapItem.swift */,
-				24B03FF11AA4E13A00A132B0 /* Match.swift */,
-				242B4C401AA8D8BC003C65A3 /* Fragment.swift */,
+				2446F0731AB78F5C004465FB /* Search Primers */,
+				2446F0741AB78F90004465FB /* Objects */,
 				248AEF6C1A893E5000F9E8EA /* Prefs */,
 				2483DAAD1A688BB100789E69 /* Document.swift */,
+				2483DAAF1A688BB100789E69 /* Document.xib */,
 				240AA3A81AAFAE86001B5258 /* MatchOperation.swift */,
 				24BAD94E1AAA5BA5000FE446 /* MapView.swift */,
-				2483DAAF1A688BB100789E69 /* Document.xib */,
 				24EE0CD41A96AB0D002D555F /* AmplifyHelpController.swift */,
 				24EE0CD21A96AA57002D555F /* AmplifyHelp.xib */,
 				2483DAB41A688BB100789E69 /* MainMenu.xib */,
@@ -286,6 +308,7 @@
 				24A9D98E1A880EED00E3E032 /* AMprefsController.xib in Resources */,
 				24A19D281A9BD5B5006486E0 /* Amplify Sample Target.rtf in Resources */,
 				24EE0CD31A96AA57002D555F /* AmplifyHelp.xib in Resources */,
+				241C7E941AB759B40068ED13 /* SearchPrimers.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				241C7E931AB759B40068ED13 /* SearchPrimers.swift in Sources */,
 				2408B5911A9E37BF00689090 /* AMformats.swift in Sources */,
 				24BAD94F1AAA5BA5000FE446 /* MapView.swift in Sources */,
 				245987851A70294F0002D9F8 /* AMsubstrateDelegate.swift in Sources */,

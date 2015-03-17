@@ -28,6 +28,7 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     @IBOutlet weak var appdel: AppDelegate!
     @IBOutlet weak var substrateWindow: NSWindow!
     @IBOutlet var primerInfoView: NSTextView!
+    @IBOutlet weak var printOutputMenuItem: NSMenuItem!
     
     override init() {
         super.init()
@@ -42,6 +43,13 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
         if (k < 0) || (k >= primers.count) {return}
         let sto = primerInfoView.textStorage!
         sto.setAttributedString(primers[k].info())
+    }
+    
+    let searchWindow = SearchPrimers(windowNibName: "SearchPrimers")
+    
+    func performFindPanelAction(sender : AnyObject) -> AnyObject {
+        searchWindow.showWindow(self)
+        return self
     }
     
     func copy(sender : AnyObject) -> AnyObject {
@@ -103,12 +111,29 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     @IBOutlet weak var saveItem: NSMenuItem!
     @IBOutlet weak var saveAsItem: NSMenuItem!
     @IBOutlet weak var copyRearrangedItem: NSMenuItem!
-        @IBOutlet weak var copyItem: NSMenuItem!
+    @IBOutlet weak var copyItem: NSMenuItem!
+    @IBOutlet weak var findItem: NSMenuItem!
+    
+    @IBOutlet weak var printItem: NSMenuItem!
+    @IBOutlet weak var plainFindItem: NSMenuItem!
     
 override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
-   
+    
+    if menuItem == printOutputMenuItem {printOutputMenuItem.hidden = true}
+
     let fid = substrateWindow.firstResponder
     if fid == primerTableView {
+        if menuItem == printItem {
+            printItem.title = "Print Primer List …"
+        }
+        if menuItem == findItem {
+            findItem.title = "Find Primers …"
+            findItem.enabled = true
+        }
+        if menuItem == plainFindItem {
+            menuItem.title = "Find Primers …"
+            plainFindItem.enabled = true
+        }
         if menuItem == saveItem {
             saveItem.title = "Save Primers"
             saveAsItem.title = "Save Primers As…"
@@ -117,6 +142,9 @@ override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
         }
         copyRearrangedItem.hidden = false
     } else if fid == targetView {
+        if menuItem == printItem {
+            printItem.title = "Print Target Sequence …"
+        }
         if menuItem == saveItem {
             saveItem.title = "Save Target"
             saveAsItem.title = "Save Target As…"
@@ -127,6 +155,18 @@ override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
     }
         return true // super.validateMenuItem(menuItem)
 }
+    
+    func printDocument(sender: AnyObject) {
+        let fid = substrateWindow.firstResponder
+        if fid == targetView {
+            let printOp = NSPrintOperation(view: targetView)
+            printOp.runOperation()
+        }
+        if fid == primerTableView {
+            let printOp = NSPrintOperation(view: primerTableView)
+            printOp.runOperation()
+        }
+    }
     
     func paste(sender : AnyObject) -> AnyObject {
         let fid = substrateWindow.firstResponder
@@ -253,15 +293,17 @@ override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
         let inputString = NSString(contentsOfURL: primerFile, encoding: NSUTF8StringEncoding, error: nil)
         if (inputString == nil) {return}
         let newline = NSCharacterSet(charactersInString: "\n\r")
-        let lines = inputString!.componentsSeparatedByCharactersInSet(newline)
-        var parts = [String]()
+        let lines = inputString!.componentsSeparatedByCharactersInSet(newline) as [String]
         primers = []
         for line in lines {
-            switch urlext {
-            case "csv", "CSV" :
-                primers.append(Primer(theCSVLine: line as String))
-            default :
-                primers.append(Primer(theLine: line as String))
+            if countElements(line) > 1 {
+                // ignore blank lines
+                switch urlext {
+                case "csv", "CSV" :
+                    primers.append(Primer(theCSVLine: line))
+                default :
+                    primers.append(Primer(theLine: line))
+                }
             }
         }
         primersChanged = false
@@ -309,6 +351,8 @@ override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
                 getTargetFromURL(openPanel.URL!)
             }
     }
+    
+    
     
     @IBOutlet weak var formattedOrPlain: NSMatrix!
     @IBAction func saveTargetStringAs(sender: AnyObject) {

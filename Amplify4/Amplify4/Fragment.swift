@@ -90,6 +90,7 @@ class Fragment: MapItem {
         extendString(starter: report, suffix: "Amplified sequence: \r", attr: fmat.normal)
         report.appendAttributedString(ampSeq)
         extendString(starter: report, suffix: "\r\r", attr: fmat.normal)
+        apdel.targDelegate.selectBasesFrom(dmatch.threePrime + 2, lastSelected: dmatch.threePrime + ampSize + 1)
         
         return report
     }

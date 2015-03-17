@@ -9,7 +9,7 @@
 import Cocoa
 
 class MapItem: NSObject {
-    var isLit = false
+    var isLit = 0
     var isClickable = false
     var coItems = [MapItem]()
     var rec = NSRect()
@@ -39,18 +39,18 @@ class MapItem: NSObject {
     }
     
     func lightCoItems() {
-        self.isLit = true
+        self.isLit++
         self.isClickable = true
         for item in coItems {
-            item.isLit = true
+            item.isLit++
         }
     }
     
     func unlightCoItems() {
-        self.isLit = false
+        self.isLit--
         self.isClickable = false
         for item in coItems {
-            item.isLit = false
+            item.isLit--
         }
     }
     

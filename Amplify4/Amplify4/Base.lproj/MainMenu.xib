@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -25,9 +25,16 @@
                 <outlet property="appdel" destination="Voe-Tx-rLC" id="HZd-92-XhW"/>
                 <outlet property="copyItem" destination="x3v-GG-iWU" id="Wdq-Da-OsT"/>
                 <outlet property="copyRearrangedItem" destination="9Ta-UL-InK" id="w2R-59-KcZ"/>
+                <outlet property="findItem" destination="Xz5-n4-O0W" id="oSf-Pu-igL"/>
+                <outlet property="findNextButton" destination="lT2-3i-hIP" id="Xmu-bE-WPI"/>
+                <outlet property="findPrimerAccView" destination="mjw-eb-B9c" id="bGO-7F-Yw4"/>
+                <outlet property="findTextField" destination="dNF-qi-O8T" id="DH0-wi-Ozy"/>
                 <outlet property="formattedOrPlain" destination="hXJ-c0-5nF" id="0J0-ff-frm"/>
+                <outlet property="plainFindItem" destination="4EN-yA-p0u" id="83O-zE-zsT"/>
                 <outlet property="primerInfoView" destination="KYe-zP-cEp" id="Hzb-pe-mkA"/>
                 <outlet property="primerTableView" destination="8GV-fp-tNe" id="0UQ-dx-kGM"/>
+                <outlet property="printItem" destination="aTl-1u-JFS" id="Elh-x7-RGe"/>
+                <outlet property="printOutputMenuItem" destination="FJq-Om-bcw" id="rex-X9-fCP"/>
                 <outlet property="saveAsItem" destination="Bw7-FT-i3A" id="Fc9-2d-mBJ"/>
                 <outlet property="saveItem" destination="pxx-59-PXV" id="GQC-Xr-aRJ"/>
                 <outlet property="substrateWindow" destination="bmA-jS-XtK" id="vG7-yM-IuX"/>
@@ -173,6 +180,12 @@
                                     <action selector="printDocument:" target="-1" id="qaZ-4w-aoO"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Print Output Text…" hidden="YES" id="FJq-Om-bcw">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="printOutputText:" target="-1" id="pLN-up-QIT"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -259,17 +272,17 @@ CA
                                                 <action selector="performFindPanelAction:" target="-1" id="NDo-RZ-v9R"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Find Previous" tag="3" keyEquivalent="G" id="OwM-mh-QMV">
+                                        <menuItem title="Find Previous" tag="3" hidden="YES" enabled="NO" keyEquivalent="G" id="OwM-mh-QMV">
                                             <connections>
                                                 <action selector="performFindPanelAction:" target="-1" id="HOh-sY-3ay"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Use Selection for Find" tag="7" keyEquivalent="e" id="buJ-ug-pKt">
+                                        <menuItem title="Use Selection for Find" tag="7" hidden="YES" enabled="NO" keyEquivalent="e" id="buJ-ug-pKt">
                                             <connections>
                                                 <action selector="performFindPanelAction:" target="-1" id="U76-nv-p5D"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Jump to Selection" keyEquivalent="j" id="S0p-oC-mLd">
+                                        <menuItem title="Jump to Selection" hidden="YES" enabled="NO" keyEquivalent="j" id="S0p-oC-mLd">
                                             <connections>
                                                 <action selector="centerSelectionInVisibleArea:" target="-1" id="IOG-6D-g5B"/>
                                             </connections>
@@ -1332,5 +1345,30 @@ CA
             </cells>
             <point key="canvasLocation" x="898" y="986"/>
         </matrix>
+        <customView id="mjw-eb-B9c" userLabel="Find Primer View">
+            <rect key="frame" x="0.0" y="0.0" width="382" height="28"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dNF-qi-O8T">
+                    <rect key="frame" x="15" y="3" width="237" height="22"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="gx3-O4-Imi">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lT2-3i-hIP">
+                    <rect key="frame" x="277" y="0.0" width="85" height="25"/>
+                    <buttonCell key="cell" type="roundTextured" title="Find Next" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7EA-CE-beh">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="findNextPrimer:" target="jx6-jC-eEd" id="oA3-NP-0Nc"/>
+                    </connections>
+                </button>
+            </subviews>
+            <point key="canvasLocation" x="564" y="1128"/>
+        </customView>
     </objects>
 </document>

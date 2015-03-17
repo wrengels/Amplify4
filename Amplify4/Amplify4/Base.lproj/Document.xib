@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Document" customModule="Amplify4" customModuleProvider="target">
@@ -14,6 +14,7 @@
                 <outlet property="mapClipView" destination="DgR-aa-l98" id="Va3-wi-HTL"/>
                 <outlet property="mapScrollView" destination="nYB-lq-G5R" id="XOe-kE-h1R"/>
                 <outlet property="outputTextView" destination="HcI-u8-QYh" id="aDm-M9-qNL"/>
+                <outlet property="saveChoices" destination="5dA-xF-mhW" id="7df-T0-V0t"/>
                 <outlet property="window" destination="xOd-HO-29H" id="JIz-fz-R2o"/>
             </connections>
         </customObject>
@@ -55,10 +56,10 @@
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <size key="minSize" width="572" height="25"/>
-                                                                        <size key="maxSize" width="572" height="10000000"/>
+                                                                        <size key="maxSize" width="589" height="10000000"/>
                                                                         <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <size key="minSize" width="572" height="25"/>
-                                                                        <size key="maxSize" width="572" height="10000000"/>
+                                                                        <size key="maxSize" width="589" height="10000000"/>
                                                                     </textView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -167,10 +168,10 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <size key="minSize" width="1073" height="19"/>
-                                    <size key="maxSize" width="1073" height="10000000"/>
+                                    <size key="maxSize" width="1075" height="10000000"/>
                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <size key="minSize" width="1073" height="19"/>
-                                    <size key="maxSize" width="1073" height="10000000"/>
+                                    <size key="maxSize" width="1075" height="10000000"/>
                                 </textView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -184,6 +185,16 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
+                    <button hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UEf-GE-WKe">
+                        <rect key="frame" x="-6" y="636" width="39" height="38"/>
+                        <buttonCell key="cell" type="round" bezelStyle="circular" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" id="b35-gp-09q">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="label"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="roundButton:" target="-2" id="JuE-qP-a0v"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="JA3-IU-KMM" firstAttribute="top" secondItem="JnV-lT-PBp" secondAttribute="top" id="5ox-hz-BUX"/>
@@ -234,5 +245,33 @@
             </scroller>
             <point key="canvasLocation" x="294.5" y="-27"/>
         </scrollView>
+        <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autorecalculatesCellSize="YES" id="5dA-xF-mhW" userLabel="Save PCR choices">
+            <rect key="frame" x="0.0" y="0.0" width="203" height="64"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+            <size key="cellSize" width="188" height="18"/>
+            <size key="intercellSpacing" width="4" height="2"/>
+            <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="dS2-G5-64d">
+                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                <font key="font" metaFont="system"/>
+            </buttonCell>
+            <cells>
+                <column>
+                    <buttonCell type="radio" title="PCR map as pdf" imagePosition="left" alignment="left" state="on" tag="1" inset="2" id="rwW-Q4-4vv">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <buttonCell type="radio" title="Text output as rich text (rtf)" imagePosition="left" alignment="left" inset="2" id="6BK-Aw-KPd">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <buttonCell type="radio" title="Text output as plain text" imagePosition="left" alignment="left" inset="2" id="hMc-xM-A3I">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </column>
+            </cells>
+            <point key="canvasLocation" x="-613.5" y="371"/>
+        </matrix>
     </objects>
 </document>

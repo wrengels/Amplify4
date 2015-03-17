@@ -26,6 +26,8 @@ class Document: NSDocument {
 //    @IBOutlet var theMapView: MapView!
     @IBOutlet var mapScrollView: NSScrollView!
     @IBOutlet var mapBottomConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var printMenuItem: NSMenuItem!
+//    @IBOutlet weak var printOutputMenuItem: NSMenuItem!
     
  //   var mapImageView = NSImageView(frame: NSRect(x: 0, y: 0, width: 100, height: 10000))
 //    var mapView = MapView()
@@ -55,6 +57,32 @@ class Document: NSDocument {
         // Add your subclass-specific initialization here.
     }
     
+    override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+        let substrateDelegate = apdel.substrateDelegate
+        if menuItem == substrateDelegate.printItem {
+            menuItem.title = "Print PCR Map …"
+        }
+        if menuItem == substrateDelegate.printOutputMenuItem {
+            menuItem.hidden = false
+        }
+        return true
+    }
+    
+    @IBAction func printOutputText(sender : AnyObject) {
+        self.printInfo.horizontalPagination = NSPrintingPaginationMode.FitPagination
+        let printOp = NSPrintOperation(view: outputTextView)
+        printOp.runOperation()
+    }
+    
+    override func printDocument(sender: AnyObject?) {
+        let printInfo = self.printInfo
+//        self.printInfo.verticalPagination = NSPrintingPaginationMode.FitPagination
+        self.printInfo.horizontalPagination = NSPrintingPaginationMode.FitPagination
+
+        let printOp = NSPrintOperation(view: theMapView)
+        printOp.runOperation()
+    }
+    
     @IBAction func unDrawIt(sender: AnyObject) {
         let last = theMapView.plotters.last! as PlotterThing
         theMapView.setNeedsDisplayInRect(last.bounds)
@@ -75,8 +103,9 @@ class Document: NSDocument {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "boundsDidChange:", name:  NSViewFrameDidChangeNotification, object: mapClipView)
         
         let substrateDelegate = apdel.substrateDelegate
+        
         for primer in substrateDelegate.primers {
-            if primer.check > 0 {
+            if !primer.hasBadBases() && primer.check > 0 {
                 primer.calcZ()
                 usedPrimers.append(primer)
             }
@@ -164,7 +193,7 @@ class Document: NSDocument {
         // constants for the plot
         let targetLength = CGFloat(apdel.substrateDelegate.targetView.textStorage!.length - apdel.targDelegate.firstbase)
         let startBase = 1
-        let endBase = Int(targetLength + 1.1)
+        let endBase = Int(targetLength + 0.1)
         wwidth  = theMapView.frame.size.width
         let h1 : CGFloat = 5.0  // Horizional margin outside base numbers
         let v1 : CGFloat = 5.0  // vertical margin above base numbers
@@ -266,20 +295,6 @@ class Document: NSDocument {
             trackingAreas.append(trackArea)
             vpoint += vfrag
         }
-        
-//        let trackRect = NSRect(x: 0, y: 0, width: 100, height: 40)
-//        var trackBez = NSBezierPath(rect: trackRect)
-//        trackBez.lineWidth = 1
-//        plotters.append(BezThing(bez: trackBez, point: NSPoint(x: 0, y: 0), fillColor: NSColor.lightGrayColor(), strokeColor: NSColor.blackColor(), scale: 1))
-//        let trackArea : NSTrackingArea = NSTrackingArea(rect: trackRect,
-//            options: (NSTrackingAreaOptions.MouseEnteredAndExited | NSTrackingAreaOptions.ActiveAlways | NSTrackingAreaOptions.MouseMoved),
-//            owner: theMapView, userInfo: [0 : dimerButton]) as NSTrackingArea
-//        
-////        theMapView.removeTrackingArea(trackArea)
-//        var tareas = theMapView.trackingAreas
-//        theMapView.addTrackingArea(trackArea)
-//        tareas = theMapView.trackingAreas
-//        println("Just added one, and there are \(tareas.count) tracking areas")
         
         theMapView.clearAllTrackingAreas()
         for tracker in trackingAreas {
@@ -472,6 +487,45 @@ class Document: NSDocument {
          self.showSeriousDimers()
     }
     
+    @IBAction func roundButton(sender: AnyObject) {
+        let pdfd = theMapView.dataWithPDFInsideRect(theMapView.bounds)
+        var savePanel = NSSavePanel()
+        savePanel.message = "Save target sequence as ..."
+        savePanel.allowedFileTypes = ["pdf", "PDF"]
+        if savePanel.runModal() == NSCancelButton {return}
+        var mapURL = savePanel.URL! as NSURL
+        pdfd.writeToURL(mapURL, atomically: true)
+        
+    }
+    
+    @IBOutlet var saveChoices: NSMatrix!
+    override func saveDocumentAs(sender: AnyObject?) {
+        let pdfd = theMapView.dataWithPDFInsideRect(theMapView.bounds)
+        var savePanel = NSSavePanel()
+        savePanel.extensionHidden = true
+        savePanel.message = "Save PCR map or text output ..."
+        savePanel.allowedFileTypes = ["pdf"]
+        let k = saveChoices.selectedRow
+        savePanel.accessoryView = saveChoices
+        if savePanel.runModal() == NSCancelButton {return}
+        if let saveURL : NSURL = savePanel.URL {
+            switch saveChoices.selectedRow {
+            case 0: // save map as pdf
+                pdfd.writeToURL(saveURL, atomically: true)
+            case 1: // save text output as rtf
+                let rtfURL : NSURL = saveURL.URLByDeletingPathExtension!.URLByAppendingPathExtension("rtf")
+                let didit = outputTextView.RTFFromRange(NSMakeRange(0, (outputTextView.textStorage?.length)!))!.writeToURL(rtfURL, atomically: true)
+            default: // save text output as txt
+                let txtURL = saveURL.URLByDeletingPathExtension!.URLByAppendingPathExtension("txt")
+                let didit = (outputTextView.string! as NSString).writeToURL(txtURL, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+            }
+
+        }
+    }
+    
+    override func saveDocument(sender: AnyObject?) {
+        self.saveDocumentAs(self)
+    }
     
     override var windowNibName: String? {
         // Returns the nib file name of the document

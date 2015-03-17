@@ -51,6 +51,7 @@ class Primer : NSObject {
     
     init(theLine: String) {
         var  parts = (theLine as String).componentsSeparatedByString("\t")
+        parts = parts.filter {countElements($0) > 0}
         while parts.count < 3 {parts.append("")} // make sure there are at least 3
         seq = parts[0]
         name = parts[1]
@@ -63,6 +64,7 @@ class Primer : NSObject {
     
     init(theCSVLine : String) {
         var  parts = (theCSVLine as String).componentsSeparatedByString(",")
+        parts = parts.filter {countElements($0) > 0}
         while parts.count < 3 {parts.append("")} // make sure there are at least 3
         seq = parts[0]
         name = parts[1]

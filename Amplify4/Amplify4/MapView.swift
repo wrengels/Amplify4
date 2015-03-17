@@ -13,6 +13,7 @@ class MapView: NSView {
     var plotters = [PlotterThing]()
     var trackers = [NSTrackingArea]()
     var theDoc : Document? = nil
+    var entered = 0
     
     override var flipped:Bool {
         get {
@@ -36,7 +37,7 @@ class MapView: NSView {
         for area : NSTrackingArea in self.trackingAreas as [NSTrackingArea] {
             if let itemDic = area.userInfo {
                 let item : MapItem = itemDic[0] as MapItem
-                if item.isLit {
+                if item.isLit > 0  {
                     item.plotHighlight()
                 }
             }
@@ -45,7 +46,7 @@ class MapView: NSView {
     }
     
     override func mouseEntered(theEvent: NSEvent) {
-        
+        entered++
         if let trackingArea = theEvent.trackingArea {
             if let itemDic = trackingArea.userInfo {
                 let item : MapItem = itemDic[0] as MapItem
@@ -60,15 +61,17 @@ class MapView: NSView {
     
     
     override func mouseExited(theEvent: NSEvent) {
-        
+        entered--
         if let trackingArea = theEvent.trackingArea {
             if let itemDic = trackingArea.userInfo {
                 let item : MapItem = itemDic[0] as MapItem
                 item.unlightCoItems()
                 self.needsDisplay = true
                 self.display()
-                let sto = theDoc!.infoTextView.textStorage!
-                sto.setAttributedString(NSAttributedString())
+                if entered < 1 {
+                    let sto = theDoc!.infoTextView.textStorage!
+                    sto.setAttributedString(NSAttributedString())
+                }
             }
         }
     }

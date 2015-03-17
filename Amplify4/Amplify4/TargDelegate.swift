@@ -196,6 +196,16 @@ class TargDelegate: NSObject {
         targetDelegate.targetChanged = true
     }
     
+    func selectBasesFrom(firstSelected : Int, lastSelected : Int) {
+        let length2 = (self.targetView.textStorage!.length)
+        let start = firstSelected + firstbase - 1
+        let end = lastSelected + firstbase - 1
+        if (start >= 0 && end < length2) {
+            self.targetView.setSelectedRange(NSMakeRange(start, end - start + 1))
+            substrateWindow.makeFirstResponder(targetView)
+        } else {NSBeep()}
+    }
+    
     @IBOutlet weak var baseRangeView: NSView!
     @IBOutlet weak var startBase: NSTextField!
     @IBOutlet weak var endBase: NSTextField!
