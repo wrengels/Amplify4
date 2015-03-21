@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AmplifyHelpController" customModule="Amplify4" customModuleProvider="target">
             <connections>
+                <outlet property="faqMenu" destination="nMP-c9-FB9" id="9nx-ck-GYI"/>
                 <outlet property="helpClip" destination="2K8-eS-qvN" id="kHS-G4-sSO"/>
                 <outlet property="helpScroll" destination="viz-H0-MeY" id="w9v-Xf-AJX"/>
                 <outlet property="helpTextView" destination="bqc-lH-ASR" id="MYT-3H-Gsw"/>
@@ -15,30 +17,30 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSWindow"/>
-        <window title="Amplify Help" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES" fullSizeContentView="YES"/>
+        <window title="Amplify Help" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="QvC-M9-y7g">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="938" y="828" width="550" height="550"/>
+            <rect key="contentRect" x="938" y="828" width="779" height="627"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <value key="minSize" type="size" width="535" height="150"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="550" height="550"/>
+                <rect key="frame" x="0.0" y="0.0" width="779" height="627"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Xr-Kj-wkz">
-                        <rect key="frame" x="-1" y="7" width="552" height="454"/>
+                        <rect key="frame" x="-1" y="7" width="781" height="560"/>
                         <clipView key="contentView" id="2K8-eS-qvN">
                             <rect key="frame" x="1" y="1" width="223" height="133"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textView usesInspectorBar="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="bqc-lH-ASR">
+                                <textView editable="NO" findStyle="bar" allowsUndo="YES" verticallyResizable="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="bqc-lH-ASR">
                                     <rect key="frame" x="0.0" y="0.0" width="223" height="643"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="535" height="452"/>
+                                    <size key="minSize" width="764" height="558"/>
                                     <size key="maxSize" width="796" height="10000000"/>
                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="minSize" width="535" height="452"/>
+                                    <size key="minSize" width="764" height="558"/>
                                     <size key="maxSize" width="796" height="10000000"/>
                                 </textView>
                             </subviews>
@@ -54,16 +56,16 @@
                         </scroller>
                     </scrollView>
                     <popUpButton identifier="topicsMenu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SDe-uD-RdU">
-                        <rect key="frame" x="164" y="464" width="223" height="26"/>
+                        <rect key="frame" x="8" y="574" width="211" height="26"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="218" id="saO-Kz-Rto"/>
+                            <constraint firstAttribute="width" constant="206" id="saO-Kz-Rto"/>
                         </constraints>
-                        <popUpButtonCell key="cell" type="push" title="Topics" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Yy6-mA-sdC" id="BwN-C1-jqx">
+                        <popUpButtonCell key="cell" type="push" title="Amplify Help Topics" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Yy6-mA-sdC" id="BwN-C1-jqx">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
                             <menu key="menu" id="sBi-fV-gF0">
                                 <items>
-                                    <menuItem title="Topics" state="on" id="Yy6-mA-sdC"/>
+                                    <menuItem title="Amplify Help Topics" state="on" id="Yy6-mA-sdC"/>
                                 </items>
                             </menu>
                         </popUpButtonCell>
@@ -71,20 +73,38 @@
                             <action selector="goToTopic:" target="-2" id="OJF-2Y-BBc"/>
                         </connections>
                     </popUpButton>
+                    <popUpButton identifier="faqMenu" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nMP-c9-FB9">
+                        <rect key="frame" x="246" y="574" width="230" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="225" id="j1o-hw-mwr"/>
+                        </constraints>
+                        <popUpButtonCell key="cell" type="push" title="Frequently Asked Questions" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="wwG-04-rez" id="hT6-je-DMg">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="FvX-Ma-J5V">
+                                <items>
+                                    <menuItem title="Frequently Asked Questions" state="on" id="wwG-04-rez"/>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                        <connections>
+                            <action selector="goToTopic:" target="-2" id="s9r-RW-nnK"/>
+                        </connections>
+                    </popUpButton>
                 </subviews>
                 <constraints>
                     <constraint firstItem="4Xr-Kj-wkz" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="-1" id="3ou-jb-sp0"/>
                     <constraint firstAttribute="trailing" secondItem="4Xr-Kj-wkz" secondAttribute="trailing" constant="-1" id="48D-hp-A37"/>
                     <constraint firstAttribute="bottom" secondItem="4Xr-Kj-wkz" secondAttribute="bottom" constant="7" id="C5h-oU-1xf"/>
-                    <constraint firstItem="4Xr-Kj-wkz" firstAttribute="top" secondItem="SDe-uD-RdU" secondAttribute="bottom" constant="6" id="GHg-Lh-fDq"/>
-                    <constraint firstItem="4Xr-Kj-wkz" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="89" id="dI5-R5-2Iv"/>
-                    <constraint firstItem="SDe-uD-RdU" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="166" id="sbQ-nK-Ed4"/>
+                    <constraint firstItem="4Xr-Kj-wkz" firstAttribute="top" secondItem="SDe-uD-RdU" secondAttribute="bottom" constant="10" id="GHg-Lh-fDq"/>
+                    <constraint firstItem="4Xr-Kj-wkz" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="60" id="dI5-R5-2Iv"/>
+                    <constraint firstItem="SDe-uD-RdU" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="10" id="sbQ-nK-Ed4"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="6Ym-pd-lOk"/>
             </connections>
-            <point key="canvasLocation" x="622" y="315"/>
+            <point key="canvasLocation" x="736.5" y="353.5"/>
         </window>
     </objects>
 </document>

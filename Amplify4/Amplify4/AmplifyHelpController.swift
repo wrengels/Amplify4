@@ -12,6 +12,7 @@ class AmplifyHelpController: NSWindowController, NSWindowDelegate {
     @IBOutlet var helpTextView: NSTextView!
     @IBOutlet var helpWindow: NSWindow!
     @IBOutlet weak var topicsMenu: NSPopUpButton!
+    @IBOutlet weak var faqMenu: NSPopUpButton!
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -22,10 +23,14 @@ class AmplifyHelpController: NSWindowController, NSWindowDelegate {
                 let newline = NSCharacterSet(charactersInString: "\r\n")
                 let bullits = NSCharacterSet(charactersInString: "▪️•◆")
                 let smallbullit = NSCharacterSet(charactersInString: "•")
+                let faqset = NSCharacterSet(charactersInString: "▪︎")
                 let helpLines = (helpTextView.string! as NSString).componentsSeparatedByCharactersInSet(newline) as [NSString]
                 for line in helpLines {
                     if line.rangeOfCharacterFromSet(bullits).location != NSNotFound {
                         topicsMenu.addItemWithTitle(line)
+                    }
+                    if line.rangeOfCharacterFromSet(faqset).location != NSNotFound{
+                        faqMenu.addItemWithTitle(line)
                     }
                 }
                 for mitem in (topicsMenu.itemArray as [NSMenuItem]) {

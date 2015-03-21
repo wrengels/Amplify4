@@ -52,6 +52,10 @@ class TargDelegate: NSObject {
         return self
     }
 
+    func paste(sender : AnyObject) -> AnyObject {
+        println("Pasted!")
+        return self
+    }
     
     @IBAction func doThing(sender: AnyObject) {
         
@@ -283,6 +287,7 @@ class TargDelegate: NSObject {
         let charsPerLine = effectiveRange.length
         let nHeaderLines = Int(firstSeqLineRect.origin.y / firstSeqLineRect.height)
         let nSeqLines = Int((targetString.length - firstbase)/charsPerLine)
+        if nSeqLines < 1 {return}
         
         // Build base count string
         var baseCountString = ""

@@ -65,11 +65,18 @@ class Document: NSDocument {
         if menuItem == substrateDelegate.printOutputMenuItem {
             menuItem.hidden = false
         }
+        if menuItem == substrateDelegate.saveAsItem  {
+            menuItem.title = "Save PCR Results As …"
+        }
+        if menuItem == substrateDelegate.saveItem {
+            menuItem.title = "Save PCR Results"
+        }
         return true
     }
     
     @IBAction func printOutputText(sender : AnyObject) {
         self.printInfo.horizontalPagination = NSPrintingPaginationMode.FitPagination
+        printInfo.verticallyCentered = false
         let printOp = NSPrintOperation(view: outputTextView)
         printOp.runOperation()
     }
@@ -78,6 +85,7 @@ class Document: NSDocument {
         let printInfo = self.printInfo
 //        self.printInfo.verticalPagination = NSPrintingPaginationMode.FitPagination
         self.printInfo.horizontalPagination = NSPrintingPaginationMode.FitPagination
+        printInfo.verticallyCentered = false
 
         let printOp = NSPrintOperation(view: theMapView)
         printOp.runOperation()
@@ -99,7 +107,6 @@ class Document: NSDocument {
     
     override func windowControllerDidLoadNib(aController: NSWindowController) {
         super.windowControllerDidLoadNib(aController)
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "boundsDidChange:", name:  NSViewFrameDidChangeNotification, object: mapClipView)
         
         let substrateDelegate = apdel.substrateDelegate

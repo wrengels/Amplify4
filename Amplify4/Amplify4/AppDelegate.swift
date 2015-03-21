@@ -54,8 +54,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     }
                 }
             }
-            
         }
+        
+        
         if (substrateDelegate.targetFile.path == nil) && settings.boolForKey(globals.useRecentTarget) {
             // No target was opened at startup and user wants to use recent file
             if let targetPath = settings.stringForKey(globals.recentTargetPath) {
@@ -66,7 +67,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     }
                 }
             }
-            
+        }
+        
+        if (substrateDelegate.targetFile.path == nil) {  //  still
+            if let welcomePath = NSBundle.mainBundle().pathForResource("Welcome", ofType: "rtf") {
+                 let didit = targetView.readRTFDFromFile(welcomePath)
+            }
         }
     }
     
@@ -151,15 +157,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func amplify(sender: AnyObject) {
+        targDelegate.cleanupTarget()
         let newDoc: Document = NSDocumentController.sharedDocumentController().openUntitledDocumentAndDisplay(true, error: nil)! as Document
     }
     
-    @IBAction func amplifyCircular(sender: AnyObject) {
-        let theDC: NSDocumentController = NSDocumentController.sharedDocumentController() as NSDocumentController
-        let newDoc: DocumentCircular = theDC.makeUntitledDocumentOfType("CircularDocumentType", error: nil)! as DocumentCircular
-        theDC.addDocument(newDoc)
-        newDoc.makeWindowControllers()
-        newDoc.showWindows()
-
-    }
+//    @IBAction func amplifyCircular(sender: AnyObject) {
+//        let theDC: NSDocumentController = NSDocumentController.sharedDocumentController() as NSDocumentController
+//        let newDoc: DocumentCircular = theDC.makeUntitledDocumentOfType("CircularDocumentType", error: nil)! as DocumentCircular
+//        theDC.addDocument(newDoc)
+//        newDoc.makeWindowControllers()
+//        newDoc.showWindows()
+//
+//    }
+    
+    
 }

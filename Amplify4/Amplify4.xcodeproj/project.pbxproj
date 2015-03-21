@@ -16,6 +16,7 @@
 		242B4C411AA8D8BC003C65A3 /* Fragment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B4C401AA8D8BC003C65A3 /* Fragment.swift */; };
 		243294421A9E8A7300D176D3 /* PlotterThing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243294411A9E8A7300D176D3 /* PlotterThing.swift */; };
 		245987851A70294F0002D9F8 /* AMsubstrateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245987841A70294F0002D9F8 /* AMsubstrateDelegate.swift */; };
+		245CB8EE1AB8D117000C7910 /* Welcome.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 245CB8ED1AB8D117000C7910 /* Welcome.rtf */; };
 		245DF74D1A8AA2AB00F4C622 /* AMGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245DF74C1A8AA2AB00F4C622 /* AMGlobals.swift */; };
 		246C33F31A75BD5900D5B058 /* TargDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246C33F21A75BD5900D5B058 /* TargDelegate.swift */; };
 		24774E601A8BE53300F95BD9 /* IntArrayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24774E5F1A8BE53300F95BD9 /* IntArrayController.swift */; };
@@ -60,6 +61,7 @@
 		242B4C401AA8D8BC003C65A3 /* Fragment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fragment.swift; sourceTree = "<group>"; };
 		243294411A9E8A7300D176D3 /* PlotterThing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlotterThing.swift; sourceTree = "<group>"; };
 		245987841A70294F0002D9F8 /* AMsubstrateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AMsubstrateDelegate.swift; sourceTree = "<group>"; };
+		245CB8ED1AB8D117000C7910 /* Welcome.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Welcome.rtf; sourceTree = "<group>"; };
 		245DF74C1A8AA2AB00F4C622 /* AMGlobals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AMGlobals.swift; sourceTree = "<group>"; };
 		246C33F21A75BD5900D5B058 /* TargDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargDelegate.swift; sourceTree = "<group>"; };
 		24774E5F1A8BE53300F95BD9 /* IntArrayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntArrayController.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				24E01EDE1A9D41C6000D9E69 /* formats.rtf */,
 				241CF2B81A97ABCD0063AF5A /* Amplify Help.rtfd */,
 				24A9D98F1A88132700E3E032 /* settings.plist */,
+				245CB8ED1AB8D117000C7910 /* Welcome.rtf */,
 				2483DAAA1A688BB100789E69 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -307,6 +310,7 @@
 				2483DAB61A688BB100789E69 /* MainMenu.xib in Resources */,
 				24A9D98E1A880EED00E3E032 /* AMprefsController.xib in Resources */,
 				24A19D281A9BD5B5006486E0 /* Amplify Sample Target.rtf in Resources */,
+				245CB8EE1AB8D117000C7910 /* Welcome.rtf in Resources */,
 				24EE0CD31A96AA57002D555F /* AmplifyHelp.xib in Resources */,
 				241C7E941AB759B40068ED13 /* SearchPrimers.xib in Resources */,
 			);

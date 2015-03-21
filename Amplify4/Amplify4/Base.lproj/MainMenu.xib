@@ -830,7 +830,11 @@ CA
                                                     <size key="minSize" width="603" height="626"/>
                                                     <size key="maxSize" width="773" height="10000000"/>
                                                     <attributedString key="textStorage">
-                                                        <fragment content="Target Sequence Goes Here">
+                                                        <fragment>
+                                                            <string key="content">Welcome to Amplify4
+
+
+Select "Open Built-In Samples" from the File menu in order to try out Amplify.</string>
                                                             <attributes>
                                                                 <font key="NSFont" size="12" name="Menlo-Regular"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
@@ -955,7 +959,7 @@ CA
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MQY-aE-McQ">
+                                    <button hidden="YES" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MQY-aE-McQ">
                                         <rect key="frame" x="231" y="637" width="96" height="32"/>
                                         <buttonCell key="cell" type="push" title="Do Thing" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ejT-AS-h6O">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
