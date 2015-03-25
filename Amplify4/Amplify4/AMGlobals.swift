@@ -26,6 +26,7 @@ class AMGlobals: NSObject {
     let saltConc = "saltConc"
     let targetFont = "targetFont"
     let targetSize = "targetSize"
+    let targetLineSpace = "targetLineSpace"
     let matchWeights = "matchWeights"
     let runWeights = "runWeights"
     let dimScores = "dimScores"

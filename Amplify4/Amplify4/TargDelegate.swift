@@ -37,6 +37,8 @@ class TargDelegate: NSObject {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "boundsDidChange:", name: NSViewBoundsDidChangeNotification, object: targetScroll.contentView)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "boundsDidChange:", name:  NSViewFrameDidChangeNotification, object: targetClip)
         settings = NSUserDefaults.standardUserDefaults();  // Just in case this needs to be done after nib awake
+        targetDelegate.targetFontSize = settings.doubleForKey(globals.targetSize)
+        targetDelegate.targetFont = settings.stringForKey(globals.targetFont)!
     }
 
     func saveDocumentAs(sender: AnyObject) -> AnyObject {
@@ -58,6 +60,9 @@ class TargDelegate: NSObject {
     }
     
     @IBAction func doThing(sender: AnyObject) {
+
+        
+        
         
         let pr = targetDelegate.primers[0]
         pr.calcZ()
@@ -175,6 +180,12 @@ class TargDelegate: NSObject {
             targetString = targetView.string! as NSString
             badbase = findNextChar(string: targetString, charSet: notok, startingFrom: firstbase)
         }
+        
+        // Get rid of any oddball paragraph settings that might be in there
+        var parStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
+        parStyle.lineBreakMode = NSLineBreakMode.ByCharWrapping
+        parStyle.lineSpacing = CGFloat(settings.floatForKey(globals.targetLineSpace))
+        targetStorage.addAttribute(NSParagraphStyleAttributeName, value: parStyle, range: NSMakeRange(0,targetStorage.length))
         targetNeedsCleaning = false
         setBaseNumbers(self)
         return
@@ -314,6 +325,14 @@ class TargDelegate: NSObject {
             theFont = maybeFont
         }
         baseView.setFont(theFont, range: NSMakeRange(0, (baseCountString as NSString).length))
+        
+        // Adjust line spacing
+        var parStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
+//        parStyle.lineBreakMode = NSLineBreakMode.ByCharWrapping
+        parStyle.lineSpacing = CGFloat(settings.floatForKey(globals.targetLineSpace))
+        parStyle.alignment = NSTextAlignment.RightTextAlignment
+        baseStorage.addAttribute(NSParagraphStyleAttributeName, value: parStyle, range: NSMakeRange(0,baseStorage.length))
+
 
        // https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/TextLayout/Tasks/CountLines.html
     }

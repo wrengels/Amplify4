@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
@@ -959,8 +959,8 @@ Select "Open Built-In Samples" from the File menu in order to try out Amplify.</
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button hidden="YES" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MQY-aE-McQ">
-                                        <rect key="frame" x="231" y="637" width="96" height="32"/>
+                                    <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MQY-aE-McQ">
+                                        <rect key="frame" x="293" y="637" width="90" height="32"/>
                                         <buttonCell key="cell" type="push" title="Do Thing" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ejT-AS-h6O">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -974,12 +974,22 @@ Select "Open Built-In Samples" from the File menu in order to try out Amplify.</
                                             <action selector="doThing:" target="Whm-mM-EMR" id="5Ao-Uf-YJd"/>
                                         </connections>
                                     </button>
+                                    <button identifier="◆ Target Sequence" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nz8-zF-sDX">
+                                        <rect key="frame" x="248" y="639" width="25" height="25"/>
+                                        <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ydE-7P-8Cp">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="findMeInHelp:" target="Voe-Tx-rLC" id="XmR-M1-fFu"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="dQb-au-cpo" firstAttribute="top" secondItem="C6b-aV-d0I" secondAttribute="bottom" constant="8" symbolic="YES" id="5Uo-mF-nMG"/>
                                     <constraint firstItem="6xV-yk-QDX" firstAttribute="top" secondItem="4aS-z7-ghz" secondAttribute="bottom" constant="4" id="BqM-Vn-P5M"/>
                                     <constraint firstItem="AM8-Hz-Z1Z" firstAttribute="centerY" secondItem="fK0-CP-3tg" secondAttribute="centerY" id="D30-Xn-amF"/>
-                                    <constraint firstItem="C6b-aV-d0I" firstAttribute="leading" secondItem="MQY-aE-McQ" secondAttribute="trailing" constant="8" symbolic="YES" id="E85-cS-sHx"/>
+                                    <constraint firstItem="C6b-aV-d0I" firstAttribute="leading" secondItem="MQY-aE-McQ" secondAttribute="trailing" constant="-25" id="E85-cS-sHx"/>
                                     <constraint firstItem="6xV-yk-QDX" firstAttribute="bottom" secondItem="dQb-au-cpo" secondAttribute="bottom" id="LCW-7C-TGU"/>
                                     <constraint firstItem="lva-4G-HWw" firstAttribute="baseline" secondItem="fK0-CP-3tg" secondAttribute="baseline" id="LZP-ax-ksZ"/>
                                     <constraint firstItem="6xV-yk-QDX" firstAttribute="top" secondItem="dQb-au-cpo" secondAttribute="top" id="Oxv-XH-pDu"/>
@@ -1223,6 +1233,16 @@ Select "Open Built-In Samples" from the File menu in order to try out Amplify.</
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableHeaderView>
                                     </scrollView>
+                                    <button identifier="◆ Primer List" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wmj-bh-FfG">
+                                        <rect key="frame" x="209" y="639" width="25" height="25"/>
+                                        <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vjW-Ri-lUd">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="findMeInHelp:" target="Voe-Tx-rLC" id="Ha3-Dg-eOP"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="ScP-zv-Ef5" firstAttribute="top" secondItem="Zwt-no-rYN" secondAttribute="top" constant="156" id="43e-3t-bY5"/>

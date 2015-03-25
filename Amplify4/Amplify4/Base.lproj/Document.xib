@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
@@ -36,7 +36,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1246" height="308"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <scrollView borderType="line" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYB-lq-G5R" userLabel="mapScrollView">
+                                    <scrollView borderType="line" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYB-lq-G5R" userLabel="mapScrollView">
                                         <rect key="frame" x="0.0" y="0.0" width="1246" height="308"/>
                                         <clipView key="contentView" id="DgR-aa-l98" userLabel="mapClipView">
                                             <rect key="frame" x="1" y="1" width="166" height="79"/>
@@ -84,11 +84,11 @@
                                             </constraints>
                                             <color key="backgroundColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
                                         </clipView>
-                                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="GFE-cF-M3e">
+                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="GFE-cF-M3e">
                                             <rect key="frame" x="1" y="80" width="166" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
-                                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="0.97875000000000001" horizontal="NO" id="aef-RE-u0S">
+                                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="0.99745222929936306" horizontal="NO" id="aef-RE-u0S">
                                             <rect key="frame" x="167" y="1" width="15" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
@@ -133,10 +133,22 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
+                                    <button identifier="◆ PCR Simulation" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Uow-2Y-uQy">
+                                        <rect key="frame" x="18" y="278" width="25" height="25"/>
+                                        <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="45h-TW-j95">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="findMeInHelp:" target="-1" id="8hi-lw-QpE"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="fhA-JU-1lw" firstAttribute="top" secondItem="fa3-we-moI" secondAttribute="top" id="1Qz-0H-8ac"/>
+                                    <constraint firstItem="Uow-2Y-uQy" firstAttribute="top" secondItem="fa3-we-moI" secondAttribute="top" constant="20" symbolic="YES" id="5Xp-Wc-Hyn"/>
                                     <constraint firstAttribute="bottom" secondItem="fhA-JU-1lw" secondAttribute="bottom" id="6hc-7S-aae"/>
+                                    <constraint firstItem="Uow-2Y-uQy" firstAttribute="leading" secondItem="fa3-we-moI" secondAttribute="leading" constant="20" symbolic="YES" id="a7C-OA-QG2"/>
                                     <constraint firstItem="fhA-JU-1lw" firstAttribute="leading" secondItem="fa3-we-moI" secondAttribute="leading" id="bZv-7X-rgf"/>
                                     <constraint firstAttribute="trailing" secondItem="fhA-JU-1lw" secondAttribute="trailing" id="wgS-pv-GTg"/>
                                 </constraints>
@@ -147,8 +159,8 @@
                             <real value="250"/>
                         </holdingPriorities>
                     </splitView>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JnV-lT-PBp">
-                        <rect key="frame" x="23" y="641" width="128" height="32"/>
+                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JnV-lT-PBp">
+                        <rect key="frame" x="23" y="641" width="157" height="32"/>
                         <buttonCell key="cell" type="push" title="Primer Dimers" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="04J-a3-z64">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -158,7 +170,7 @@
                         </connections>
                     </button>
                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JA3-IU-KMM">
-                        <rect key="frame" x="166" y="648" width="1075" height="21"/>
+                        <rect key="frame" x="182" y="648" width="1059" height="21"/>
                         <clipView key="contentView" id="VI9-Mz-rhe">
                             <rect key="frame" x="1" y="1" width="223" height="133"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -167,10 +179,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="1073" height="19"/>
+                                    <size key="minSize" width="1057" height="19"/>
                                     <size key="maxSize" width="1075" height="10000000"/>
                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="minSize" width="1073" height="19"/>
+                                    <size key="minSize" width="1057" height="19"/>
                                     <size key="maxSize" width="1075" height="10000000"/>
                                 </textView>
                             </subviews>
@@ -185,14 +197,14 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <button hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UEf-GE-WKe">
-                        <rect key="frame" x="-6" y="636" width="39" height="38"/>
-                        <buttonCell key="cell" type="round" bezelStyle="circular" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" id="b35-gp-09q">
+                    <button identifier="• Primer dimers" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hjL-j4-svN">
+                        <rect key="frame" x="3" y="645" width="25" height="25"/>
+                        <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="VtH-a3-J3H">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="label"/>
+                            <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="roundButton:" target="-2" id="JuE-qP-a0v"/>
+                            <action selector="findMeInHelp:" target="-1" id="JQ7-ne-Rgc"/>
                         </connections>
                     </button>
                 </subviews>
@@ -200,8 +212,8 @@
                     <constraint firstItem="JA3-IU-KMM" firstAttribute="top" secondItem="JnV-lT-PBp" secondAttribute="top" id="5ox-hz-BUX"/>
                     <constraint firstItem="wGq-37-lpF" firstAttribute="top" secondItem="gIp-Ho-8D9" secondAttribute="top" constant="35" id="HD6-yq-OV4"/>
                     <constraint firstItem="JA3-IU-KMM" firstAttribute="top" secondItem="gIp-Ho-8D9" secondAttribute="top" constant="6" id="HSu-y8-3hX"/>
-                    <constraint firstItem="JA3-IU-KMM" firstAttribute="leading" secondItem="gIp-Ho-8D9" secondAttribute="leading" constant="166" id="T6j-tQ-o0N"/>
-                    <constraint firstItem="JA3-IU-KMM" firstAttribute="leading" secondItem="JnV-lT-PBp" secondAttribute="trailing" constant="21" id="Wop-jS-Qth"/>
+                    <constraint firstItem="JA3-IU-KMM" firstAttribute="leading" secondItem="gIp-Ho-8D9" secondAttribute="leading" constant="182" id="T6j-tQ-o0N"/>
+                    <constraint firstItem="JA3-IU-KMM" firstAttribute="leading" secondItem="JnV-lT-PBp" secondAttribute="trailing" constant="8" id="Wop-jS-Qth"/>
                     <constraint firstAttribute="trailing" secondItem="JA3-IU-KMM" secondAttribute="trailing" constant="5" id="Y2h-AJ-rFa"/>
                     <constraint firstItem="wGq-37-lpF" firstAttribute="leading" secondItem="gIp-Ho-8D9" secondAttribute="leading" id="YDE-2g-FUg"/>
                     <constraint firstAttribute="trailing" secondItem="wGq-37-lpF" secondAttribute="trailing" id="bwH-CW-wDQ"/>

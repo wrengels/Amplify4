@@ -597,10 +597,10 @@ When you run a PCR simulation,
 \f0\fs32 \cf0 \cb12 Potential primer-dimer for primers: 1701 and 10245\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
-\fs24 \cf0 \cb12 \
+\fs24 \cf0 \
 Overlap = 12,   Quality = 90.0\
 \pard\tx2160\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf9 \cb12 \
+\cf9 \
 1701	
 \f6\fs28 \cf8 5\uc0\u8242  \cf0 CGACTGGGCAAAGGAAATCC\cf8  3\uc0\u8242 \
 
@@ -796,7 +796,8 @@ You might be wondering why I have assigned a large value to matching pairs, such
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\qc
 
 \f0\fs24 \cf0 {{\NeXTGraphic 1__#$!@%!#__Pasted Graphic.pdf \width4740 \height740
-}¬}\
+}¬}\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\qc
+\cf0 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
 
 \f2\fs28 \cf0 \
@@ -830,8 +831,9 @@ You might be wondering why I have assigned a large value to matching pairs, such
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\qc
 
 \f0\fs24 \cf0 {{\NeXTGraphic Pasted Graphic 1.pdf \width5260 \height800
-}¬}
-\f2\fs28 \
+}¬}\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\qc
+
+\f2\fs28 \cf0 \
 \pard\pardeftab720\li576\ri0
 \cf0 When the left and right primer matches are both perfect, 
 \i Q
@@ -842,7 +844,7 @@ You might be wondering why I have assigned a large value to matching pairs, such
 \pard\tx6480\pardeftab720\li270\ri-19445
 
 \f4 \cf2 \'95
-\f2\b\fs36  Primer dimers\
+\f2\b\fs36  Primer dimer evaluation\
 \pard\tx6480\pardeftab720\li576\ri-19445
 \cf6 \
 \pard\pardeftab720\li576\ri0
@@ -850,6 +852,7 @@ You might be wondering why I have assigned a large value to matching pairs, such
 \b0\fs28 \cf0 For each possible primer-primer alignment, 
 \i Amplify
 \i0  looks at the sum weight scores for each of the overlapping bases. The default scores for each possible base pair, including IUB ambiguous ones are as follows:\
+\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\qc
 
 \f0\fs24 \cf0 {{\NeXTGraphic 2__#$!@%!#__Pasted Graphic 2.tiff \width7200 \height4460
@@ -886,13 +889,15 @@ You can change the
 \'97 Tm Calculations\
 \'97 Primer Dimers\
 \
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
 \f0\fs24 \cf0 {{\NeXTGraphic Pasted Graphic 4.tiff \width10080 \height520
-}¬}
-\f2\fs28 \
+}¬}\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
+
+\f2\fs28 \cf0 \
 \pard\tx6480\pardeftab720\li576\ri-19445
-\cf0 Changes you make in any of these panels only take effect when you hit the "Okay" button. At any point, you can hit "Restore Factory Settings" to get back to the original values. \
+\cf0 \
+Changes you make in any of these panels only take effect when you hit the "Okay" button. At any point, you can hit "Restore Factory Settings" to get back to the original values. \
 \
 You can also save all your settings to a file or load the settings from any previously-saved file.\
 \
@@ -1027,6 +1032,21 @@ Click on the question-mark icons you find in various places to get help. A windo
 
 \f1\b0\fs32 \cf11 \uc0\u9642 \u65038 
 \f2\b  Q: 
+\b0 Is there a version of 
+\i Amplify
+\i0  for Windows or Linux?\
+
+\b\fs28 \cf2 \
+\pard\tx6480\pardeftab720\li27\fi446\ri-19445
+
+\fs32 \cf0 A:
+\fs28  
+\b0 Short answer: no. Most of the programming went into making the user interface, which makes heavy use of the Mac\'92s Cocoa API. Over the years, several people have asked me for the source code so that they could \'93port\'94 it over to Windows, but to my knowledge no one has completed that job.
+\f1\fs32 \cf11 \
+\pard\tx6480\pardeftab720\li270\ri-19445
+\cf11 \
+\uc0\u9642 \u65038 
+\f2\b  Q: 
 \b0 Why is the text so tiny on my printouts?\
 
 \b\fs28 \cf2 \
@@ -1042,6 +1062,118 @@ Click on the question-mark icons you find in various places to get help. A windo
 \b \cf2 \
 \pard\tx6480\pardeftab720\li270\ri-19445
 \cf2 \
+
+\f1\b0\fs32 \cf11 \uc0\u9642 \u65038 
+\f2\b  Q: 
+\b0 What is the source of the algorithms and parameters used for evaluating primer matches?\
+
+\b\fs28 \cf2 \
+\pard\tx6480\pardeftab720\li27\fi446\ri-19445
+
+\fs32 \cf0 A:
+\fs28  
+\b0 It\'92s all pretty much trial-and-error. I tested a variety of algorithmic approaches, and found that the two-dimensional approach with separate quantities for 
+\i primability 
+\i0 and 
+\i stability 
+\i0 worked for all the PCR runs in my lab. Once I found a workable method, it produced reliable results through many years, several postdocs and a variety of protocols used in my lab. If you find that 
+\i Amplify\'92s
+\i0  predictions don\'92t match your results, you can tinker with the parameters in the settings window. When you find a combination that works for you, you can save it as your defaults. (Don\'92t worry, you can always restore the original settings.) You can also share your settings with others by saving them in a file. All these options are in the 
+\b Preferences\'85
+\b0  window.\
+\
+\pard\tx6480\pardeftab720\li270\ri-19445
+
+\f1\fs32 \cf11 \uc0\u9642 \u65038 
+\f2\b  Q: 
+\b0 How does this version differ from version 3.x?\
+
+\b\fs28 \cf2 \
+\pard\tx6480\pardeftab720\li27\fi446\ri-19445
+
+\fs32 \cf0 A:
+\fs28  
+\b0 The basic algorithms are still the same, and I have tried to keep the essential user interface elements similar.
+\b \
+\
+
+\b0 Version 4 was completely re-written in a language that should be more easily maintained as the MacOS evolves. Version 4 is in the 
+\i Swift
+\i0  programming language, which is much more widely used than the other languages I have used for previous versions of 
+\i Amplify
+\i0 . \
+\
+Here are a few changes you might notice:\
+\
+\'96 Split screens are now used to keep the two kinds of substrate, target and primers, together in one window, and the two kinds of results, graphic map and textual output, in another.\
+\
+\'96 Amplify will automatically reopen your last-used primer and target files. (You can turn this feature off.) An \'93Open Recent\'94 menu item is also included.\
+\
+\'96 Length limitations on the target sequence and primers have been removed.\
+\
+\'96 Parallel processing is now employed for better performance on multi-core computers.\
+\
+\'96 Opening target and primer files is simplified so that both kinds of file can be opened at once from the same dialog. (
+\i Amplify
+\i0  can tell whether a file contains primers or a target.)\
+\
+\'96 Cutting and pasting primers and primer lists is more robust. You can use the clipboard to move primers around within 
+\i Amplify\'92s
+\i0  primer list, or to and from spreadsheet programs.\
+\
+\'96 Styled text is used in the output to make the results more readable. You can also save this styled text in \'93rich text format\'94.\
+\
+\'96 The online help has been expanded and combined. It also has a 
+\b Topics
+\b0  popup menu and another for 
+\b Frequently Asked Questions.
+\b0 \
+\
+\pard\tx6480\pardeftab720\li270\ri-19445
+
+\f1\fs32 \cf11 \uc0\u9642 \u65038 
+\f2\b  Q: 
+\b0 Were any features from version 3.x removed in version 4?\
+
+\b\fs28 \cf2 \
+\pard\tx6480\pardeftab720\li27\fi446\ri-19445
+
+\fs32 \cf0 A:
+\fs28  
+\b0 The current beta does not include circular targets, but I plan to add that ability soon. I also took out some of specialized search abilities.\
+\
+\pard\tx6480\pardeftab720\li270\ri-19445
+
+\f1\fs32 \cf11 \uc0\u9642 \u65038 
+\f2\b  Q: 
+\b0 How much does 
+\i Amplify
+\i0  cost?\
+
+\b\fs28 \cf2 \
+\pard\tx6480\pardeftab720\li27\fi446\ri-19445
+
+\fs32 \cf0 A:
+\fs28  
+\b0 You may use this software free of charge, but do not sell it. You may distribute it, but only in unaltered form. Finally, the user agrees never to use the redundant phrase "PCR reaction" unless it is enclosed in quotation marks and preceded by the words "redundant phrase." If you do wish to pay for 
+\i Amplify, 
+\i0 please do so in the form of a contribution in the name of Bill Engels to {\field{\*\fldinst{HYPERLINK "http://nature.org"}}{\fldrslt The Nature Conservancy}}.\
+\pard\tx6480\pardeftab720\li27\fi446\ri-19445
+
+\b \cf2 \
+\pard\tx6480\pardeftab720\li270\ri-19445
+
+\f1\b0\fs32 \cf11 \uc0\u9642 \u65038 
+\f2\b  Q: 
+\b0 What legal text does the University of Wisconsin suggest?\
+
+\b\fs28 \cf2 \
+\pard\tx6480\pardeftab720\li27\fi446\ri-19445
+
+\fs32 \cf0 A:
+\fs28  
+\b0 Amplify was written by Bill Engels, Genetics Dept., University of Wisconsin. This software is provided "as is", without express or implied warranty, and with no support nor obligation to assist in its use, correction, modification or enhancement. We assume no liability with respect to the correctness of information provided, infringement of copyrights, trade secrets, or any patents, and are not responsible for consequential damages. Proper use of this software is entirely the responsibility of the user. This software may not be sold or used for profit.
+\b \cf2 \
 \pard\tx6480\pardeftab720\fi27\ri-19445\qc
 \cf0 \
 }

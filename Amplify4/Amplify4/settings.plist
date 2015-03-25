@@ -936,6 +936,8 @@
 	<string>Menlo</string>
 	<key>targetSize</key>
 	<integer>12</integer>
+	<key>targetLineSpace</key>
+	<integer>10</integer>
 	<key>useRecentPrimers</key>
 	<true/>
 	<key>useRecentTarget</key>
