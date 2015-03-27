@@ -8,18 +8,28 @@
 
 import Cocoa
 
+
 class Fragment: MapItem {
     let dmatch, gmatch : Match
+    let isCircular : Bool
     let ampSize, totSize : Int
     let quality : CGFloat
-    let barRect : NSRect
+    let barRect, barRectG: NSRect
+    let bez : NSBezierPath
     let maxWidth : CGFloat = 10
     let widthCutoffs : [CGFloat] = [100, 200, 300, 500, 700, 1000, 1500, 2000, 3000, 4000, 7000, 10000]
     
     init(dmatch : Match, gmatch : Match) {
         self.dmatch = dmatch
         self.gmatch = gmatch
+        self.isCircular = dmatch.threePrime  > gmatch.threePrime
         self.ampSize = gmatch.threePrime - dmatch.threePrime - 1
+        var targetLength : CGFloat = 0 // Placeholder. No need to compute this if it's not circular
+        if isCircular {
+            let apdel = NSApplication.sharedApplication().delegate! as AppDelegate
+            targetLength = CGFloat(apdel.substrateDelegate.targetView.textStorage!.length - apdel.targDelegate.firstbase)
+            self.ampSize = Int(targetLength) + ampSize // ampSize is negative prior to this statement
+        }
         self.totSize = countElements(dmatch.primer.seq) + ampSize + countElements(gmatch.primer.seq)
         self.quality = dmatch.quality() * gmatch.quality()
         if quality > 0 {
@@ -32,7 +42,16 @@ class Fragment: MapItem {
         for w in widthCutoffs {
             if quality > w {barWidth -= widthIncrement}
         }
-        self.barRect = NSRect(origin: NSPoint(x: 0, y: 0), size: NSSize(width: CGFloat(gmatch.threePrime - dmatch.threePrime), height: barWidth))
+        bez = NSBezierPath()
+        if isCircular {
+            self.barRect = NSRect(origin: NSPoint(x: dmatch.threePrime, y: 0), size: NSSize(width: targetLength - CGFloat(dmatch.threePrime), height: barWidth))
+            self.barRectG = NSRect(x: 0, y: 0, width: CGFloat(gmatch.threePrime), height: barWidth);
+            bez = NSBezierPath(rect: barRectG)
+            bez.appendBezierPath(NSBezierPath(rect: barRect))
+        } else {
+            self.barRect = NSRect(origin: NSPoint(x: 0, y: 0), size: NSSize(width: CGFloat(gmatch.threePrime - dmatch.threePrime), height: barWidth))
+            self.barRectG = NSRect(x: 0, y: 0, width: 1, height: 1);
+        }
     }
     
     func setLitRec (rect : NSRect) {

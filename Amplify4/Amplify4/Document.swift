@@ -182,8 +182,12 @@ class Document: NSDocument {
     func findFrags () {
         for dmatch in dmatches {
             for gmatch in gmatches {
-                if gmatch.threePrime >= dmatch.threePrime {
+                if circularTarget {
                     fragments.append(Fragment(dmatch: dmatch, gmatch: gmatch))
+                } else {
+                    if gmatch.threePrime >= dmatch.threePrime {
+                        fragments.append(Fragment(dmatch: dmatch, gmatch: gmatch))
+                    }
                 }
             }
         }
@@ -202,7 +206,7 @@ class Document: NSDocument {
         let startBase = 1
         let endBase = Int(targetLength + 0.1)
         wwidth  = theMapView.frame.size.width
-        let h1 : CGFloat = 5.0  // Horizional margin outside base numbers
+        let h1 : CGFloat = 15.0  // Horizional margin outside base numbers
         let v1 : CGFloat = 5.0  // vertical margin above base numbers
         let v2 : CGFloat = 30.0  // vertical space above top of base number tick
         let v3 : CGFloat = 70.0  // vertical space from top of big tick to target baseline
@@ -217,6 +221,10 @@ class Document: NSDocument {
         let targwidth : CGFloat = 2.5  // linewidth for target baseline
         let bigtickFactor : CGFloat = 1.5  // relative size of ticks every 1000 pb
         let twidth = wwidth - 2.0 * h1 // graphic distance between first and last base
+        let arrowLength : CGFloat = 5 // for circular fragments
+        let arrowRise : CGFloat = 5  // for circular fragments
+
+        let pointsPerBase : CGFloat = twidth/targetLength
         
         let clip = mapClipView.bounds
         let mapFrame = NSRect(origin: clip.origin, size: NSMakeSize(clip.size.width, v2 + v3 + v5 + v6 + vfrag * CGFloat(fragments.count)))
@@ -284,22 +292,54 @@ class Document: NSDocument {
         
         // Add fragments
         var vpoint : CGFloat  = v2 + v3 + v5 + v6
-        let pointsPerBase = twidth/targetLength
         for frag in fragments {
-            var barRect = frag.barRect
-            barRect.size.width *= pointsPerBase  // rescale length of bar
-            let bez = NSBezierPath(rect: barRect)
-            let plotPoint = NSPoint(x: basex(frag.dmatch.threePrime), y: vpoint)
-            frag.highlightPoint = plotPoint
-            frag.setLitRec(barRect)
-            plotters.append(BezThing(bez: bez, point: plotPoint, fillColor: NSColor.blackColor(), strokeColor: nil, scale: 1))
-            let rec = (String(frag.totSize) as NSString).boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: fmat.normal)
-            let stringx : CGFloat = basex(frag.dmatch.threePrime) + barRect.size.width/2  - rec.size.width/2  // to center the size string
-            plotters.append(StringThing(string: String(frag.totSize), point: NSPoint(x: stringx, y: vpoint + barRect.size.height), attr: fmat.normal))
-            let trackArea = NSTrackingArea(rect: NSInsetRect(NSRect(origin: plotPoint, size: bez.bounds.size), -2, -12),
-                options: (NSTrackingAreaOptions.MouseEnteredAndExited | NSTrackingAreaOptions.ActiveAlways | NSTrackingAreaOptions.MouseMoved),
-                owner: theMapView, userInfo: [0 : frag])
-            trackingAreas.append(trackArea)
+            var barRect = frag.barRect  // NSRect is a value, so this doesn't change frag.barRect
+
+            if frag.isCircular {
+                let rec = (String(frag.totSize) as NSString).boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: fmat.normal)
+                let stringx : CGFloat = basex(Int(targetLength/2))  -  rec.size.width/2  // to center the size string
+                plotters.append(StringThing(string: String(frag.totSize), point: NSPoint(x: stringx, y: vpoint + barRect.size.height), attr: fmat.normal))
+                var bez = frag.bez.copy() as NSBezierPath // Get a copy of the two rectangles
+                let stretch : NSAffineTransform = NSAffineTransform()
+                stretch.scaleXBy(pointsPerBase, yBy: 1)
+                bez.transformUsingAffineTransform(stretch)
+                let plotPoint = NSPoint(x: basex(0), y: vpoint)
+                plotters.append(BezThing(bez: bez, point: plotPoint, fillColor: NSColor.blackColor(), strokeColor: nil, scale: 1))
+
+                // add left and right arrowheads
+                let barWidth : CGFloat = barRect.size.height
+                var rightArrow = NSBezierPath()
+                rightArrow.moveToPoint(NSPoint(x: 0, y: 0))
+                rightArrow.relativeLineToPoint(NSPoint(x: 0, y: barWidth/2 + arrowRise))
+                rightArrow.relativeLineToPoint(NSPoint(x: arrowLength, y: -barWidth/2 - arrowRise))
+                rightArrow.relativeLineToPoint(NSPoint(x: -arrowLength, y: -barWidth/2 - arrowRise))
+                rightArrow.closePath()
+                plotters.append(BezThing(bez: rightArrow, point: NSPoint(x: wwidth - h1, y: vpoint + barWidth/2), fillColor: NSColor.blackColor(), strokeColor: nil, scale: 1))
+                var leftArrow = NSBezierPath()
+                leftArrow.moveToPoint(NSPoint(x: 0, y: 0))
+                leftArrow.relativeLineToPoint(NSPoint(x: 0, y: barWidth/2 + arrowRise))
+                leftArrow.relativeLineToPoint(NSPoint(x: -arrowLength, y: -barWidth/2 - arrowRise))
+                leftArrow.relativeLineToPoint(NSPoint(x: arrowLength, y: -barWidth/2 - arrowRise))
+                leftArrow.closePath()
+                plotters.append(BezThing(bez: leftArrow, point: NSPoint(x: h1, y: vpoint + barWidth/2), fillColor: NSColor.blackColor(), strokeColor: nil, scale: 1))
+                
+              } else {
+                barRect.size.width *= pointsPerBase  // rescale length of bar
+                let bez = NSBezierPath(rect: barRect)
+                let plotPoint = NSPoint(x: basex(frag.dmatch.threePrime), y: vpoint)
+                frag.highlightPoint = plotPoint
+                frag.setLitRec(barRect)
+                plotters.append(BezThing(bez: bez, point: plotPoint, fillColor: NSColor.blackColor(), strokeColor: nil, scale: 1))
+                let rec = (String(frag.totSize) as NSString).boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: fmat.normal)
+                let stringx : CGFloat = basex(frag.dmatch.threePrime) + barRect.size.width/2  - rec.size.width/2  // to center the size string
+                plotters.append(StringThing(string: String(frag.totSize), point: NSPoint(x: stringx, y: vpoint + barRect.size.height), attr: fmat.normal))
+
+                let trackArea = NSTrackingArea(rect: NSInsetRect(NSRect(origin: plotPoint, size: bez.bounds.size), -2, -12),
+                    options: (NSTrackingAreaOptions.MouseEnteredAndExited | NSTrackingAreaOptions.ActiveAlways | NSTrackingAreaOptions.MouseMoved),
+                    owner: theMapView, userInfo: [0 : frag])
+                trackingAreas.append(trackArea)
+            }
+
             vpoint += vfrag
         }
         

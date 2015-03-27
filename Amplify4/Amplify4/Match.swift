@@ -13,8 +13,8 @@ class Match: MapItem {
     let threePrime : Int  // 3' end in target coordinates
     let primability, stability : Int
     let primer : Primer
-    let bez : NSBezierPath
     let bezFillColor, bezStrokeColor : NSColor
+    let bez : NSBezierPath
     
     init(primer: Primer, isD : Bool, threePrime : Int, primability : Int, stability : Int) {
         self.primer = primer

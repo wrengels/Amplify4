@@ -161,14 +161,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let newDoc: Document = NSDocumentController.sharedDocumentController().openUntitledDocumentAndDisplay(true, error: nil)! as Document
     }
     
-//    @IBAction func amplifyCircular(sender: AnyObject) {
-//        let theDC: NSDocumentController = NSDocumentController.sharedDocumentController() as NSDocumentController
-//        let newDoc: DocumentCircular = theDC.makeUntitledDocumentOfType("CircularDocumentType", error: nil)! as DocumentCircular
-//        theDC.addDocument(newDoc)
-//        newDoc.makeWindowControllers()
-//        newDoc.showWindows()
-//
-//    }
+    @IBAction func amplifyCircular(sender: AnyObject) {
+        let theDC: NSDocumentController = NSDocumentController.sharedDocumentController() as NSDocumentController
+        let newDoc: DocumentCircular = theDC.makeUntitledDocumentOfType("CircularDocumentType", error: nil)! as DocumentCircular
+        theDC.addDocument(newDoc)
+        newDoc.makeWindowControllers()
+        newDoc.showWindows()
+
+    }
     
     
 }
