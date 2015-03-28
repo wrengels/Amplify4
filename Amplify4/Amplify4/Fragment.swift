@@ -15,8 +15,11 @@ class Fragment: MapItem {
     let ampSize, totSize : Int
     let quality : CGFloat
     let barRect, barRectG: NSRect
-    let bez : NSBezierPath
+    let bez, leftArrow, rightArrow : NSBezierPath
     let maxWidth : CGFloat = 10
+    let arrowLength : CGFloat = 5 // for circular fragments
+    let arrowRise : CGFloat = 3  // for circular fragments
+
     let widthCutoffs : [CGFloat] = [100, 200, 300, 500, 700, 1000, 1500, 2000, 3000, 4000, 7000, 10000]
     
     init(dmatch : Match, gmatch : Match) {
@@ -43,11 +46,24 @@ class Fragment: MapItem {
             if quality > w {barWidth -= widthIncrement}
         }
         bez = NSBezierPath()
+        leftArrow = NSBezierPath()
+        rightArrow = NSBezierPath()
         if isCircular {
             self.barRect = NSRect(origin: NSPoint(x: dmatch.threePrime, y: 0), size: NSSize(width: targetLength - CGFloat(dmatch.threePrime), height: barWidth))
             self.barRectG = NSRect(x: 0, y: 0, width: CGFloat(gmatch.threePrime), height: barWidth);
             bez = NSBezierPath(rect: barRectG)
             bez.appendBezierPath(NSBezierPath(rect: barRect))
+            let arrowHalf : CGFloat = barWidth/2 + arrowRise
+            rightArrow.moveToPoint(NSPoint(x: 0, y: 0))
+            rightArrow.relativeLineToPoint(NSPoint(x: 0, y: arrowHalf))
+            rightArrow.relativeLineToPoint(NSPoint(x: arrowLength, y: -arrowHalf))
+            rightArrow.relativeLineToPoint(NSPoint(x: -arrowLength, y: -arrowHalf))
+            rightArrow.closePath()
+            leftArrow.moveToPoint(NSPoint(x: 0, y: 0))
+            leftArrow.relativeLineToPoint(NSPoint(x: 0, y: arrowHalf))
+            leftArrow.relativeLineToPoint(NSPoint(x: -arrowLength, y: -arrowHalf))
+            leftArrow.relativeLineToPoint(NSPoint(x: arrowLength, y: -arrowHalf))
+            leftArrow.closePath()
         } else {
             self.barRect = NSRect(origin: NSPoint(x: 0, y: 0), size: NSSize(width: CGFloat(gmatch.threePrime - dmatch.threePrime), height: barWidth))
             self.barRectG = NSRect(x: 0, y: 0, width: 1, height: 1);
@@ -58,6 +74,18 @@ class Fragment: MapItem {
         self.litBez = NSBezierPath(rect: NSInsetRect(rect, -5, 0))
         var move = NSAffineTransform()
         move.translateXBy(highlightPoint.x, yBy: highlightPoint.y)
+        self.litBez.transformUsingAffineTransform(move)
+        litBez.lineWidth =   highlightLineWidth
+        self.coItems = [dmatch, gmatch]
+        dmatch.coItems.append(self)
+        gmatch.coItems.append(self)
+    }
+    
+    override func setLitBez (b : NSBezierPath) {
+        self.litBez = b
+        var move = NSAffineTransform()
+        move.translateXBy(highlightPoint.x, yBy: highlightPoint.y)
+        move.scaleXBy(1, yBy: highlightScale)
         self.litBez.transformUsingAffineTransform(move)
         litBez.lineWidth =   highlightLineWidth
         self.coItems = [dmatch, gmatch]
@@ -96,7 +124,7 @@ class Fragment: MapItem {
         if quality < 1500 {description = "(moderate amplification)"}
         if quality < 700 {description = "(okay amplification)"}
         if quality < 300 {description = "(good amplification)"}
-
+        if isCircular {description += "   (Circular)"}
         
         extendString(starter: report, suffix: String(format: "         Q = %.1f  %@\r\r", Double(quality), description), attr: fmat.normal)
         var gseq = ""
@@ -104,13 +132,22 @@ class Fragment: MapItem {
             gseq = apdel.substrateDelegate.iubComp(String(c)) + gseq
         }
         var ampSeq = NSMutableAttributedString(string: dmatch.primer.seq.lowercaseString, attributes: fmat.blueseq)
-        let ampBases = targString.substringWithRange(NSMakeRange(dmatch.threePrime + 1, ampSize)).uppercaseString
+        var ampBases = ""
+         if isCircular {
+            ampBases = targString.substringWithRange(NSMakeRange(dmatch.threePrime + 1, targString.length - dmatch.threePrime - 1))
+            ampBases += targString.substringWithRange(NSMakeRange(0, gmatch.threePrime))
+        } else {
+           ampBases = targString.substringWithRange(NSMakeRange(dmatch.threePrime + 1, ampSize)).uppercaseString
+        }
         extendString(starter: ampSeq, suffix1: ampBases, attr1: fmat.seq, suffix2: gseq.lowercaseString, attr2: fmat.redseq)
         extendString(starter: report, suffix: "Amplified sequence: \r", attr: fmat.normal)
         report.appendAttributedString(ampSeq)
         extendString(starter: report, suffix: "\r\r", attr: fmat.normal)
-        apdel.targDelegate.selectBasesFrom(dmatch.threePrime + 2, lastSelected: dmatch.threePrime + ampSize + 1)
-        
+        if isCircular {
+            apdel.targDelegate.targetView.setSelectedRange(NSMakeRange(apdel.targDelegate.firstbase, 0))
+        } else {
+            apdel.targDelegate.selectBasesFrom(dmatch.threePrime + 2, lastSelected: dmatch.threePrime + ampSize + 1)
+        }
         return report
     }
 

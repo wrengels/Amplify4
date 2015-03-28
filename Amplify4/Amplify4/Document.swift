@@ -222,7 +222,7 @@ class Document: NSDocument {
         let bigtickFactor : CGFloat = 1.5  // relative size of ticks every 1000 pb
         let twidth = wwidth - 2.0 * h1 // graphic distance between first and last base
         let arrowLength : CGFloat = 5 // for circular fragments
-        let arrowRise : CGFloat = 5  // for circular fragments
+        let arrowRise : CGFloat = 3  // for circular fragments
 
         let pointsPerBase : CGFloat = twidth/targetLength
         
@@ -305,25 +305,19 @@ class Document: NSDocument {
                 bez.transformUsingAffineTransform(stretch)
                 let plotPoint = NSPoint(x: basex(0), y: vpoint)
                 plotters.append(BezThing(bez: bez, point: plotPoint, fillColor: NSColor.blackColor(), strokeColor: nil, scale: 1))
-
+                frag.highlightPoint = plotPoint
+                frag.setLitBez(bez)
                 // add left and right arrowheads
                 let barWidth : CGFloat = barRect.size.height
-                var rightArrow = NSBezierPath()
-                rightArrow.moveToPoint(NSPoint(x: 0, y: 0))
-                rightArrow.relativeLineToPoint(NSPoint(x: 0, y: barWidth/2 + arrowRise))
-                rightArrow.relativeLineToPoint(NSPoint(x: arrowLength, y: -barWidth/2 - arrowRise))
-                rightArrow.relativeLineToPoint(NSPoint(x: -arrowLength, y: -barWidth/2 - arrowRise))
-                rightArrow.closePath()
-                plotters.append(BezThing(bez: rightArrow, point: NSPoint(x: wwidth - h1, y: vpoint + barWidth/2), fillColor: NSColor.blackColor(), strokeColor: nil, scale: 1))
-                var leftArrow = NSBezierPath()
-                leftArrow.moveToPoint(NSPoint(x: 0, y: 0))
-                leftArrow.relativeLineToPoint(NSPoint(x: 0, y: barWidth/2 + arrowRise))
-                leftArrow.relativeLineToPoint(NSPoint(x: -arrowLength, y: -barWidth/2 - arrowRise))
-                leftArrow.relativeLineToPoint(NSPoint(x: arrowLength, y: -barWidth/2 - arrowRise))
-                leftArrow.closePath()
-                plotters.append(BezThing(bez: leftArrow, point: NSPoint(x: h1, y: vpoint + barWidth/2), fillColor: NSColor.blackColor(), strokeColor: nil, scale: 1))
+                plotters.append(BezThing(bez: frag.rightArrow, point: NSPoint(x: wwidth - h1, y: vpoint + barWidth/2), fillColor: NSColor.blackColor(), strokeColor: nil, scale: 1))
+                plotters.append(BezThing(bez: frag.leftArrow, point: NSPoint(x: h1, y: vpoint + barWidth/2), fillColor: NSColor.blackColor(), strokeColor: nil, scale: 1))
+
+                let trackArea = NSTrackingArea(rect: NSInsetRect(NSRect(origin: plotPoint, size: bez.bounds.size), -2, -12),
+                    options: (NSTrackingAreaOptions.MouseEnteredAndExited | NSTrackingAreaOptions.ActiveAlways | NSTrackingAreaOptions.MouseMoved),
+                    owner: theMapView, userInfo: [0 : frag])
+                trackingAreas.append(trackArea)
                 
-              } else {
+            } else {
                 barRect.size.width *= pointsPerBase  // rescale length of bar
                 let bez = NSBezierPath(rect: barRect)
                 let plotPoint = NSPoint(x: basex(frag.dmatch.threePrime), y: vpoint)

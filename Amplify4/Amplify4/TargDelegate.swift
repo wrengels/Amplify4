@@ -218,7 +218,7 @@ class TargDelegate: NSObject {
         if (start >= 0 && end < length2) {
             self.targetView.setSelectedRange(NSMakeRange(start, end - start + 1))
             substrateWindow.makeFirstResponder(targetView)
-        } else {NSBeep()}
+        } else {return}
     }
     
     @IBOutlet weak var baseRangeView: NSView!
