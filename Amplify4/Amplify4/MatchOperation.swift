@@ -33,7 +33,13 @@ class DMatchOperation: NSOperation {
             // Now check for a match at each 3' (tp) site on the target
             var primability = 0
             var stability = 0
-            for tp in 0..<maker.targInt.count {
+            var firsttp = 0
+            var lasttp = maker.targInt.count
+            if maker.circularTarget {
+                firsttp = settings.integerForKey(globals.effectivePrimer)
+                lasttp = maker.targInt.count - settings.integerForKey(globals.effectivePrimer)
+            }
+            for tp in firsttp..<lasttp {
                 var basePos = 0
                 var targPos = tp
                 primability = primer.zD[basePos++][maker.targInt[targPos--]]
@@ -66,7 +72,9 @@ class DMatchOperation: NSOperation {
                         // Found a match!
                         primability =  primability * 100 / primer.maxPrimability
                         stability = stability * 100 / primer.maxStab
-                        let match = Match(primer: primer, isD: true, threePrime: tp, primability: primability, stability: stability)
+                        var threePrime = tp
+                        if maker.circularTarget {threePrime = tp - settings.integerForKey(globals.effectivePrimer)}
+                        let match = Match(primer: primer, isD: true, threePrime: threePrime, primability: primability, stability: stability, isCircular : maker.circularTarget)
                         dmatches.append(match)
                     }
                 }
@@ -123,7 +131,13 @@ class GMatchOperation: NSOperation {
             // Now check for a match at each 3' (tp) site on the target
             var primability = 0
             var stability = 0
-            for tp in 0..<maker.targInt.count {
+            var firsttp = 0
+            var lasttp = maker.targInt.count
+            if maker.circularTarget {
+                firsttp = settings.integerForKey(globals.effectivePrimer)
+                lasttp = maker.targInt.count - settings.integerForKey(globals.effectivePrimer)
+            }
+            for tp in firsttp..<lasttp {
                 var basePos = 0
                 var targPos = tp
                 primability = primer.zG[basePos++][maker.targInt[targPos++]] // Different from D
@@ -156,7 +170,9 @@ class GMatchOperation: NSOperation {
                         // Found a match!
                         primability =  primability * 100 / primer.maxPrimability
                         stability = stability * 100 / primer.maxStab
-                        let match = Match(primer: primer, isD: false, threePrime: tp, primability: primability, stability: stability) // Different from D
+                        var threePrime = tp
+                        if maker.circularTarget {threePrime = tp - settings.integerForKey(globals.effectivePrimer)}
+                        let match = Match(primer: primer, isD: false, threePrime: threePrime, primability: primability, stability: stability, isCircular : maker.circularTarget) // Different from D
                         gmatches.append(match)
                     }
                 }

@@ -15,13 +15,15 @@ class Match: MapItem {
     let primer : Primer
     let bezFillColor, bezStrokeColor : NSColor
     let bez : NSBezierPath
+    let isCircular : Bool // need to know how to handle straddling matches
     
-    init(primer: Primer, isD : Bool, threePrime : Int, primability : Int, stability : Int) {
+    init(primer: Primer, isD : Bool, threePrime : Int, primability : Int, stability : Int, isCircular : Bool) {
         self.primer = primer
         self.isD = isD
         self.threePrime = threePrime
         self.primability = primability
         self.stability = stability
+        self.isCircular = isCircular
         let hsize : CGFloat = 10
         let vsize : CGFloat = 14
         let linewidth : CGFloat = 1
@@ -88,11 +90,12 @@ class Match: MapItem {
         func spaces(k : Int) -> String {
             return String(count: k, repeatedValue: Character(" "))
         }
-        func hbonds(targetString : String, primerString: String) -> String {
+        func hbonds(targetString : String, primerStringReceived: String) -> String {
             // Produce a string of | or : or blank to indicate base-pairing
             let pairScores = NSUserDefaults.standardUserDefaults().arrayForKey(globals.pairScores) as [[Int]]
             let topScore = pairScores[0][0]
             let tchars = "GATCN" as NSString
+            var primerString = primerStringReceived
             var pchars = globals.compIUBString as NSString
             if isD {
                 pchars = globals.IUBString as NSString
@@ -100,18 +103,19 @@ class Match: MapItem {
             var bonds = ""
             
             let n = countElements(targetString)
-            if countElements(primerString) == n {
+             if countElements(primerString) >= n {
                 // If strings are different sizes, then something is wrong
                 let tbases = [Character](targetString.uppercaseString)
                 let pbases = [Character](primerString.uppercaseString)
                 var targIndex, primerIndex : Int
-                for base in 0..<n {
+                for base in 0..<min(n, countElements(primerString)) {
                     targIndex = tchars.rangeOfString(String(tbases[base])).location
-                    if targIndex == NSNotFound {targIndex = 4}
+                    let badBase = targIndex == NSNotFound
+                    if badBase {targIndex = 4}
                     primerIndex = pchars.rangeOfString(String(pbases[base])).location
                     if primerIndex == NSNotFound {primerIndex = 14}
                     let pairScore = pairScores[primerIndex][targIndex]
-                    if pairScore == 0{
+                    if pairScore == 0 || badBase  {
                         bonds += " "
                     } else if pairScore >= topScore {
                         bonds += "|"
@@ -141,16 +145,30 @@ class Match: MapItem {
         let firstbase = apdel.targDelegate.firstbase as Int
         let targString = targFileString.substringFromIndex(firstbase).uppercaseString as NSString
         var context = NSMutableString(string: "")
-        if contextLeft < 0 {
-            var newContext = context.stringByPaddingToLength(-contextLeft, withString: " ", startingAtIndex: 0)
-            context = NSMutableString(string: newContext)
-            contextLeft = 0
-        }
-        if contextRight > targString.length {
-            contextRight = targString.length
+        if isCircular {
+            if contextLeft < 0 {
+                var newContext = targString.substringWithRange(NSMakeRange(targString.length + contextLeft , -contextLeft))
+                context = NSMutableString(string: newContext)
+                context = NSMutableString(string: context + targString.substringWithRange(NSMakeRange(0, contextRight)))
+            } else if contextRight > targString.length {
+                var newContext = targString.substringWithRange(NSMakeRange(0, contextRight - targString.length))
+                context = NSMutableString(string: targString.substringWithRange(NSMakeRange(contextLeft, targString.length - contextLeft)) + newContext)
+//                contextRight = targString.length
+            } else {
+                context = NSMutableString(string: context + targString.substringWithRange(NSMakeRange(contextLeft, contextRight - contextLeft)))
+            }
+        } else {
+            if contextLeft < 0 {
+                var newContext = context.stringByPaddingToLength(-contextLeft, withString: " ", startingAtIndex: 0)
+                context = NSMutableString(string: newContext)
+                contextLeft = 0
+            }
+            if contextRight > targString.length {
+                contextRight = targString.length
+            }
+            context = NSMutableString(string: context + targString.substringWithRange(NSMakeRange(contextLeft, contextRight - contextLeft)))
         }
         let padding = spaces(side - 3)
-        context = NSMutableString(string: context + targString.substringWithRange(NSMakeRange(contextLeft, contextRight - contextLeft)))
         let matchingTarget = context.substringWithRange(NSMakeRange(side, min(seqLen, context.length - side)))
         var bonds = hbonds(matchingTarget, seq)
         var paddedPrimer = NSMutableAttributedString()
@@ -160,7 +178,11 @@ class Match: MapItem {
 
         
         if isD {
-            let startNumString = String(threePrime - seqLen + 2)
+            var startNum = threePrime - seqLen + 2
+            if startNum < 0 && isCircular {
+                startNum = targString.length + startNum
+            }
+            let startNumString = String(startNum)
             let startDigits = countElements(startNumString)
             let endNumString = String(threePrime + 1)
             let endDigits = countElements(endNumString)
@@ -193,7 +215,11 @@ class Match: MapItem {
             addReport("\r", fmat.seq)
             let startNumString = String(threePrime + 1)
             let startDigits = countElements(startNumString)
-            let endNumString = String(threePrime + seqLen)
+            var endNum = threePrime + seqLen
+            if endNum > targString.length && isCircular {
+                endNum -= targString.length
+            }
+            let endNumString = String(endNum)
             let endDigits = countElements(endNumString)
             var numline = "\t\(spaces(side - startDigits/2))\(startNumString)"
             numline += spaces(seqLen - startDigits/2 - endDigits/2 - 1) + endNumString

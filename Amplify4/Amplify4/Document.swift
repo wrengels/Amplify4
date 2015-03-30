@@ -136,6 +136,14 @@ class Document: NSDocument {
             }
             k++
         }
+        if circularTarget {
+            // Add some bases to the start and end to cover matches that overlap the junction
+            let effectivep = settings.integerForKey(globals.effectivePrimer)
+            if effectivep > targInt.count { return }  // Can't do a circular PCR with such a short target!
+            let pre = targInt[(targInt.count - effectivep)..<targInt.count]
+            let post = targInt[0 ..< effectivep]
+            targInt = pre + targInt + post
+        }
         
         // Find Matches and Dimers using parallel cores
         let opQ = NSOperationQueue()
