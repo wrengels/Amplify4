@@ -13,16 +13,16 @@ class DMatchOperation: NSOperation {
     let settings = NSUserDefaults.standardUserDefaults()
     
     init(maker : AnyObject) {
-        self.maker = maker as Document
+        self.maker = maker as! Document
     }
     
     override func main() {
         var dmatches = [Match]()
         for primer in maker.usedPrimers {
-            let seq = (primer.seq as NSString).substringFromIndex(max(0, countElements(primer.seq) - maker.maxLength)).uppercaseString
+            let seq = (primer.seq as NSString).substringFromIndex(max(0, count(primer.seq) - maker.maxLength)).uppercaseString
             let requiredPrimability = primer.Req.last
             let requiredStability100 = primer.maxStab * settings.integerForKey(globals.stabilityCutoff)
-            var seqInt = [Int](count: countElements(seq), repeatedValue: 0)
+            var seqInt = [Int](count: count(seq), repeatedValue: 0)
             let IUBString = globals.IUBString as NSString
             var k = 0
             for c in seq {
@@ -87,7 +87,7 @@ class DMatchOperation: NSOperation {
 class FindPrimers : NSOperation {
     let maker : Document
     init(maker : AnyObject) {
-        self.maker = maker as Document
+        self.maker = maker as! Document
     }
     
     override func main() {
@@ -111,16 +111,16 @@ class GMatchOperation: NSOperation {
     let settings = NSUserDefaults.standardUserDefaults()
     
     init(maker : AnyObject) {
-        self.maker = maker as Document
+        self.maker = maker as! Document
     }
     
     override func main() {
         var gmatches = [Match]()
         for primer in maker.usedPrimers {
-            let seq = (primer.seq as NSString).substringFromIndex(max(0, countElements(primer.seq) - maker.maxLength)).uppercaseString
+            let seq = (primer.seq as NSString).substringFromIndex(max(0, count(primer.seq) - maker.maxLength)).uppercaseString
             let requiredPrimability = primer.Req.last
             let requiredStability100 = primer.maxStab * settings.integerForKey(globals.stabilityCutoff)
-            var seqInt = [Int](count: countElements(seq), repeatedValue: 0)
+            var seqInt = [Int](count: count(seq), repeatedValue: 0)
             let compIUBString = globals.compIUBString as NSString
             var k = 0
             for c in seq {

@@ -51,31 +51,31 @@ class Primer : NSObject {
     
     init(theLine: String) {
         var  parts = (theLine as String).componentsSeparatedByString("\t")
-        parts = parts.filter {countElements($0) > 0}
+        parts = parts.filter {count($0) > 0}
         while parts.count < 3 {parts.append("")} // make sure there are at least 3
         seq = parts[0]
         name = parts[1]
         note = parts[2]
         // truncate the name if it's too long
-        if countElements(name) > maxNameLength {
+        if count(name) > maxNameLength {
             name = String((name as NSString).substringWithRange(NSMakeRange(0, maxNameLength)))
         }
     }
     
     init(theCSVLine : String) {
         var  parts = (theCSVLine as String).componentsSeparatedByString(",")
-        parts = parts.filter {countElements($0) > 0}
+        parts = parts.filter {count($0) > 0}
         while parts.count < 3 {parts.append("")} // make sure there are at least 3
         seq = parts[0]
         name = parts[1]
         note = parts[2]
-        if countElements(name) > maxNameLength {
+        if count(name) > maxNameLength {
             name = String((name as NSString).substringWithRange(NSMakeRange(0, maxNameLength)))
         }
     }
     
     func hasBadBases()->Bool {
-        if countElements(seq) < 1 {return true}
+        if count(seq) < 1 {return true}
         let okayChars = NSCharacterSet(charactersInString: globals.IUBString)
         let badChars = okayChars.invertedSet
         let firstBad = (seq.uppercaseString as NSString).rangeOfCharacterFromSet(badChars).location
@@ -117,7 +117,7 @@ class Primer : NSObject {
     
     func countBases() {
         let upseq = seq.uppercaseString
-        nBases = countElements(seq)
+        nBases = count(seq)
         nAT = 0; nGC = 0
         for c in upseq {
             switch String(c) {
@@ -137,8 +137,8 @@ class Primer : NSObject {
         var enth = 0.0
         let seqChar = [Character](seq.uppercaseString)
         let settings = NSUserDefaults.standardUserDefaults()
-        let entropy = settings.arrayForKey(globals.entropy) as [[Double]]
-        let enthalpy = settings.arrayForKey(globals.enthalpy) as [[Double]]
+        let entropy = settings.arrayForKey(globals.entropy) as! [[Double]]
+        let enthalpy = settings.arrayForKey(globals.enthalpy) as! [[Double]]
         let saltConc : Double = settings.doubleForKey(globals.saltConc)
         let DNAConc : Double = settings.doubleForKey(globals.DNAConc)
         let n = min(settings.integerForKey(globals.effectivePrimer), seqChar.count)
@@ -175,8 +175,8 @@ class Primer : NSObject {
         let dbases = [Character](globals.IUBString)
         let cbases = [Character](globals.compIUBString)
         let settings = NSUserDefaults.standardUserDefaults()
-        let matchWeights = settings.arrayForKey(globals.matchWeights)! as [Int]
-        let pairScores = settings.arrayForKey(globals.pairScores)! as [[Int]]
+        let matchWeights = settings.arrayForKey(globals.matchWeights)! as! [Int]
+        let pairScores = settings.arrayForKey(globals.pairScores)! as! [[Int]]
         let seqChar = [Character](seq.uppercaseString)
         var seqd = [Int]()
         var seqc = [Int]()
@@ -205,7 +205,7 @@ class Primer : NSObject {
             let possibleScores = pairScores[seqd[primerLocation]]
             maxStab += possibleScores.reduce(Int.min, combine: max) // 'reduce' used to find the maximum integer in an array
         } // for primerLocation
-        maxStab *= (settings.arrayForKey(globals.runWeights)! as [Int])[n-1]
+        maxStab *= (settings.arrayForKey(globals.runWeights)! as! [Int])[n-1]
 //        let minPrimability : Int = maxPrimability * settings.integerForKey(globals.primabilityCutoff)/100
         Req.append(ideal[0] - maxPrimability * (100 - settings.integerForKey(globals.primabilityCutoff))/100)
         for i in 1..<n {
@@ -219,7 +219,7 @@ class Primer : NSObject {
         self.countBases()
         let baseContent = String(format: "%.1f", 100.0 * (Double(nAT) + Double(nBases - nAT - nGC)/2.0)/Double(nBases))
         self.calcRedundancy()
-        var report = NSMutableAttributedString(string: "Primer: \(name)\r", attributes: fmat.h3)
+        var report = NSMutableAttributedString(string: "Primer: \(name)\r", attributes: fmat.h3 as [NSObject : AnyObject])
         extendString(starter: report, suffix: "\(nBases) bp:      ", attr: fmat.normal)
         extendString(starter: report, suffix1: "\(seq)", attr1: fmat.seq, suffix2: "\r\rTm = \(forFloat(val: self.calcTm(), decimals: 2))°C", attr2: fmat.normal)
         extendString(starter: report, suffix: "\r\(nAT) AT Pairs,  \(nGC) GC Pairs,    \(baseContent)% AT", attr: fmat.normal)

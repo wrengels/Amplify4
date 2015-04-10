@@ -27,7 +27,7 @@ class AMformats: NSObject {
         let fmatString = fmatAString.string as NSString
         
         func attributesForThis(ss : NSString) -> NSDictionary {
-            let stlocation = fmatString.rangeOfString(ss).location
+            let stlocation = fmatString.rangeOfString(ss as String).location
             let dicat = fmatAString.attributesAtIndex(stlocation, effectiveRange: nil)
             return dicat
         }

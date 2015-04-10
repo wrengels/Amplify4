@@ -32,7 +32,7 @@ class Document: NSDocument {
  //   var mapImageView = NSImageView(frame: NSRect(x: 0, y: 0, width: 100, height: 10000))
 //    var mapView = MapView()
     let settings = NSUserDefaults.standardUserDefaults()
-    let apdel = NSApplication.sharedApplication().delegate! as AppDelegate
+    let apdel = NSApplication.sharedApplication().delegate! as! AppDelegate
     var usedPrimers = [Primer]()
     var matches = [Match]()
     var dmatches = [Match]()
@@ -43,8 +43,8 @@ class Document: NSDocument {
     var targInt = [Int]()
     var circularTarget  : Bool = false
     var wwidth : CGFloat = 0.0
-    let runWeights = NSUserDefaults.standardUserDefaults().arrayForKey(globals.runWeights)! as [Int]
-    let pairScores = NSUserDefaults.standardUserDefaults().arrayForKey(globals.pairScores)! as [[Int]]
+    let runWeights = NSUserDefaults.standardUserDefaults().arrayForKey(globals.runWeights)! as! [Int]
+    let pairScores = NSUserDefaults.standardUserDefaults().arrayForKey(globals.pairScores)! as! [[Int]]
     let maxLength = NSUserDefaults.standardUserDefaults().integerForKey(globals.effectivePrimer)
     var opn = 100
 
@@ -124,7 +124,7 @@ class Document: NSDocument {
         let targFileString = apdel.substrateDelegate.targetView.textStorage!.string as NSString
         let firstbase = apdel.targDelegate.firstbase as Int
         let targString = targFileString.substringFromIndex(firstbase).uppercaseString
-        targInt = [Int](count: countElements(targString), repeatedValue: 0)
+        targInt = [Int](count: count(targString), repeatedValue: 0)
         var k = 0
         for c in targString {
             switch c {
@@ -245,9 +245,9 @@ class Document: NSDocument {
         // Write first and last base numbers
         plotters.append(StringThing(string: String(startBase), point: NSMakePoint(h1, v1), attr: fmat.bigger))
         let endString = String(endBase) as NSString
-        let endStringRect = endString.boundingRectWithSize(NSSize(width: 1000, height: 1000), options: nil, attributes: fmat.bigger)
+        let endStringRect = endString.boundingRectWithSize(NSSize(width: 1000, height: 1000), options: nil, attributes: fmat.bigger as [NSObject : AnyObject])
         let endStringWidth = endStringRect.size.width
-        plotters.append(StringThing(string: endString, point: NSPoint(x: wwidth  - endStringWidth, y: v1), attr: fmat.bigger))
+        plotters.append(StringThing(string: endString as String, point: NSPoint(x: wwidth  - endStringWidth, y: v1), attr: fmat.bigger))
         
         // Make baseline for target
         var targLine = NSBezierPath()
@@ -290,7 +290,7 @@ class Document: NSDocument {
             let plotPoint = NSPoint(x: basex(match.threePrime), y: ypos)
             let bez = BezThing(bez: match.bez, point: plotPoint, fillColor: match.bezFillColor, strokeColor: match.bezStrokeColor, scale: 1)
             match.highlightPoint = plotPoint
-            match.setLitBez(match.bez.copy() as NSBezierPath)
+            match.doLitBez(match.bez.copy() as! NSBezierPath)
             plotters.append(bez)
             let trackArea = NSTrackingArea(rect: NSInsetRect(bez.bounds, -3, -3),
                 options: (NSTrackingAreaOptions.MouseEnteredAndExited | NSTrackingAreaOptions.ActiveAlways | NSTrackingAreaOptions.MouseMoved),
@@ -304,17 +304,17 @@ class Document: NSDocument {
             var barRect = frag.barRect  // NSRect is a value, so this doesn't change frag.barRect
 
             if frag.isCircular {
-                let rec = (String(frag.totSize) as NSString).boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: fmat.normal)
+                let rec = (String(frag.totSize) as NSString).boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: fmat.normal as [NSObject : AnyObject])
                 let stringx : CGFloat = basex(Int(targetLength/2))  -  rec.size.width/2  // to center the size string
                 plotters.append(StringThing(string: String(frag.totSize), point: NSPoint(x: stringx, y: vpoint + barRect.size.height), attr: fmat.normal))
-                var bez = frag.bez.copy() as NSBezierPath // Get a copy of the two rectangles
+                var bez = frag.bez.copy() as! NSBezierPath // Get a copy of the two rectangles
                 let stretch : NSAffineTransform = NSAffineTransform()
                 stretch.scaleXBy(pointsPerBase, yBy: 1)
                 bez.transformUsingAffineTransform(stretch)
                 let plotPoint = NSPoint(x: basex(0), y: vpoint)
                 plotters.append(BezThing(bez: bez, point: plotPoint, fillColor: NSColor.blackColor(), strokeColor: nil, scale: 1))
                 frag.highlightPoint = plotPoint
-                frag.setLitBez(bez)
+                frag.doLitBez(bez)
                 // add left and right arrowheads
                 let barWidth : CGFloat = barRect.size.height
                 plotters.append(BezThing(bez: frag.rightArrow, point: NSPoint(x: wwidth - h1, y: vpoint + barWidth/2), fillColor: NSColor.blackColor(), strokeColor: nil, scale: 1))
@@ -332,7 +332,7 @@ class Document: NSDocument {
                 frag.highlightPoint = plotPoint
                 frag.setLitRec(barRect)
                 plotters.append(BezThing(bez: bez, point: plotPoint, fillColor: NSColor.blackColor(), strokeColor: nil, scale: 1))
-                let rec = (String(frag.totSize) as NSString).boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: fmat.normal)
+                let rec = (String(frag.totSize) as NSString).boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: fmat.normal as [NSObject : AnyObject])
                 let stringx : CGFloat = basex(frag.dmatch.threePrime) + barRect.size.width/2  - rec.size.width/2  // to center the size string
                 plotters.append(StringThing(string: String(frag.totSize), point: NSPoint(x: stringx, y: vpoint + barRect.size.height), attr: fmat.normal))
 
@@ -364,7 +364,7 @@ class Document: NSDocument {
     }
     
     func addOutput(s : String, attr: NSDictionary) {
-        output.appendAttributedString(NSAttributedString(string: s , attributes: attr))
+        output.appendAttributedString(NSAttributedString(string: s , attributes: attr as [NSObject : AnyObject]))
     }
     
 

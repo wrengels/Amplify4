@@ -17,18 +17,19 @@ class IntArrayController: NSObject,  NSTableViewDataSource,NSTableViewDelegate {
         return vals.count
     }
     
-    func tableView(tableView: NSTableView!, objectValueForTableColumn tableColumn: NSTableColumn!, row: Int) -> AnyObject! {
-        if tableColumn.identifier! == "Labels" {
+    func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
+
+        if tableColumn!.identifier! == "Labels" {
             return  String(labels[row])
         } else {
-            let col = tableColumn.identifier!.toInt()!
+            let col = tableColumn!.identifier!.toInt()!
             return vals[row][col]
         }
     }
     
-    func tableView(tableView: NSTableView, setObjectValue object: AnyObject!, forTableColumn tableColumn: NSTableColumn!, row: Int) {
-        let col = tableColumn.identifier!.toInt()!
-        let newval : Int = (object as NSString).integerValue
+    func tableView(tableView: NSTableView, setObjectValue object: AnyObject?, forTableColumn tableColumn: NSTableColumn?, row: Int) {
+        let col = tableColumn!.identifier!.toInt()!
+        let newval : Int = (object as! NSString).integerValue
         vals[row][col] = newval
     }
     

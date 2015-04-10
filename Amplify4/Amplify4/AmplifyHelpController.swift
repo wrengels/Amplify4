@@ -24,16 +24,16 @@ class AmplifyHelpController: NSWindowController, NSWindowDelegate {
                 let bullits = NSCharacterSet(charactersInString: "▪️•◆")
                 let smallbullit = NSCharacterSet(charactersInString: "•")
                 let faqset = NSCharacterSet(charactersInString: "▪︎")
-                let helpLines = (helpTextView.string! as NSString).componentsSeparatedByCharactersInSet(newline) as [NSString]
+                let helpLines = (helpTextView.string! as NSString).componentsSeparatedByCharactersInSet(newline) as! [NSString]
                 for line in helpLines {
                     if line.rangeOfCharacterFromSet(bullits).location != NSNotFound {
-                        topicsMenu.addItemWithTitle(line)
+                        topicsMenu.addItemWithTitle(line as String)
                     }
                     if line.rangeOfCharacterFromSet(faqset).location != NSNotFound{
-                        faqMenu.addItemWithTitle(line)
+                        faqMenu.addItemWithTitle(line as String)
                     }
                 }
-                for mitem in (topicsMenu.itemArray as [NSMenuItem]) {
+                for mitem in (topicsMenu.itemArray as! [NSMenuItem]) {
                     let mitemTitle = mitem.title as NSString
                     if mitemTitle.rangeOfCharacterFromSet(smallbullit).location != NSNotFound {
                         mitem.indentationLevel = 2
@@ -50,7 +50,7 @@ class AmplifyHelpController: NSWindowController, NSWindowDelegate {
     
     func scrollToString(theString : NSString) {
         let helpString = helpTextView.string! as NSString
-        let stringRange : NSRange = helpString.rangeOfString(theString)
+        let stringRange : NSRange = helpString.rangeOfString(theString as String)
         if stringRange.location == NSNotFound {return}
         var effectiveRange = NSRange(location: 0, length: 0)
         let stringRect = helpTextView.layoutManager!.lineFragmentRectForGlyphAtIndex(stringRange.location, effectiveRange: &effectiveRange)
@@ -60,7 +60,7 @@ class AmplifyHelpController: NSWindowController, NSWindowDelegate {
     }
     
     @IBAction func goToTopic(sender: AnyObject) {
-        let popup = sender as NSPopUpButton
+        let popup = sender as! NSPopUpButton
         if let topic = popup.selectedItem?.title {
              let helpString = helpTextView.string! as NSString
             let nstopic = topic as NSString

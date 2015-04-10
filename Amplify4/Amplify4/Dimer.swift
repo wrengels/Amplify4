@@ -19,66 +19,69 @@ struct Dimer {
     var p2n = [Int]()
 
     init (primer primer1 : Primer, and primer2 : Primer) {
-        n1 = countElements(primer1.seq)
-        n2 = countElements(primer2.seq)
-        self.serious = false
-        p1pos = -1
+        //        self.serious = false
+        //        p1pos = -1
         // Make sure primer 2 is the larger one
-        if countElements(primer1.seq) < countElements(primer2.seq) {
+        if count(primer1.seq) < count(primer2.seq) {
+            n1 = count(primer1.seq)
+            n2 = count(primer2.seq)
             self.p1 = primer1
             self.p2 = primer2
         } else {
             self.p1 = primer2
             self.p2 = primer1
-            n1 = n2
-            n2 = countElements(p2.seq)
+            n1 = count(p1.seq)
+            n2 = count(p2.seq)
         }
-        if p1.hasBadBases() || p2.hasBadBases() {
+        if primer1.hasBadBases() || primer2.hasBadBases() {
             self.quality = -1
             self.olap = 0
-            return
-        }
-
-        let settings = NSUserDefaults.standardUserDefaults()
-        let dimerScores = settings.arrayForKey(globals.dimScores) as [[Int]]
-        let dimerStringency = settings.integerForKey(globals.dimerStringency)
-        let dimerMinOverlap = settings.integerForKey(globals.dimerOverlap)
-        let dbases = [Character](globals.IUBString)
-        var v = 0
-        for c in p1.seq.uppercaseString {
-            v = 0
-            while c != dbases[v] {v++}
-            p1n.append(v)
-        }
-        for c in p2.seq.uppercaseString {
-            v = 0
-            while c != dbases[v] {v++}
-            p2n.append(v)
-        }
-        var bestQuality = Int.min
-        var tempp1pos = -1
-        var q = 0
-        for leftEnd in 0..<n2 {
-            q = 0
-            for rightEnd in leftEnd..<min(leftEnd + n1 , n2) {
-                let index1 = p1n[n1 - (rightEnd - leftEnd) - 1]
-                let index2 = p2n[rightEnd ]
-                q += dimerScores[index1][index2]
+            self.serious = false
+            self.p1pos = 0
+        } else {
+            let settings = NSUserDefaults.standardUserDefaults()
+            let dimerScores = settings.arrayForKey(globals.dimScores) as! [[Int]]
+            let dimerStringency = settings.integerForKey(globals.dimerStringency)
+            let dimerMinOverlap = settings.integerForKey(globals.dimerOverlap)
+            let dbases = [Character](globals.IUBString)
+            var v = 0
+            for c in p1.seq.uppercaseString {
+                v = 0
+                while c != dbases[v] {v++}
+                p1n.append(v)
             }
-            if q >= bestQuality {
-                bestQuality = q
-                tempp1pos = leftEnd
+            for c in p2.seq.uppercaseString {
+                v = 0
+                while c != dbases[v] {v++}
+                p2n.append(v)
             }
+            var bestQuality = Int.min
+            var tempp1pos = -1
+            var q = 0
+            for leftEnd in 0..<n2 {
+                q = 0
+                for rightEnd in leftEnd..<min(leftEnd + n1 , n2) {
+                    let index1 = p1n[n1 - (rightEnd - leftEnd) - 1]
+                    let index2 = p2n[rightEnd ]
+                    q += dimerScores[index1][index2]
+                }
+                if q >= bestQuality {
+                    bestQuality = q
+                    tempp1pos = leftEnd
+                }
+            }
+            self.p1pos = tempp1pos
+            self.quality = Double(bestQuality)
+            self.olap = min(n1, n2 - tempp1pos)
+            let xolap = olap
+            let xquality = quality
+            self.serious = (xquality > settings.doubleForKey(globals.dimerStringency)) && (xolap >= settings.integerForKey(globals.dimerOverlap))
         }
-        self.p1pos = tempp1pos
-        self.olap = min(n1, n2 - tempp1pos)
-        self.quality = Double(bestQuality)
-        self.serious = (quality > settings.doubleForKey(globals.dimerStringency)) && (olap >= settings.integerForKey(globals.dimerOverlap))
     }
     
     func report() -> String {
         // re-do this function with attributed strings?
-         let dimerScores = NSUserDefaults.standardUserDefaults().arrayForKey(globals.dimScores) as [[Int]]
+         let dimerScores = NSUserDefaults.standardUserDefaults().arrayForKey(globals.dimScores) as! [[Int]]
         let space = Character(" ")
         var s = "\r5' " + p2.seq + " 3'\r" + String(count: p1pos + 3, repeatedValue: space)
         for position2 in p1pos..<(p1pos + olap) {
@@ -101,11 +104,11 @@ struct Dimer {
     
     func freport() -> NSAttributedString {
        
-        let dimerScores = NSUserDefaults.standardUserDefaults().arrayForKey(globals.dimScores) as [[Int]]
+        let dimerScores = NSUserDefaults.standardUserDefaults().arrayForKey(globals.dimScores) as! [[Int]]
         var report = NSMutableAttributedString()
         
         func addReport(s : String, attr: NSDictionary) {
-            report.appendAttributedString(NSAttributedString(string: s, attributes: attr))
+            report.appendAttributedString(NSAttributedString(string: s, attributes: attr as [NSObject : AnyObject]))
         }
         
         addReport("\r", fmat.hline1)

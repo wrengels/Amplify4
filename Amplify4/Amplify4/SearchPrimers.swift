@@ -21,10 +21,15 @@ class SearchPrimers: NSWindowController {
     }
     
     @IBAction func findNextPrimer(sender: AnyObject) {
-        let apdel = NSApplication.sharedApplication().delegate! as AppDelegate
+        let apdel = NSApplication.sharedApplication().delegate! as! AppDelegate
         notFoundField.hidden = true
         let substrate = apdel.substrateDelegate
-        var index : Int = substrate.primerTableView.selectedRowIndexes.firstIndex + 1
+        var index : Int = substrate.primerTableView.selectedRowIndexes.firstIndex
+        if index == NSNotFound {
+            index = 0
+        } else {
+            index++
+        }
         let primers = substrate.primers
         let txt = searchTextField.stringValue.uppercaseString
         while (index < primers.count) && ((primers[index].line as String).uppercaseString.rangeOfString(txt) == nil) {
@@ -52,7 +57,7 @@ class SearchPrimers: NSWindowController {
 
     @IBAction func selectAllMatches(sender: AnyObject) {
         var numFound = 0
-        let apdel = NSApplication.sharedApplication().delegate! as AppDelegate
+        let apdel = NSApplication.sharedApplication().delegate! as! AppDelegate
         let substrate = apdel.substrateDelegate
         let primers = substrate.primers
         substrate.primerTableView.deselectAll(self)

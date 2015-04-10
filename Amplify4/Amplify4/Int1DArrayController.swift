@@ -16,17 +16,17 @@ class Int1DArrayController: NSObject,  NSTableViewDataSource,NSTableViewDelegate
         return vals.count
     }
     
-    func tableView(tableView: NSTableView!, objectValueForTableColumn tableColumn: NSTableColumn!, row: Int) -> AnyObject! {
+    func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
         
-        if tableColumn.identifier! == "Labels" {
+        if tableColumn!.identifier! == "Labels" {
             return labels[row] as NSNumber
         } else {
             return vals[row]
         }
     }
     
-    func tableView(tableView: NSTableView, setObjectValue object: AnyObject!, forTableColumn tableColumn: NSTableColumn!, row: Int) {
-        let newval : Int = (object as NSString).integerValue
+    func tableView(tableView: NSTableView, setObjectValue object: AnyObject?, forTableColumn tableColumn: NSTableColumn?, row: Int) {
+        let newval : Int = (object as! NSString).integerValue
         vals[row] = newval
     }
     

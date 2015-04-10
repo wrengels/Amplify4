@@ -39,11 +39,11 @@ class AMprefsController: NSWindowController {
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
         let theColumns: [AnyObject]  = pairWeightsTableView.tableColumns + entropyTableView.tableColumns + enthalpyTableView.tableColumns + dimWeightsTableView.tableColumns
         var theColor : NSColor = NSColor()
-        for col : NSTableColumn in theColumns as [NSTableColumn] {
+        for col : NSTableColumn in theColumns as! [NSTableColumn] {
             if col.identifier == "Labels" {
                 theColor = col.dataCell.backgroundColor!! as NSColor
             } else {
-                let hc = col.headerCell as NSTableHeaderCell
+                let hc = col.headerCell as! NSTableHeaderCell
                 hc.backgroundColor = theColor
                 hc.drawsBackground = true
             }
@@ -64,27 +64,27 @@ class AMprefsController: NSWindowController {
     
     func currentSettings()-> NSDictionary {
         let currentS = NSMutableDictionary()
-        let allkeys = globals.factory.allKeys as [NSString]
+        let allkeys = globals.factory.allKeys as! [NSString]
         for onekey : NSString in allkeys {
-            currentS.setObject(settings.objectForKey(onekey)!, forKey: onekey)
+            currentS.setObject(settings.objectForKey(onekey as String)!, forKey: onekey)
         }
         return NSDictionary(dictionary: currentS)
     }
     
     func putIntoDefaults(#dictionary : NSDictionary) {
-        let allkeys = globals.factory.allKeys as [NSString]
+        let allkeys = globals.factory.allKeys as! [NSString]
         for onekey : NSString in allkeys {
-            settings.setObject(dictionary.objectForKey(onekey)!, forKey: onekey)
+            settings.setObject(dictionary.objectForKey(onekey)!, forKey: onekey as String)
         }
     }
     
     func setAllArrayVals() {
-        pairWeightsCont.vals = settings.arrayForKey(globals.pairScores)! as [[Int]]
-        matchWeightsCont.vals = settings.arrayForKey(globals.matchWeights)! as [Int]
-        runWeightsCont.vals = settings.arrayForKey(globals.runWeights)! as [Int]
-        entropyCont.vals = settings.arrayForKey(globals.entropy)! as [[Int]]
-        enthalpyCont.vals = settings.arrayForKey(globals.enthalpy)! as [[Int]]
-        dimWeightsCont.vals = settings.arrayForKey(globals.dimScores)! as [[Int]]
+        pairWeightsCont.vals = settings.arrayForKey(globals.pairScores)! as! [[Int]]
+        matchWeightsCont.vals = settings.arrayForKey(globals.matchWeights)! as! [Int]
+        runWeightsCont.vals = settings.arrayForKey(globals.runWeights)! as! [Int]
+        entropyCont.vals = settings.arrayForKey(globals.entropy)! as! [[Int]]
+        enthalpyCont.vals = settings.arrayForKey(globals.enthalpy)! as! [[Int]]
+        dimWeightsCont.vals = settings.arrayForKey(globals.dimScores)! as! [[Int]]
     }
     
     @IBAction func loadSettingsFile(sender: AnyObject) {

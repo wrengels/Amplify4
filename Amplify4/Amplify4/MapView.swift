@@ -22,7 +22,7 @@ class MapView: NSView {
     }
     
     func clearAllTrackingAreas() {
-        for area : NSTrackingArea in self.trackingAreas as [NSTrackingArea] {
+        for area : NSTrackingArea in self.trackingAreas as! [NSTrackingArea] {
             self.removeTrackingArea(area)
         }
     }
@@ -34,9 +34,9 @@ class MapView: NSView {
         for plotter in plotters {
             plotter.plot()
         }
-        for area : NSTrackingArea in self.trackingAreas as [NSTrackingArea] {
+        for area : NSTrackingArea in self.trackingAreas as! [NSTrackingArea] {
             if let itemDic = area.userInfo {
-                let item : MapItem = itemDic[0] as MapItem
+                let item : MapItem = itemDic[0] as! MapItem
                 if item.isLit > 0  {
                     item.plotHighlight()
                 }
@@ -49,7 +49,7 @@ class MapView: NSView {
         entered++
         if let trackingArea = theEvent.trackingArea {
             if let itemDic = trackingArea.userInfo {
-                let item : MapItem = itemDic[0] as MapItem
+                let item : MapItem = itemDic[0] as! MapItem
                 item.lightCoItems()
                 self.needsDisplay = true
                 self.display()
@@ -64,7 +64,7 @@ class MapView: NSView {
         entered--
         if let trackingArea = theEvent.trackingArea {
             if let itemDic = trackingArea.userInfo {
-                let item : MapItem = itemDic[0] as MapItem
+                let item : MapItem = itemDic[0] as! MapItem
                 item.unlightCoItems()
                 self.needsDisplay = true
                 self.display()
@@ -78,9 +78,9 @@ class MapView: NSView {
     
     override func mouseUp(theEvent: NSEvent) {
         
-        for area : NSTrackingArea in self.trackingAreas as [NSTrackingArea] {
+        for area : NSTrackingArea in self.trackingAreas as! [NSTrackingArea] {
             if let itemDic = area.userInfo {
-                let item : MapItem = itemDic[0] as MapItem
+                let item : MapItem = itemDic[0] as! MapItem
                 if item.isClickable {
                     theDoc!.outputTextView.textStorage?.appendAttributedString(item.report())
                     theDoc!.printOutput()

@@ -26,7 +26,13 @@ class StringThing : PlotterThing {
         self.point = point
         self.attr = nil
         super.init()
-        bounds = (self.string as NSString).boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: attr)
+        let selfString = self.string as NSString
+        if attr != nil {
+            let attrDict = attr! as NSDictionary
+            bounds = selfString.boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: attrDict as [NSObject : AnyObject])
+        } else {
+             bounds = (self.string as NSString).boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: nil)
+        }
     }
     
     init (string : String, point : NSPoint, attr : NSDictionary) {
@@ -34,12 +40,18 @@ class StringThing : PlotterThing {
         self.point = point
         self.attr = attr
         super.init()
-        bounds = (self.string as NSString).boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: attr)
+        bounds = (self.string as NSString).boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: attr as [NSObject : AnyObject])
         bounds.origin = point
     }
     
     override func plot() {
-        (string as NSString).drawAtPoint(point, withAttributes: attr)
+        if attr != nil {
+            let attrDict = attr! as NSDictionary
+            (string as NSString).drawAtPoint(point, withAttributes: attrDict as [NSObject : AnyObject])
+        } else {
+            (string as NSString).drawAtPoint(point, withAttributes: nil)
+        }
+        
     }
 }
 
@@ -53,7 +65,7 @@ class VStringThing : PlotterThing {
         self.string = string
         self.point = point
         self.attr = attr
-        let rec = (self.string as NSString).boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: attr)
+        let rec = (self.string as NSString).boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: attr as [NSObject : AnyObject])
         super.init()
         bounds = NSMakeRect(point.x, point.y, rec.height, -rec.width)
     }
@@ -63,7 +75,13 @@ class VStringThing : PlotterThing {
         tran.translateXBy(point.x, yBy: point.y)
         tran.rotateByDegrees(-90)
         tran.concat()
-        (string as NSString).drawAtPoint(NSMakePoint(0, 0), withAttributes: attr)
+        if attr != nil {
+            let attrDict = attr! as NSDictionary
+            (string as NSString).drawAtPoint(NSMakePoint(0, 0), withAttributes: attrDict as [NSObject : AnyObject])
+        } else {
+            (string as NSString).drawAtPoint(NSMakePoint(0, 0), withAttributes: nil)
+        }
+        
         tran.invert()
         tran.concat()
     }
@@ -79,7 +97,7 @@ class VStringRectThing : PlotterThing {
         self.string = string
         self.rect = rect
         self.attr = attr
-        let rec = (self.string as NSString).boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: attr)
+        let rec = (self.string as NSString).boundingRectWithSize(NSMakeSize(1000, 1000), options: nil, attributes: attr as [NSObject : AnyObject])
         super.init()
         bounds = rect
     }
@@ -90,7 +108,13 @@ class VStringRectThing : PlotterThing {
         tran.rotateByDegrees(-90)
         tran.concat()
         let drect = NSMakeRect(-(rect.origin.y + rect.size.height), rect.origin.x, rect.size.height, rect.size.width)
-        (string as NSString).drawInRect(drect, withAttributes: attr)
+        let attrDict = attr! as NSDictionary
+        if attr != nil {
+            (string as NSString).drawInRect(drect, withAttributes: attrDict as [NSObject : AnyObject])
+        } else {
+            (string as NSString).drawInRect(drect, withAttributes: nil)
+        }
+        
 //        (string as NSString).drawAtPoint(NSMakePoint(0, 0), withAttributes: attr)
         tran.invert()
         tran.concat()
@@ -104,7 +128,7 @@ class BezThing : PlotterThing {
 //    let bounds : NSRect
     
     init(bez : NSBezierPath, point : NSPoint, fillColor : NSColor?, strokeColor: NSColor?, scale : CGFloat) {
-        self.bez = bez.copy() as NSBezierPath
+        self.bez = bez.copy() as! NSBezierPath
         var move = NSAffineTransform()
         move.translateXBy(point.x, yBy: point.y)
         move.scaleBy(scale)

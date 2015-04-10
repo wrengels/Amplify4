@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AmplifyHelpController" customModule="Amplify4" customModuleProvider="target">
@@ -20,7 +20,7 @@
         <window title="Amplify Help" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="938" y="828" width="779" height="627"/>
+            <rect key="contentRect" x="824" y="790" width="779" height="627"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <value key="minSize" type="size" width="535" height="150"/>
             <view key="contentView" id="EiT-Mj-1SZ">
@@ -73,7 +73,7 @@
                             <action selector="goToTopic:" target="-2" id="OJF-2Y-BBc"/>
                         </connections>
                     </popUpButton>
-                    <popUpButton identifier="faqMenu" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nMP-c9-FB9">
+                    <popUpButton identifier="faqMenu" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nMP-c9-FB9">
                         <rect key="frame" x="246" y="574" width="230" height="26"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="225" id="j1o-hw-mwr"/>
@@ -97,8 +97,10 @@
                     <constraint firstAttribute="trailing" secondItem="4Xr-Kj-wkz" secondAttribute="trailing" constant="-1" id="48D-hp-A37"/>
                     <constraint firstAttribute="bottom" secondItem="4Xr-Kj-wkz" secondAttribute="bottom" constant="7" id="C5h-oU-1xf"/>
                     <constraint firstItem="4Xr-Kj-wkz" firstAttribute="top" secondItem="SDe-uD-RdU" secondAttribute="bottom" constant="10" id="GHg-Lh-fDq"/>
+                    <constraint firstItem="nMP-c9-FB9" firstAttribute="baseline" secondItem="SDe-uD-RdU" secondAttribute="baseline" id="JpS-eM-TjI"/>
                     <constraint firstItem="4Xr-Kj-wkz" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="60" id="dI5-R5-2Iv"/>
                     <constraint firstItem="SDe-uD-RdU" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="10" id="sbQ-nK-Ed4"/>
+                    <constraint firstItem="nMP-c9-FB9" firstAttribute="leading" secondItem="SDe-uD-RdU" secondAttribute="trailing" constant="32" id="xvh-Iv-CUx"/>
                 </constraints>
             </view>
             <connections>

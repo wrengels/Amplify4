@@ -23,14 +23,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     override init() {
         super.init()
-        NSUserDefaults.standardUserDefaults().registerDefaults(globals.factory)
-        NSUserDefaultsController.sharedUserDefaultsController().initialValues = globals.factory
+        NSUserDefaults.standardUserDefaults().registerDefaults(globals.factory as [NSObject : AnyObject])
+        NSUserDefaultsController.sharedUserDefaultsController().initialValues = globals.factory as [NSObject : AnyObject]
         let docController: AnyObject = NSDocumentController.sharedDocumentController()
         let maxdocs = docController.maximumRecentDocumentCount
         let doclist = docController.recentDocumentURLs
         let docnum = doclist.count
         if let oldDocList = NSUserDefaults.standardUserDefaults().arrayForKey(globals.recentDocs) {
-            for doc in (oldDocList as [String])  {
+            for doc in (oldDocList as! [String])  {
                 if let url = NSURL(fileURLWithPath: doc) {
                     docController.noteNewRecentDocumentURL(url)
                 }
@@ -79,7 +79,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
      func application(sender: NSApplication, openFiles filenames: [AnyObject]) {
         var urlArray = NSMutableArray()
         for name in filenames {
-            urlArray.addObject(NSURL(fileURLWithPath: name as NSString)!)
+            urlArray.addObject(NSURL(fileURLWithPath: (name as! NSString) as NSString as String)!)
         }
         if urlArray.count < 1 {
             sender.replyToOpenOrPrint(NSApplicationDelegateReply.Failure)
@@ -100,7 +100,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 substrateDelegate.targetFile = NSURL()
             }
         }
-        
     }
 
     let prefsWindow = AMprefsController(windowNibName: "AMprefsController")
@@ -127,16 +126,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let helpWindow = helpWindowController.helpWindow
         helpWindow.display()
         helpWindow.makeKeyAndOrderFront(self)
-        if let name = sender.identifier? {
+        let senderId = (sender as! NSButton).identifier
+        if let name = senderId {
             let nsname = name as NSString
             helpWindowController.scrollToString(nsname)
         }
     }
     
-    
     func applicationWillTerminate(aNotification: NSNotification) {
         let docController: AnyObject = NSDocumentController.sharedDocumentController()
-        let doclist = docController.recentDocumentURLs as [NSURL]
+        let doclist = docController.recentDocumentURLs as! [NSURL]
         var docpaths = [String]()
         for doc in doclist {
             docpaths.append(doc.path!)
@@ -158,16 +157,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func amplify(sender: AnyObject) {
         targDelegate.cleanupTarget()
-        let newDoc: Document = NSDocumentController.sharedDocumentController().openUntitledDocumentAndDisplay(true, error: nil)! as Document
+        let newDoc: Document = NSDocumentController.sharedDocumentController().openUntitledDocumentAndDisplay(true, error: nil)! as! Document
     }
     
     @IBAction func amplifyCircular(sender: AnyObject) {
-        let theDC: NSDocumentController = NSDocumentController.sharedDocumentController() as NSDocumentController
-        let newDoc: DocumentCircular = theDC.makeUntitledDocumentOfType("CircularDocumentType", error: nil)! as DocumentCircular
+        let theDC: NSDocumentController = NSDocumentController.sharedDocumentController() as! NSDocumentController
+        let newDoc: DocumentCircular = theDC.makeUntitledDocumentOfType("CircularDocumentType", error: nil)! as! DocumentCircular
         theDC.addDocument(newDoc)
         newDoc.makeWindowControllers()
         newDoc.showWindows()
-
     }
     
     

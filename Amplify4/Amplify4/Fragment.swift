@@ -26,17 +26,18 @@ class Fragment: MapItem {
         self.dmatch = dmatch
         self.gmatch = gmatch
         self.isCircular = dmatch.threePrime  > gmatch.threePrime
-        self.ampSize = gmatch.threePrime - dmatch.threePrime - 1
         var targetLength : CGFloat = 0 // Placeholder. No need to compute this if it's not circular
         if isCircular {
-            let apdel = NSApplication.sharedApplication().delegate! as AppDelegate
+            let apdel = NSApplication.sharedApplication().delegate! as! AppDelegate
             targetLength = CGFloat(apdel.substrateDelegate.targetView.textStorage!.length - apdel.targDelegate.firstbase)
-            self.ampSize = Int(targetLength) + ampSize // ampSize is negative prior to this statement
+            self.ampSize = Int(targetLength) + gmatch.threePrime - dmatch.threePrime - 1
+        } else {
+            self.ampSize = gmatch.threePrime - dmatch.threePrime - 1
         }
-        self.totSize = countElements(dmatch.primer.seq) + ampSize + countElements(gmatch.primer.seq)
-        self.quality = dmatch.quality() * gmatch.quality()
-        if quality > 0 {
-            self.quality = CGFloat(ampSize)/(quality * quality)
+        self.totSize = count(dmatch.primer.seq) + ampSize + count(gmatch.primer.seq)
+        let tempQuality = dmatch.quality() * gmatch.quality()
+        if tempQuality > 0 {
+            self.quality = CGFloat(ampSize)/(tempQuality * tempQuality)
         } else {
             quality = 5000000000
         }
@@ -45,7 +46,6 @@ class Fragment: MapItem {
         for w in widthCutoffs {
             if quality > w {barWidth -= widthIncrement}
         }
-        bez = NSBezierPath()
         leftArrow = NSBezierPath()
         rightArrow = NSBezierPath()
         if isCircular {
@@ -67,6 +67,8 @@ class Fragment: MapItem {
         } else {
             self.barRect = NSRect(origin: NSPoint(x: 0, y: 0), size: NSSize(width: CGFloat(gmatch.threePrime - dmatch.threePrime), height: barWidth))
             self.barRectG = NSRect(x: 0, y: 0, width: 1, height: 1);
+            self.bez = NSBezierPath()
+
         }
     }
     
@@ -81,7 +83,7 @@ class Fragment: MapItem {
         gmatch.coItems.append(self)
     }
     
-    override func setLitBez (b : NSBezierPath) {
+    override func doLitBez (b : NSBezierPath) {
         self.litBez = b
         var move = NSAffineTransform()
         move.translateXBy(highlightPoint.x, yBy: highlightPoint.y)
@@ -94,7 +96,7 @@ class Fragment: MapItem {
     }
     
     override func info() -> NSAttributedString {
-        var info = NSMutableAttributedString(string: "Fragment of total length: \(totSize) bp   ", attributes: fmat.normal)
+        var info = NSMutableAttributedString(string: "Fragment of total length: \(totSize) bp   ", attributes: fmat.normal as [NSObject : AnyObject])
         extendString(starter: info, suffix1:  "⫸(primer: ", attr1: fmat.normal, suffix2: dmatch.primer.name, attr2: fmat.bigboldblue)
         extendString(starter: info, suffix1: ") — \(ampSize) bp — (primer: ", attr1: fmat.normal, suffix2: gmatch.primer.name, attr2: fmat.bigboldred)
         extendString(starter: info, suffix: ")⫷", attr: fmat.normal)
@@ -110,8 +112,8 @@ class Fragment: MapItem {
     }
 
     override func report() -> NSAttributedString {
-        var report = NSMutableAttributedString(string: "\r", attributes: fmat.hline1)
-        let apdel = NSApplication.sharedApplication().delegate! as AppDelegate
+        var report = NSMutableAttributedString(string: "\r", attributes: fmat.hline1 as [NSObject : AnyObject])
+        let apdel = NSApplication.sharedApplication().delegate! as! AppDelegate
         let targFileString = apdel.substrateDelegate.targetView.textStorage!.string as NSString
         let firstbase = apdel.targDelegate.firstbase as Int
         let targString = targFileString.substringFromIndex(firstbase).uppercaseString as NSString
@@ -131,7 +133,7 @@ class Fragment: MapItem {
         for c in gmatch.primer.seq {
             gseq = apdel.substrateDelegate.iubComp(String(c)) + gseq
         }
-        var ampSeq = NSMutableAttributedString(string: dmatch.primer.seq.lowercaseString, attributes: fmat.blueseq)
+        var ampSeq = NSMutableAttributedString(string: dmatch.primer.seq.lowercaseString, attributes: fmat.blueseq as [NSObject : AnyObject])
         var ampBases = ""
          if isCircular {
             ampBases = targString.substringWithRange(NSMakeRange(dmatch.threePrime + 1, targString.length - dmatch.threePrime - 1))

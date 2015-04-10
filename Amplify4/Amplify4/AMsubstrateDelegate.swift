@@ -90,7 +90,7 @@ class AMsubstrateDelegate: NSObject, NSTableViewDataSource,NSTableViewDelegate {
     }
     
     func delete(sender : AnyObject) -> AnyObject {
-        let fid = (substrateWindow.firstResponder as NSView).identifier
+        let fid = (substrateWindow.firstResponder as! NSView).identifier
         if fid == "primer Table View" {
             self.deletePrimers(sender);
         }
@@ -204,7 +204,7 @@ override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
             options:opts,
             usingBlock: {
                 (value:AnyObject!, range:NSRange, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
-                let font = value as NSFont
+                let font = value as! NSFont
                 var newsize = CGFloat(fsize)
                 if newsize < 1 {newsize = font.pointSize}
                 let fontF = fontManager.convertFont(font, toFamily: ffamily)
@@ -217,7 +217,7 @@ override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
     }
     
     @IBAction func setTargFont(sender: AnyObject) {
-        let butt = sender as NSPopUpButton
+        let butt = sender as! NSPopUpButton
         let ffam = butt.selectedItem!.title
         targetFont = ffam
         settings.setObject(ffam, forKey: globals.targetFont)
@@ -234,7 +234,7 @@ override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
         let fontn = settings.stringForKey(globals.targetFont)!
         let endh = settings.stringForKey(globals.endHeader)!
         
-        let butt = sender as NSPopUpButton
+        let butt = sender as! NSPopUpButton
         let ssize = butt.selectedItem!.title as NSString
         targetFontSize = ssize.doubleValue
         settings.setInteger(ssize.integerValue, forKey: globals.targetSize)
@@ -293,10 +293,10 @@ override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
         let inputString = NSString(contentsOfURL: primerFile, encoding: NSUTF8StringEncoding, error: nil)
         if (inputString == nil) {return}
         let newline = NSCharacterSet(charactersInString: "\n\r")
-        let lines = inputString!.componentsSeparatedByCharactersInSet(newline) as [String]
+        let lines = inputString!.componentsSeparatedByCharactersInSet(newline) as! [String]
         primers = []
         for line in lines {
-            if countElements(line) > 1 {
+            if count(line) > 1 {
                 // ignore blank lines
                 switch urlext {
                 case "csv", "CSV" :
@@ -317,14 +317,14 @@ override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
         var needPrimers = true
         var needTarget = true
         for url in urls {
-            if primerFileQ(url as NSURL) {
+            if primerFileQ(url as! NSURL) {
                 if needPrimers {
-                    getPrimersFromURL(url as NSURL)
+                    getPrimersFromURL(url as! NSURL)
                     needPrimers = false
                 }
             } else {
                 if needTarget {
-                    getTargetFromURL(url as NSURL)
+                    getTargetFromURL(url as! NSURL)
                     needTarget = false
                 }
             }
@@ -395,7 +395,7 @@ override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
      }
     
     func saveDocument(sender: AnyObject) -> AnyObject {
-        let fid = (substrateWindow.firstResponder as NSView).identifier
+        let fid = (substrateWindow.firstResponder as! NSView).identifier as String!
         switch fid {
         case "primer Table View":
             if let primerPath = primerFile.path {
@@ -459,16 +459,16 @@ override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
         return primers.count
     }
     
-    func tableView(tableView: NSTableView!, objectValueForTableColumn tableColumn: NSTableColumn!, row: Int) -> AnyObject!
+    func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject?
     {
-        if ((tableColumn.identifier) == "C")
+        if ((tableColumn!.identifier as String) == "C")
         {
             return primers[row].check
         }
-        else if ((tableColumn.identifier) == "Sequence")
+        else if ((tableColumn!.identifier) == "Sequence")
         {
             return primers[row].seq
-        } else if (tableColumn.identifier == "Name") {
+        } else if (tableColumn!.identifier == "Name") {
             return primers[row].name
         } else {
             return primers[row].note
@@ -509,11 +509,11 @@ override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
             primersChanged = true
         }
         if tableColumn?.identifier == "Sequence" {
-            primers[row].seq = object as String
+            primers[row].seq = object as! String
         } else if tableColumn?.identifier == "Name" {
-            primers[row].name = object as String
+            primers[row].name = object as! String
         } else if tableColumn?.identifier == "Notes" {
-            primers[row].note = object as String
+            primers[row].note = object as! String
         }
         showInfoForPrimer(row)
         primersChanged = true

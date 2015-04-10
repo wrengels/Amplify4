@@ -42,7 +42,7 @@ class TargDelegate: NSObject {
     }
 
     func saveDocumentAs(sender: AnyObject) -> AnyObject {
-        let fid = (substrateWindow.firstResponder as NSView).identifier
+        let fid = (substrateWindow.firstResponder as! NSView).identifier! as String
         switch fid {
         case "primer Table View":
             targetDelegate.savePrimersAs(sender)
@@ -111,21 +111,21 @@ class TargDelegate: NSObject {
         tsettings.setValue(3,
             forKey: "minOverlap")
         
-        tsettings.setValue(make2D(tsettings.valueForKey("dScores") as [Int], 5),
+        tsettings.setValue(make2D(tsettings.valueForKey("dScores") as! [Int], 5),
             forKey: "pairScores")
-        let dimScores = make2D(tsettings.valueForKey("dimerScores") as [Int], 15)
+        let dimScores = make2D(tsettings.valueForKey("dimerScores") as! [Int], 15)
         tsettings.setValue(dimScores,
             forKey: "dimScores")
-        tsettings.setValue(make2D(tsettings.valueForKey("entropy") as [Int], 5),
+        tsettings.setValue(make2D(tsettings.valueForKey("entropy") as! [Int], 5),
             forKey: "entropy2")
-        tsettings.setValue(make2D(tsettings.valueForKey("enthalpy") as [Int], 5),
+        tsettings.setValue(make2D(tsettings.valueForKey("enthalpy") as! [Int], 5),
             forKey: "enthalpy2")
 
         let tsettingsURL = NSURL.fileURLWithPath( "/Users/WRE/DropBox/Amplify4/tsettings.plist")
 //        let didit = tsettings.writeToURL(tsettingsURL!, atomically: true)
         let rtsettings = NSDictionary(contentsOfFile:  "/Users/WRE/DropBox/Amplify4/settings.plist")!
-        let rw = rtsettings.valueForKey("runWeights")! as [Int]
-        let ps = tsettings.valueForKey("pairScores")! as [[Int]]
+        let rw = rtsettings.valueForKey("runWeights")! as! [Int]
+        let ps = tsettings.valueForKey("pairScores")! as! [[Int]]
         let ps11 = ps[1][1]
         let a = rw[4]
         let b = a + 2
@@ -182,7 +182,7 @@ class TargDelegate: NSObject {
         }
         
         // Get rid of any oddball paragraph settings that might be in there
-        var parStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
+        var parStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
         parStyle.lineBreakMode = NSLineBreakMode.ByCharWrapping
         parStyle.lineSpacing = CGFloat(settings.floatForKey(globals.targetLineSpace))
         targetStorage.addAttribute(NSParagraphStyleAttributeName, value: parStyle, range: NSMakeRange(0,targetStorage.length))
@@ -327,7 +327,7 @@ class TargDelegate: NSObject {
         baseView.setFont(theFont, range: NSMakeRange(0, (baseCountString as NSString).length))
         
         // Adjust line spacing
-        var parStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
+        var parStyle: NSMutableParagraphStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
 //        parStyle.lineBreakMode = NSLineBreakMode.ByCharWrapping
         parStyle.lineSpacing = CGFloat(settings.floatForKey(globals.targetLineSpace))
         parStyle.alignment = NSTextAlignment.RightTextAlignment

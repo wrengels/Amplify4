@@ -19,7 +19,7 @@ class MapItem: NSObject {
     let highlightStrokeColor = NSColor(red: 36/255, green: 204/255, blue: 217/255, alpha: 1)
     let highlightScale : CGFloat = 1.3
 
-    func setLitBez (b : NSBezierPath) {
+    func doLitBez (b : NSBezierPath) {
         self.litBez = b
         var move = NSAffineTransform()
         move.translateXBy(highlightPoint.x, yBy: highlightPoint.y)

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -26,9 +26,6 @@
                 <outlet property="copyItem" destination="x3v-GG-iWU" id="Wdq-Da-OsT"/>
                 <outlet property="copyRearrangedItem" destination="9Ta-UL-InK" id="w2R-59-KcZ"/>
                 <outlet property="findItem" destination="Xz5-n4-O0W" id="oSf-Pu-igL"/>
-                <outlet property="findNextButton" destination="lT2-3i-hIP" id="Xmu-bE-WPI"/>
-                <outlet property="findPrimerAccView" destination="mjw-eb-B9c" id="bGO-7F-Yw4"/>
-                <outlet property="findTextField" destination="dNF-qi-O8T" id="DH0-wi-Ozy"/>
                 <outlet property="formattedOrPlain" destination="hXJ-c0-5nF" id="0J0-ff-frm"/>
                 <outlet property="plainFindItem" destination="4EN-yA-p0u" id="83O-zE-zsT"/>
                 <outlet property="primerInfoView" destination="KYe-zP-cEp" id="Hzb-pe-mkA"/>
@@ -860,25 +857,15 @@ Select "Open Built-In Samples" from the File menu in order to try out Amplify.</
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
-                                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4aS-z7-ghz">
-                                        <rect key="frame" x="7" y="638" width="55" height="33"/>
-                                        <buttonCell key="cell" type="square" title="Base" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="ddS-ek-qM8">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                            <connections>
-                                                <action selector="clickBase:" target="Whm-mM-EMR" id="ttp-l2-z6d"/>
-                                            </connections>
-                                        </buttonCell>
-                                    </button>
-                                    <popUpButton misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fK0-CP-3tg">
-                                        <rect key="frame" x="132" y="642" width="50" height="22"/>
+                                    <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="fK0-CP-3tg">
+                                        <rect key="frame" x="132" y="641" width="50" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="Zhm-I3-Ww5"/>
                                             <constraint firstAttribute="width" constant="50" id="jU4-c7-RMy"/>
                                         </constraints>
-                                        <popUpButtonCell key="cell" type="inline" title="Font" bezelStyle="inline" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" id="a7T-Vi-5IU">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="menuBar"/>
+                                        <popUpButtonCell key="cell" type="recessed" title="Font" bezelStyle="recessed" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" id="a7T-Vi-5IU">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                            <font key="font" metaFont="systemBold" size="12"/>
                                             <menu key="menu" id="f59-64-uMu">
                                                 <items>
                                                     <menuItem title="Font" hidden="YES" id="slj-j6-jcI"/>
@@ -897,15 +884,15 @@ Select "Open Built-In Samples" from the File menu in order to try out Amplify.</
                                             <action selector="setTargFont:" target="jx6-jC-eEd" id="bu5-aA-HQZ"/>
                                         </connections>
                                     </popUpButton>
-                                    <popUpButton ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lva-4G-HWw">
-                                        <rect key="frame" x="181" y="642" width="48" height="22"/>
+                                    <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="lva-4G-HWw">
+                                        <rect key="frame" x="181" y="641" width="48" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="48" id="aCj-kv-ysk"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="48" id="siV-r3-g5K"/>
                                         </constraints>
-                                        <popUpButtonCell key="cell" type="inline" title="Size" bezelStyle="inline" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" id="WfI-PB-rEi">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="menuBar"/>
+                                        <popUpButtonCell key="cell" type="recessed" title="Size" bezelStyle="recessed" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" id="WfI-PB-rEi">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                            <font key="font" metaFont="systemBold" size="12"/>
                                             <menu key="menu" id="P1W-62-VOQ">
                                                 <items>
                                                     <menuItem title="Size" hidden="YES" id="4Wh-GJ-doM"/>
@@ -925,11 +912,11 @@ Select "Open Built-In Samples" from the File menu in order to try out Amplify.</
                                             <action selector="setTargSize:" target="jx6-jC-eEd" id="MzS-TW-8NV"/>
                                         </connections>
                                     </popUpButton>
-                                    <popUpButton misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AM8-Hz-Z1Z">
-                                        <rect key="frame" x="72" y="642" width="61" height="22"/>
-                                        <popUpButtonCell key="cell" type="inline" title="DNA" bezelStyle="inline" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" selectedItem="asV-zU-nP0" id="gf9-Mu-P5p">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="menuBar"/>
+                                    <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="AM8-Hz-Z1Z">
+                                        <rect key="frame" x="72" y="641" width="61" height="19"/>
+                                        <popUpButtonCell key="cell" type="recessed" title="DNA" bezelStyle="recessed" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" selectedItem="asV-zU-nP0" id="gf9-Mu-P5p">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                            <font key="font" metaFont="systemBold" size="12"/>
                                             <menu key="menu" id="dVN-ZA-U4E">
                                                 <items>
                                                     <menuItem title="DNA" hidden="YES" id="1dm-nO-dRm"/>
@@ -948,8 +935,8 @@ Select "Open Built-In Samples" from the File menu in order to try out Amplify.</
                                             </menu>
                                         </popUpButtonCell>
                                     </popUpButton>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C6b-aV-d0I">
-                                        <rect key="frame" x="327" y="642" width="326" height="22"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C6b-aV-d0I">
+                                        <rect key="frame" x="327" y="642" width="326" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="322" id="xeP-EP-kyL"/>
                                         </constraints>
@@ -959,22 +946,7 @@ Select "Open Built-In Samples" from the File menu in order to try out Amplify.</
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button hidden="YES" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MQY-aE-McQ">
-                                        <rect key="frame" x="293" y="637" width="90" height="32"/>
-                                        <buttonCell key="cell" type="push" title="Do Thing" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ejT-AS-h6O">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="frameCenterRotation">
-                                                <integer key="value" value="7"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="doThing:" target="Whm-mM-EMR" id="5Ao-Uf-YJd"/>
-                                        </connections>
-                                    </button>
-                                    <button identifier="◆ Target Sequence" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nz8-zF-sDX">
+                                    <button identifier="◆ Target Sequence" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nz8-zF-sDX">
                                         <rect key="frame" x="248" y="639" width="25" height="25"/>
                                         <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ydE-7P-8Cp">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -984,27 +956,41 @@ Select "Open Built-In Samples" from the File menu in order to try out Amplify.</
                                             <action selector="findMeInHelp:" target="Voe-Tx-rLC" id="XmR-M1-fFu"/>
                                         </connections>
                                     </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4aS-z7-ghz">
+                                        <rect key="frame" x="14" y="646" width="35" height="17"/>
+                                        <buttonCell key="cell" type="square" title="Base" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="ddS-ek-qM8">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <connections>
+                                                <action selector="clickBase:" target="Whm-mM-EMR" id="ttp-l2-z6d"/>
+                                            </connections>
+                                        </buttonCell>
+                                    </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="lva-4G-HWw" firstAttribute="leading" secondItem="x3S-l4-R7d" secondAttribute="leading" constant="181" id="2m7-ZJ-aeR"/>
                                     <constraint firstItem="dQb-au-cpo" firstAttribute="top" secondItem="C6b-aV-d0I" secondAttribute="bottom" constant="8" symbolic="YES" id="5Uo-mF-nMG"/>
-                                    <constraint firstItem="6xV-yk-QDX" firstAttribute="top" secondItem="4aS-z7-ghz" secondAttribute="bottom" constant="4" id="BqM-Vn-P5M"/>
+                                    <constraint firstItem="6xV-yk-QDX" firstAttribute="top" secondItem="4aS-z7-ghz" secondAttribute="bottom" constant="12" id="BqM-Vn-P5M"/>
                                     <constraint firstItem="AM8-Hz-Z1Z" firstAttribute="centerY" secondItem="fK0-CP-3tg" secondAttribute="centerY" id="D30-Xn-amF"/>
-                                    <constraint firstItem="C6b-aV-d0I" firstAttribute="leading" secondItem="MQY-aE-McQ" secondAttribute="trailing" constant="-25" id="E85-cS-sHx"/>
+                                    <constraint firstItem="nz8-zF-sDX" firstAttribute="leading" secondItem="lva-4G-HWw" secondAttribute="trailing" constant="21" id="Gql-aI-4D4"/>
                                     <constraint firstItem="6xV-yk-QDX" firstAttribute="bottom" secondItem="dQb-au-cpo" secondAttribute="bottom" id="LCW-7C-TGU"/>
                                     <constraint firstItem="lva-4G-HWw" firstAttribute="baseline" secondItem="fK0-CP-3tg" secondAttribute="baseline" id="LZP-ax-ksZ"/>
                                     <constraint firstItem="6xV-yk-QDX" firstAttribute="top" secondItem="dQb-au-cpo" secondAttribute="top" id="Oxv-XH-pDu"/>
                                     <constraint firstAttribute="trailing" secondItem="dQb-au-cpo" secondAttribute="trailing" id="YCI-Ox-DIV"/>
                                     <constraint firstItem="dQb-au-cpo" firstAttribute="top" secondItem="AM8-Hz-Z1Z" secondAttribute="bottom" constant="8" symbolic="YES" id="YzN-nR-TP3"/>
+                                    <constraint firstItem="lva-4G-HWw" firstAttribute="bottom" secondItem="nz8-zF-sDX" secondAttribute="bottom" id="Zvx-ih-gG1"/>
                                     <constraint firstItem="dQb-au-cpo" firstAttribute="top" secondItem="x3S-l4-R7d" secondAttribute="top" constant="40" id="aBC-kl-BDu"/>
                                     <constraint firstAttribute="bottom" secondItem="dQb-au-cpo" secondAttribute="bottom" constant="6" id="cSK-e4-Ct7"/>
+                                    <constraint firstItem="lva-4G-HWw" firstAttribute="leading" secondItem="fK0-CP-3tg" secondAttribute="trailing" constant="-1" id="eGw-D2-WHD"/>
                                     <constraint firstItem="AM8-Hz-Z1Z" firstAttribute="trailing" secondItem="fK0-CP-3tg" secondAttribute="leading" constant="1" id="g34-l0-Jf3"/>
                                     <constraint firstItem="dQb-au-cpo" firstAttribute="leading" secondItem="x3S-l4-R7d" secondAttribute="leading" constant="64" id="ifj-dn-T6w"/>
                                     <constraint firstItem="dQb-au-cpo" firstAttribute="leading" secondItem="6xV-yk-QDX" secondAttribute="trailing" constant="2" id="lRR-9s-XkM"/>
-                                    <constraint firstItem="6xV-yk-QDX" firstAttribute="trailing" secondItem="4aS-z7-ghz" secondAttribute="trailing" id="mGM-ff-K7Q"/>
+                                    <constraint firstItem="6xV-yk-QDX" firstAttribute="trailing" secondItem="4aS-z7-ghz" secondAttribute="trailing" constant="13" id="mGM-ff-K7Q"/>
                                     <constraint firstItem="C6b-aV-d0I" firstAttribute="top" secondItem="lva-4G-HWw" secondAttribute="top" id="ng7-Px-Xhv"/>
                                     <constraint firstItem="6xV-yk-QDX" firstAttribute="leading" secondItem="x3S-l4-R7d" secondAttribute="leading" id="sad-u2-5x4"/>
+                                    <constraint firstItem="C6b-aV-d0I" firstAttribute="leading" secondItem="nz8-zF-sDX" secondAttribute="trailing" constant="58" id="v7b-Df-cwf"/>
                                     <constraint firstItem="C6b-aV-d0I" firstAttribute="top" secondItem="fK0-CP-3tg" secondAttribute="top" id="w2i-Co-2Xr"/>
-                                    <constraint firstItem="AM8-Hz-Z1Z" firstAttribute="leading" secondItem="4aS-z7-ghz" secondAttribute="trailing" constant="10" symbolic="YES" id="wVr-L1-5no"/>
+                                    <constraint firstItem="AM8-Hz-Z1Z" firstAttribute="leading" secondItem="4aS-z7-ghz" secondAttribute="trailing" constant="23" id="wVr-L1-5no"/>
                                 </constraints>
                             </customView>
                             <customView identifier="rightSideview" id="Zwt-no-rYN" userLabel="Right Split View">
@@ -1032,13 +1018,13 @@ Select "Open Built-In Samples" from the File menu in order to try out Amplify.</
                                         </connections>
                                     </button>
                                     <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="Njo-5X-cfa">
-                                        <rect key="frame" x="126" y="642" width="73" height="22"/>
+                                        <rect key="frame" x="126" y="641" width="73" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="73" id="AVz-t2-gg4"/>
                                         </constraints>
-                                        <popUpButtonCell key="cell" type="inline" title="Selected" bezelStyle="inline" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" id="ySD-pI-Drt">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="menuBar"/>
+                                        <popUpButtonCell key="cell" type="recessed" title="Selected" bezelStyle="recessed" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" id="ySD-pI-Drt">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                            <font key="font" metaFont="systemBold" size="12"/>
                                             <menu key="menu" id="GeW-zS-MhU">
                                                 <items>
                                                     <menuItem title="Selected" hidden="YES" id="m4j-ow-THX"/>
@@ -1076,16 +1062,18 @@ Select "Open Built-In Samples" from the File menu in order to try out Amplify.</
                                         </popUpButtonCell>
                                     </popUpButton>
                                     <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="1qk-7s-qgz">
-                                        <rect key="frame" x="92" y="642" width="32" height="22"/>
+                                        <rect key="frame" x="86" y="641" width="41" height="19"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="32" id="tZu-Zk-fk0"/>
+                                            <constraint firstAttribute="width" constant="41" id="tZu-Zk-fk0"/>
                                         </constraints>
-                                        <popUpButtonCell key="cell" type="inline" title="All" bezelStyle="inline" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" selectedItem="KVu-kz-Big" id="XuV-DN-5Tk">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="menuBar"/>
+                                        <popUpButtonCell key="cell" type="recessed" title="All" bezelStyle="recessed" alignment="left" lineBreakMode="truncatingTail" state="mixed" borderStyle="border" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" selectedItem="TnY-rI-RW0" id="XuV-DN-5Tk">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                            <font key="font" metaFont="systemBold" size="12"/>
                                             <menu key="menu" id="PH9-Js-boF">
                                                 <items>
-                                                    <menuItem title="All" hidden="YES" id="KVu-kz-Big"/>
+                                                    <menuItem title="All" state="mixed" hidden="YES" id="KVu-kz-Big">
+                                                        <attributedString key="attributedTitle"/>
+                                                    </menuItem>
                                                     <menuItem title="Check" id="CJW-tJ-Cfe">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
@@ -1106,7 +1094,7 @@ Select "Open Built-In Samples" from the File menu in order to try out Amplify.</
                                             </menu>
                                         </popUpButtonCell>
                                     </popUpButton>
-                                    <button toolTip="Flip sequences of selected primers" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QGb-6I-ymT">
+                                    <button toolTip="Flip sequences of selected primers" translatesAutoresizingMaskIntoConstraints="NO" id="QGb-6I-ymT">
                                         <rect key="frame" x="53" y="639" width="25" height="25"/>
                                         <buttonCell key="cell" type="square" title="🔄" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="haI-z8-iII">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1149,7 +1137,7 @@ Select "Open Built-In Samples" from the File menu in order to try out Amplify.</
                                     </scrollView>
                                     <scrollView identifier="primerScrollView" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="infinite" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ScP-zv-Ef5" userLabel="Primer Table View">
                                         <rect key="frame" x="0.0" y="6" width="350" height="512"/>
-                                        <clipView key="contentView" identifier="primerClipView" misplaced="YES" id="tsJ-hL-erV">
+                                        <clipView key="contentView" identifier="primerClipView" id="tsJ-hL-erV">
                                             <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
@@ -1157,7 +1145,7 @@ Select "Open Built-In Samples" from the File menu in order to try out Amplify.</
                                                     <rect key="frame" x="0.0" y="0.0" width="348" height="19"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
                                                         <tableColumn identifier="C" width="15" minWidth="15" maxWidth="15" id="NYN-Vl-qAF">
@@ -1233,7 +1221,7 @@ Select "Open Built-In Samples" from the File menu in order to try out Amplify.</
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableHeaderView>
                                     </scrollView>
-                                    <button identifier="◆ Primer List" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wmj-bh-FfG">
+                                    <button identifier="◆ Primer List" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wmj-bh-FfG">
                                         <rect key="frame" x="209" y="639" width="25" height="25"/>
                                         <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vjW-Ri-lUd">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1245,6 +1233,7 @@ Select "Open Built-In Samples" from the File menu in order to try out Amplify.</
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="1qk-7s-qgz" firstAttribute="leading" secondItem="QGb-6I-ymT" secondAttribute="trailing" constant="8" id="2pC-v3-4MI"/>
                                     <constraint firstItem="ScP-zv-Ef5" firstAttribute="top" secondItem="Zwt-no-rYN" secondAttribute="top" constant="156" id="43e-3t-bY5"/>
                                     <constraint firstItem="RmG-Ep-kLg" firstAttribute="top" secondItem="QGb-6I-ymT" secondAttribute="bottom" constant="5" id="5EG-Bf-2cF"/>
                                     <constraint firstItem="ScP-zv-Ef5" firstAttribute="top" secondItem="RmG-Ep-kLg" secondAttribute="bottom" constant="2" id="6Ph-gg-UBO"/>
@@ -1255,14 +1244,17 @@ Select "Open Built-In Samples" from the File menu in order to try out Amplify.</
                                     <constraint firstAttribute="trailing" secondItem="ScP-zv-Ef5" secondAttribute="trailing" constant="5" id="IVS-j9-yOm"/>
                                     <constraint firstItem="ScP-zv-Ef5" firstAttribute="leading" secondItem="Zwt-no-rYN" secondAttribute="leading" id="JT3-Jx-37D"/>
                                     <constraint firstItem="iW3-Z6-HTk" firstAttribute="baseline" secondItem="pDk-FR-bFd" secondAttribute="baseline" id="Lud-7h-7r3"/>
-                                    <constraint firstItem="1qk-7s-qgz" firstAttribute="leading" secondItem="pDk-FR-bFd" secondAttribute="trailing" constant="38" id="NvB-2j-Rb4"/>
+                                    <constraint firstItem="1qk-7s-qgz" firstAttribute="leading" secondItem="pDk-FR-bFd" secondAttribute="trailing" constant="32" id="NvB-2j-Rb4"/>
                                     <constraint firstAttribute="bottom" secondItem="ScP-zv-Ef5" secondAttribute="bottom" constant="6" id="RPb-CN-As2"/>
+                                    <constraint firstItem="Wmj-bh-FfG" firstAttribute="bottom" secondItem="Njo-5X-cfa" secondAttribute="bottom" id="WTE-8f-DJQ"/>
                                     <constraint firstItem="1qk-7s-qgz" firstAttribute="baseline" secondItem="Njo-5X-cfa" secondAttribute="baseline" id="YJJ-Kq-Xwj"/>
-                                    <constraint firstItem="Njo-5X-cfa" firstAttribute="leading" secondItem="1qk-7s-qgz" secondAttribute="trailing" constant="2" id="feV-gW-19C"/>
+                                    <constraint firstItem="Wmj-bh-FfG" firstAttribute="leading" secondItem="Njo-5X-cfa" secondAttribute="trailing" constant="12" symbolic="YES" id="Ydw-PK-22z"/>
+                                    <constraint firstItem="Njo-5X-cfa" firstAttribute="leading" secondItem="1qk-7s-qgz" secondAttribute="trailing" constant="-1" id="feV-gW-19C"/>
                                     <constraint firstItem="iW3-Z6-HTk" firstAttribute="baseline" secondItem="1qk-7s-qgz" secondAttribute="baseline" constant="1" id="fwN-3s-ffn"/>
                                     <constraint firstItem="iW3-Z6-HTk" firstAttribute="leading" secondItem="Zwt-no-rYN" secondAttribute="leading" constant="5" id="n87-u2-L9N"/>
-                                    <constraint firstItem="1qk-7s-qgz" firstAttribute="leading" secondItem="iW3-Z6-HTk" secondAttribute="trailing" constant="62" id="qyi-GM-inZ"/>
+                                    <constraint firstItem="1qk-7s-qgz" firstAttribute="leading" secondItem="iW3-Z6-HTk" secondAttribute="trailing" constant="56" id="qyi-GM-inZ"/>
                                     <constraint firstItem="ScP-zv-Ef5" firstAttribute="top" secondItem="1qk-7s-qgz" secondAttribute="bottom" constant="124" id="rfo-wd-Miq"/>
+                                    <constraint firstItem="QGb-6I-ymT" firstAttribute="leading" secondItem="pDk-FR-bFd" secondAttribute="trailing" constant="-1" id="sPC-yO-q8B"/>
                                     <constraint firstItem="RmG-Ep-kLg" firstAttribute="trailing" secondItem="ScP-zv-Ef5" secondAttribute="trailing" id="tDg-6d-h8d"/>
                                 </constraints>
                             </customView>
@@ -1369,30 +1361,5 @@ Select "Open Built-In Samples" from the File menu in order to try out Amplify.</
             </cells>
             <point key="canvasLocation" x="898" y="986"/>
         </matrix>
-        <customView id="mjw-eb-B9c" userLabel="Find Primer View">
-            <rect key="frame" x="0.0" y="0.0" width="382" height="28"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <subviews>
-                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dNF-qi-O8T">
-                    <rect key="frame" x="15" y="3" width="237" height="22"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="gx3-O4-Imi">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lT2-3i-hIP">
-                    <rect key="frame" x="277" y="0.0" width="85" height="25"/>
-                    <buttonCell key="cell" type="roundTextured" title="Find Next" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7EA-CE-beh">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="findNextPrimer:" target="jx6-jC-eEd" id="oA3-NP-0Nc"/>
-                    </connections>
-                </button>
-            </subviews>
-            <point key="canvasLocation" x="564" y="1128"/>
-        </customView>
     </objects>
 </document>

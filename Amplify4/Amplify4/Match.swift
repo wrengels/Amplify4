@@ -85,14 +85,14 @@ class Match: MapItem {
         let settings = NSUserDefaults.standardUserDefaults()
         
         func addReport(s : String, attr: NSDictionary) {
-            report.appendAttributedString(NSAttributedString(string: s, attributes: attr))
+            report.appendAttributedString(NSAttributedString(string: s, attributes: attr as [NSObject : AnyObject]))
         }
         func spaces(k : Int) -> String {
             return String(count: k, repeatedValue: Character(" "))
         }
         func hbonds(targetString : String, primerStringReceived: String) -> String {
             // Produce a string of | or : or blank to indicate base-pairing
-            let pairScores = NSUserDefaults.standardUserDefaults().arrayForKey(globals.pairScores) as [[Int]]
+            let pairScores = NSUserDefaults.standardUserDefaults().arrayForKey(globals.pairScores) as! [[Int]]
             let topScore = pairScores[0][0]
             let tchars = "GATCN" as NSString
             var primerString = primerStringReceived
@@ -102,13 +102,13 @@ class Match: MapItem {
             }
             var bonds = ""
             
-            let n = countElements(targetString)
-             if countElements(primerString) >= n {
+            let n = count(targetString)
+             if count(primerString) >= n {
                 // If strings are different sizes, then something is wrong
                 let tbases = [Character](targetString.uppercaseString)
                 let pbases = [Character](primerString.uppercaseString)
                 var targIndex, primerIndex : Int
-                for base in 0..<min(n, countElements(primerString)) {
+                for base in 0..<min(n, count(primerString)) {
                     targIndex = tchars.rangeOfString(String(tbases[base])).location
                     let badBase = targIndex == NSNotFound
                     if badBase {targIndex = 4}
@@ -131,7 +131,7 @@ class Match: MapItem {
         var seq = primer.seq.uppercaseString as NSString
         if seq.length > effectivePrimer {
             seq = seq.substringFromIndex(seq.length - effectivePrimer)
-            seq = "…" + seq
+            seq = "…" + (seq as String)
         }
         let seqLen = seq.length
         var contextRight = threePrime + side + 1
@@ -140,7 +140,7 @@ class Match: MapItem {
             contextRight = threePrime + seqLen + side
             contextLeft = threePrime - side
         }
-        let apdel = NSApplication.sharedApplication().delegate! as AppDelegate
+        let apdel = NSApplication.sharedApplication().delegate! as! AppDelegate
         let targFileString = apdel.substrateDelegate.targetView.textStorage!.string as NSString
         let firstbase = apdel.targDelegate.firstbase as Int
         let targString = targFileString.substringFromIndex(firstbase).uppercaseString as NSString
@@ -149,13 +149,13 @@ class Match: MapItem {
             if contextLeft < 0 {
                 var newContext = targString.substringWithRange(NSMakeRange(targString.length + contextLeft , -contextLeft))
                 context = NSMutableString(string: newContext)
-                context = NSMutableString(string: context + targString.substringWithRange(NSMakeRange(0, contextRight)))
+                context = NSMutableString(string: (context as String) + targString.substringWithRange(NSMakeRange(0, contextRight)))
             } else if contextRight > targString.length {
                 var newContext = targString.substringWithRange(NSMakeRange(0, contextRight - targString.length))
                 context = NSMutableString(string: targString.substringWithRange(NSMakeRange(contextLeft, targString.length - contextLeft)) + newContext)
 //                contextRight = targString.length
             } else {
-                context = NSMutableString(string: context + targString.substringWithRange(NSMakeRange(contextLeft, contextRight - contextLeft)))
+                context = NSMutableString(string: (context as String) + targString.substringWithRange(NSMakeRange(contextLeft, contextRight - contextLeft)))
             }
         } else {
             if contextLeft < 0 {
@@ -166,11 +166,11 @@ class Match: MapItem {
             if contextRight > targString.length {
                 contextRight = targString.length
             }
-            context = NSMutableString(string: context + targString.substringWithRange(NSMakeRange(contextLeft, contextRight - contextLeft)))
+            context = NSMutableString(string: (context as String) + targString.substringWithRange(NSMakeRange(contextLeft, contextRight - contextLeft)))
         }
         let padding = spaces(side - 3)
         let matchingTarget = context.substringWithRange(NSMakeRange(side, min(seqLen, context.length - side)))
-        var bonds = hbonds(matchingTarget, seq)
+        var bonds = hbonds(matchingTarget, seq as String)
         var paddedPrimer = NSMutableAttributedString()
         addReport("\r", fmat.hline1)
         addReport("Match for primer: \(primer.name)  \(self.direction())\r", fmat.h3)
@@ -183,30 +183,30 @@ class Match: MapItem {
                 startNum = targString.length + startNum
             }
             let startNumString = String(startNum)
-            let startDigits = countElements(startNumString)
+            let startDigits = count(startNumString)
             let endNumString = String(threePrime + 1)
-            let endDigits = countElements(endNumString)
+            let endDigits = count(endNumString)
             var numline = "\t\(spaces(side - startDigits/2))\(startNumString)"
             numline += spaces(seqLen - startDigits/2 - endDigits/2 - 1) + endNumString
             addReport(numline, fmat.blueseq)
             extendString(starter: report, suffix1: "\r\t\(spaces(side))", attr1: fmat.seq, suffix2: "↓", attr2: fmat.symb)
             extendString(starter: report, suffix1: spaces(seqLen - 2), attr1: fmat.seq, suffix2:  "↓", attr2: fmat.symb)
-            paddedPrimer = NSMutableAttributedString(string: "\r\(primer.name)", attributes : fmat.blue)
+            paddedPrimer = NSMutableAttributedString(string: "\r\(primer.name)", attributes : fmat.blue as [NSObject : AnyObject])
             extendString(starter: paddedPrimer, suffix: "\t" + padding + "5′ " , attr: fmat.blueseq )
             extendString(starter: paddedPrimer, suffix1: seq, attr1: fmat.seq, suffix2: " 3′ \r", attr2: fmat.blueseq)
             report.appendAttributedString(paddedPrimer)
             extendString(starter: report, suffix: "\t\(spaces(side))\(bonds)\r", attr: fmat.greyseq)
             addReport("Context\t", fmat.blue)
-            addReport(context + "\r\r" , fmat.seq)
+            addReport((context as String) + "\r\r" , fmat.seq)
             apdel.targDelegate.selectBasesFrom(threePrime - seqLen + 2, lastSelected: threePrime + 1)
 
         } else {
             let reverseSeq = (String(reverse(String(seq))) as NSString)
-            paddedPrimer = NSMutableAttributedString(string: padding + "3′ " , attributes: fmat.blueseq)
+            paddedPrimer = NSMutableAttributedString(string: padding + "3′ " , attributes: fmat.blueseq as [NSObject : AnyObject])
             extendString(starter: paddedPrimer, suffix1: reverseSeq, attr1: fmat.seq, suffix2: " 5′ ", attr2: fmat.blueseq)
-            bonds = hbonds(matchingTarget, reverseSeq)
+            bonds = hbonds(matchingTarget, reverseSeq as String)
             addReport("Context\t", fmat.blue)
-            addReport(context + "\r" , fmat.seq)
+            addReport((context as String) + "\r" , fmat.seq)
             extendString(starter: report, suffix: "\t\(spaces(side))\(bonds)\r", attr: fmat.greyseq)
             addReport(primer.name + "\t", fmat.blue)
             report.appendAttributedString(paddedPrimer)
@@ -214,13 +214,13 @@ class Match: MapItem {
             extendString(starter: report, suffix1: spaces(seqLen - 2), attr1: fmat.seq, suffix2:  "↑", attr2: fmat.symb)
             addReport("\r", fmat.seq)
             let startNumString = String(threePrime + 1)
-            let startDigits = countElements(startNumString)
+            let startDigits = count(startNumString)
             var endNum = threePrime + seqLen
             if endNum > targString.length && isCircular {
                 endNum -= targString.length
             }
             let endNumString = String(endNum)
-            let endDigits = countElements(endNumString)
+            let endDigits = count(endNumString)
             var numline = "\t\(spaces(side - startDigits/2))\(startNumString)"
             numline += spaces(seqLen - startDigits/2 - endDigits/2 - 1) + endNumString
             addReport(numline + "\r\r", fmat.blueseq)
