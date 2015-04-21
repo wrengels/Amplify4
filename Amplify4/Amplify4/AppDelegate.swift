@@ -79,7 +79,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
      func application(sender: NSApplication, openFiles filenames: [AnyObject]) {
         var urlArray = NSMutableArray()
         for name in filenames {
-            urlArray.addObject(NSURL(fileURLWithPath: (name as! NSString) as NSString as String)!)
+            if let furl = NSURL(fileURLWithPath: (name as? String)!) {
+                urlArray.addObject(furl)
+            }
         }
         if urlArray.count < 1 {
             sender.replyToOpenOrPrint(NSApplicationDelegateReply.Failure)
@@ -121,38 +123,37 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
     
     @IBAction func findMeInHelp(sender: AnyObject) {
-        helpWindowController.showWindow(self)
-        let didit = helpWindowController.windowLoaded
-        let helpWindow = helpWindowController.helpWindow
-        helpWindow.display()
-        helpWindow.makeKeyAndOrderFront(self)
-        let senderId = (sender as! NSButton).identifier
-        if let name = senderId {
-            let nsname = name as NSString
+        if let btn = sender as? NSButton, senderId = btn.identifier {
+            helpWindowController.showWindow(self)
+            let didit = helpWindowController.windowLoaded
+            let helpWindow = helpWindowController.helpWindow
+            helpWindow.display()
+            helpWindow.makeKeyAndOrderFront(self)
+            let nsname = senderId as NSString
             helpWindowController.scrollToString(nsname)
         }
     }
     
     func applicationWillTerminate(aNotification: NSNotification) {
         let docController: AnyObject = NSDocumentController.sharedDocumentController()
-        let doclist = docController.recentDocumentURLs as! [NSURL]
-        var docpaths = [String]()
-        for doc in doclist {
-            docpaths.append(doc.path!)
+        if let doclist = docController.recentDocumentURLs as? [NSURL] {
+            var docpaths = [String]()
+            for doc in doclist {
+                docpaths.append(doc.path!)
+            }
+            NSUserDefaults.standardUserDefaults().setObject(docpaths, forKey: globals.recentDocs)
+            if let ppath = substrateDelegate.primerFile.path {
+                NSUserDefaults.standardUserDefaults().setObject(ppath, forKey: globals.recentPrimerPath)
+            } else {
+                NSUserDefaults.standardUserDefaults().removeObjectForKey(globals.recentPrimerPath)
+            }
+            if let tpath = substrateDelegate.targetFile.path {
+                NSUserDefaults.standardUserDefaults().setObject(tpath, forKey: globals.recentTargetPath)
+            } else {
+                NSUserDefaults.standardUserDefaults().removeObjectForKey(globals.recentTargetPath)
+            }
+            NSUserDefaults.standardUserDefaults().synchronize()
         }
-        NSUserDefaults.standardUserDefaults().setObject(docpaths, forKey: globals.recentDocs)
-        if let ppath = substrateDelegate.primerFile.path {
-            NSUserDefaults.standardUserDefaults().setObject(ppath, forKey: globals.recentPrimerPath)
-        } else {
-            NSUserDefaults.standardUserDefaults().removeObjectForKey(globals.recentPrimerPath)
-        }
-        if let tpath = substrateDelegate.targetFile.path {
-            NSUserDefaults.standardUserDefaults().setObject(tpath, forKey: globals.recentTargetPath)
-        } else {
-            NSUserDefaults.standardUserDefaults().removeObjectForKey(globals.recentTargetPath)
-        }
-        NSUserDefaults.standardUserDefaults().synchronize()
-        return
     }
     
     @IBAction func amplify(sender: AnyObject) {
@@ -162,10 +163,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func amplifyCircular(sender: AnyObject) {
         let theDC: NSDocumentController = NSDocumentController.sharedDocumentController() as! NSDocumentController
-        let newDoc: DocumentCircular = theDC.makeUntitledDocumentOfType("CircularDocumentType", error: nil)! as! DocumentCircular
-        theDC.addDocument(newDoc)
-        newDoc.makeWindowControllers()
-        newDoc.showWindows()
+        if let newDoc: DocumentCircular = theDC.makeUntitledDocumentOfType("CircularDocumentType", error: nil)! as? DocumentCircular {
+            theDC.addDocument(newDoc)
+            newDoc.makeWindowControllers()
+            newDoc.showWindows()
+        }
     }
     
     

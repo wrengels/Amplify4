@@ -22,7 +22,7 @@ class MapView: NSView {
     }
     
     func clearAllTrackingAreas() {
-        for area : NSTrackingArea in self.trackingAreas as! [NSTrackingArea] {
+        for area : NSTrackingArea in self.trackingAreas  as! [NSTrackingArea]{
             self.removeTrackingArea(area)
         }
     }
@@ -36,9 +36,10 @@ class MapView: NSView {
         }
         for area : NSTrackingArea in self.trackingAreas as! [NSTrackingArea] {
             if let itemDic = area.userInfo {
-                let item : MapItem = itemDic[0] as! MapItem
-                if item.isLit > 0  {
-                    item.plotHighlight()
+                if let item : MapItem = itemDic[0] as? MapItem {
+                    if item.isLit > 0  {
+                        item.plotHighlight()
+                    } 
                 }
             }
         }
