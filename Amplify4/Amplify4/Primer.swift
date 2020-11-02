@@ -182,7 +182,9 @@ class Primer : NSObject {
         var seqc = [Int]()
         let n = min(settings.integerForKey(globals.effectivePrimer), seqChar.count)
             // n is the number of bases in the primer (or the max effective primer)
-        for c in seq.uppercaseString {
+        var primerOffset = max(0, seqChar.count - settings.integerForKey(globals.effectivePrimer))
+        var truncSeq = ((seq as NSString).substringFromIndex(primerOffset)).uppercaseString
+        for c in truncSeq {
             var v = 0
             while c != dbases[v] {v += 1}
             seqd.append(v)

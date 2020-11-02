@@ -30,8 +30,8 @@ class AMprefsController: NSWindowController {
     
     override func windowDidLoad() {
         super.windowDidLoad()
-        matchWeightsCont.labels = [Int](1...200)
-        runWeightsCont.labels = [Int](1...200)
+        matchWeightsCont.labels = [Int](1...50)
+        runWeightsCont.labels = [Int](1...50)
         entropyCont.labels = [Character]("GATCN")
         enthalpyCont.labels =  [Character]("GATCN")
         self.setAllArrayVals();
